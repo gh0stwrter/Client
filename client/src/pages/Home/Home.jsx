@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import styles from './style.module.scss';
-import Container from '@material-ui/core/Container';
+import React from 'react';
+
 
 
  const Home = (props) => {
@@ -8,11 +7,7 @@ import Container from '@material-ui/core/Container';
    
    
     return (
-        <Container maxWidth="sm">
-        <div>
-            <h1>Hello World</h1>
-        </div>
-        </Container>
+       <></>
         
 );
 };

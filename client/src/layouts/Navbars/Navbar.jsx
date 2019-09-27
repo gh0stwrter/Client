@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -31,10 +30,8 @@ import {
                     <NavLink href="/components/">Connexion</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink>
-                        <Link to="/inscription">
-                            Inscription    
-                        </Link>
+                    <NavLink href="/inscription">
+                        Inscription    
                     </NavLink>
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>

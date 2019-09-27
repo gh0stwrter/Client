@@ -1,31 +1,31 @@
-import React, {useState, useRef} from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import React, {useState} from 'react';
+import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import style from './style.module.scss';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 
 const FormInscription = (props) => {
+  const  NEW_USER = gql`
+    mutation newUser($email: String, $username: String, $password: String) {
+      newUser(email: $email, username: $username, password: $password){
+        email
+        username
+        password
+      }
+      }`
+  const [newUser] = useMutation(NEW_USER);  
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('');  
 
-  const Mutation = () =>{
-    const  NEW_USER = gql`
-    newUser(email: String, username: String, password: String) {
-        email
-        username     
-    }`
-    const [addData, data] = useMutation(NEW_USER);  
-    addData({email: email,username: username,password: password});
-    console.log(data)
-      return data;
-  
-  }
-  
-
-    const userSignup =  (e) => {
+    const userSignup = async (e) => {
       e.preventDefault();
-      Mutation();
+     await newUser({
+        variables: { 
+        email: email, 
+        username: username, 
+        password: password}
+      });    
     }
      
     
@@ -37,10 +37,10 @@ return (
 <Form onSubmit={userSignup}>
     <FormGroup row>
     <Col sm={6}>
-    <Button color="secondary" size="lg" block>Connect  <i class='fab fa-facebook'></i></Button>
+    <Button color="secondary" size="lg" block>Connect  <i className='fab fa-facebook'></i></Button>
     </Col>        
     <Col sm={6}>
-    <Button color="secondary" size="lg" block>Connect  <i class='fab fa-google-plus-g'/></Button>
+    <Button color="secondary" size="lg" block>Connect  <i className='fab fa-google-plus-g'/></Button>
     </Col>        
 
     </FormGroup>
@@ -69,7 +69,7 @@ return (
     <div className={style.validationButton}>
    <FormGroup row>
         <Col sm={6}>
-        <Button  color="secondary" size="lg" type="submit" block>Inscription <i class='fas fa-chevron-circle-right'></i>
+        <Button  color="secondary" size="lg" type="submit" block>Connexion <i className='fas fa-chevron-circle-right'></i>
         </Button>
         </Col>
     </FormGroup>

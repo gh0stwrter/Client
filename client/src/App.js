@@ -1,6 +1,5 @@
-import React, {Comp} from 'react';
-import styles from './App.module.scss';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import Home from './pages/Home/Home.jsx';
 import Connexion from './pages/Connection/Connection.jsx';
 import inscription from './pages/Inscription/Inscription.jsx';
@@ -10,8 +9,6 @@ const  App  =(props)  => {
     <Router>
       <Navbar/>
       <div className="App">
-
-      
       <Route path="/" exact component={Home}/>
       <Route path="/connexion" component={Connexion}/>
       <Route  path="/inscription" component={inscription}/>
