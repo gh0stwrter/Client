@@ -8,10 +8,12 @@ const FormInscription = (props) => {
   const  NEW_USER = gql`
     mutation newUser($email: String, $username: String, $password: String) {
       newUser(email: $email, username: $username, password: $password){
-        token
+        email
+        username
+        password
       }
       }`
-  const [newUser, {data}] = useMutation(NEW_USER);  
+  const [newUser] = useMutation(NEW_USER);  
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');  
@@ -23,9 +25,6 @@ const FormInscription = (props) => {
         email: email, 
         username: username, 
         password: password}
-      }).then(res => {
-        const token =  res.data.newUser.token;
-        console.log(token);
       });    
     }
      
