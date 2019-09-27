@@ -24,6 +24,7 @@ const FormConnexion = (props) => {
     }
     }).then(res =>{
         const Token = res.data.login.token;
+        console.log(Token)
      const TokenStored = localStorage.setItem('Token', Token);
      if(TokenStored){
         
