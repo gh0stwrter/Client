@@ -1,14 +1,8 @@
 import React from 'react';
+import Player from './../../components/Player/Player';
 
-
-
- const Home = (props) => {
-   
-   
-   
-    return (
-       <></>
-        
+export default () => (
+    <div>
+        <Player />
+    </div>
 );
-};
-export default Home;
