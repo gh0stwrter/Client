@@ -15,6 +15,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 // sections for this page
+import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import SectionDescription from "views/PresentationPage/Sections/SectionDescription.js";
 import SectionComponents from "views/PresentationPage/Sections/SectionComponents.js";
 import SectionCards from "views/PresentationPage/Sections/SectionCards.js";
@@ -24,8 +25,10 @@ import SectionExamples from "views/PresentationPage/Sections/SectionExamples.js"
 import SectionFreeDemo from "views/PresentationPage/Sections/SectionFreeDemo.js";
 import SectionOverview from "views/PresentationPage/Sections/SectionOverview.js";
 import SectionPricing from "views/PresentationPage/Sections/SectionPricing.js";
-
 import presentationStyle from "assets/jss/material-kit-pro-react/views/presentationStyle.js";
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+import Sticky from 'react-sticky-el';
 
 const useStyles = makeStyles(presentationStyle);
 
@@ -36,9 +39,10 @@ export default function PresentationPage() {
   });
   const classes = useStyles();
   return (
-    <div>
+    <div className="scrollarea" style={{overflow: 'scroll'}}>
+
       <Header
-        brand="Material Kit PRO React"
+        brand="Ghost-Composer"
         links={<HeaderLinks dropdownHoverColor="info" />}
         fixed
         color="transparent"
@@ -47,35 +51,44 @@ export default function PresentationPage() {
           color: "info"
         }}
       />
+      
       <Parallax
         image={require("assets/img/bg4.jpg")}
         className={classes.parallax}
       >
+      
         <div className={classes.container}>
           <GridContainer>
             <GridItem>
               <div className={classes.brand}>
                 <h1>
-                  Material Kit React
-                  <span className={classes.proBadge}>PRO</span>
+                Ghost-Composer 
+                <Button  className={classes.proBadge}>vivez de votre art <ArrowRightAltRoundedIcon/> </Button>
                 </h1>
                 <h3 className={classes.title}>
-                  A Badass Material-UI Kit based on Material Design.
+                La plateforme des amateur et professionel de la musique
                 </h3>
               </div>
+              
             </GridItem>
           </GridContainer>
         </div>
       </Parallax>
+
+      {/* <Sticky scrollElement=".scrollarea">
+      <AudioPlayer
+    autoPlay
+    src="http://example.com/audio.mp3"
+    onPlay={e => console.log("onPlay")}
+    // other props here
+  />
+      </Sticky> */}
+     
       <div className={classNames(classes.main, classes.mainRaised)}>
         <SectionDescription />
+       
         <SectionComponents />
-        <SectionCards />
-        <SectionContent />
-        <SectionSections />
-        <SectionExamples />
-        <SectionFreeDemo />
-        <SectionOverview />
+        
       </div>
       <SectionPricing />
       <Footer
@@ -88,8 +101,7 @@ export default function PresentationPage() {
                 target="_blank"
                 className={classes.footerBrand}
               >
-                Material Kit PRO React
-              </a>
+              Ghost-Composer              </a>
             </div>
             <div className={classes.pullCenter}>
               <List className={classes.list}>
@@ -167,6 +179,7 @@ export default function PresentationPage() {
           </div>
         }
       />
+    
     </div>
   );
 }

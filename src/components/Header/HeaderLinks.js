@@ -13,6 +13,7 @@ import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
+import PersonAddTwoToneIcon from '@material-ui/icons/PersonAddTwoTone';
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import ViewDay from "@material-ui/icons/ViewDay";
 import Dns from "@material-ui/icons/Dns";
@@ -246,16 +247,23 @@ export default function HeaderLinks(props) {
         />
       </ListItem>
       <ListItem className={classes.listItem}>
+      <Link to="/login-page" >
+
         <Button
-          href="https://www.creative-tim.com/product/material-kit-pro-react?ref=mkpr-navbar"
           color={window.innerWidth < 960 ? "info" : "white"}
           target="_blank"
           className={classes.navButton}
           round
         >
-          <ShoppingCart className={classes.icons} /> buy now
+                              <PersonAddTwoToneIcon/>
+
+          Signup
+          
+          {/* <ShoppingCart className={classes.icons} />  */}
         </Button>
-      </ListItem>
+        </Link>
+
+        </ListItem>
     </List>
   );
 }

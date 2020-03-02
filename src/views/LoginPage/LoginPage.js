@@ -39,7 +39,7 @@ export default function LoginPage() {
       <Header
         absolute
         color="transparent"
-        brand="Material Kit PRO React"
+        brand="Ghost-Composer"
         links={<HeaderLinks dropdownHoverColor="info" />}
       />
       <div
@@ -56,7 +56,7 @@ export default function LoginPage() {
               <Card>
                 <form className={classes.form}>
                   <CardHeader
-                    color="primary"
+                    color="warning"
                     signup
                     className={classes.cardHeader}
                   >

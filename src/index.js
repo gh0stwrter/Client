@@ -18,6 +18,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router";
+import { ApolloProvider } from '@apollo/react-hooks';
 
 import "assets/scss/material-kit-pro-react.scss?v=1.8.0";
 
@@ -38,10 +39,10 @@ import SectionsPage from "views/SectionsPage/SectionsPage.js";
 import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.js";
 import SignupPage from "views/SignupPage/SignupPage.js";
 import ErrorPage from "views/ErrorPage/ErrorPage.js";
-
+import client from "apollo/client.js"
 var hist = createBrowserHistory();
-
 ReactDOM.render(
+  <ApolloProvider client={client}>
   <Router history={hist}>
     <Switch>
       <Route path="/about-us" component={AboutUsPage} />
@@ -61,6 +62,7 @@ ReactDOM.render(
       <Route path="/error-page" component={ErrorPage} />
       <Route path="/" component={PresentationPage} />
     </Switch>
-  </Router>,
+  </Router>
+  </ApolloProvider>,
   document.getElementById("root")
 );

@@ -12,7 +12,7 @@ const descriptionStyle = {
   },
   section: {
     ...section,
-    padding: "70px 0px",
+    padding: "0px",
     "& h4$description": {
       fontSize: "1.5em"
     }
@@ -20,7 +20,7 @@ const descriptionStyle = {
   features: {
     textAlign: "center !important",
     paddingTop: "30px",
-    paddingBottom: "0px",
+    paddingBottom: "30px",
     "& p": {
       fontSize: "16px",
       lineHeight: "1.6em"
