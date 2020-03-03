@@ -11,7 +11,7 @@ import SkipNextIcon from '@material-ui/icons/SkipNext';
 import avatar from "assets/img/faces/avatar.jpg";
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  root: { 
       background:"#6e0d20",
       color: "white",
     display: 'flex',
