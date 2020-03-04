@@ -30,7 +30,6 @@ const useStyles = makeStyles(blogPostsPageStyle);
 export default function BlogPostsPage() {   
 const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
       onCompleted(){
-        console.log(addWrittenComp)
       },
       variables:{
           file: null,
@@ -47,7 +46,8 @@ const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
       ([file]) =>{
         console.log(file)
         addWrittenComp({ 
-          variables:  {file: file}
+          
+          variables:  {file}
         })
       },[addWrittenComp]
     );
@@ -91,25 +91,6 @@ const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
       }
     </div>
 
-        <CustomFileInput
-          formControlProps={{
-            fullWidth: true
-          }}
-          
-          inputProps={{
-            placeholder: "Single File..."
-
-          }}
-          endButton={{
-            buttonProps: {
-              round: true,
-              color: "primary",
-              justIcon: true,
-              fileButton: true
-            },
-            icon: <AttachFile />
-          }}
-        />
           <SectionPills />
           <SectionInterested />
         </div>

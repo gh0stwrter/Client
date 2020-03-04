@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
+import { UPLOAD_WRITTEN_COMP } from "apollo/uploads";
+import {useMutation} from "@apollo/react-hooks";
 
 import styles from "assets/jss/material-kit-pro-react/components/customFileInputStyle.js";
 
@@ -13,6 +15,20 @@ const useStyles = makeStyles(styles);
 
 export default function CustomFileInput(props) {
   const [fileNames, setFileNames] = React.useState("");
+  const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
+    onCompleted(){
+    },
+    variables:{
+        file: null,
+        writtenInput:{
+        userId:"5de4001874802333419ecd04",
+        title:"Oh Primaire",
+        category:"5e10ff08736953c91e4cf40e",
+        isPublish: true,
+        price: 12.33
+      }
+    }
+  })
   // eslint-disable-next-line
   const [files, setFiles] = React.useState(null);
   let hiddenFile = React.createRef();
@@ -25,6 +41,7 @@ export default function CustomFileInput(props) {
     // files is the file/image uploaded
     // in this function you can save the image (files) on form submit
     // you have to call it yourself
+    if(files) addWrittenComp({variables:{file: [files]}})
   };
   const addFile = e => {
     let fileNames = "";
@@ -35,7 +52,6 @@ export default function CustomFileInput(props) {
         fileNames = fileNames + ", ";
       }
     }
-    console.log(files)
     setFiles(files);
     setFileNames(fileNames);
   };
@@ -91,6 +107,7 @@ export default function CustomFileInput(props) {
           startAdornment: buttonStart
         }}
       />
+      <button onClick={handleSubmit}> submit</button>
     </div>
   );
 }
