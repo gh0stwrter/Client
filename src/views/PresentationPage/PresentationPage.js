@@ -18,17 +18,10 @@ import Button from "components/CustomButtons/Button.js";
 import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
 import SectionDescription from "views/PresentationPage/Sections/SectionDescription.js";
 import SectionComponents from "views/PresentationPage/Sections/SectionComponents.js";
-import SectionCards from "views/PresentationPage/Sections/SectionCards.js";
-import SectionContent from "views/PresentationPage/Sections/SectionContent.js";
-import SectionSections from "views/PresentationPage/Sections/SectionSections.js";
-import SectionExamples from "views/PresentationPage/Sections/SectionExamples.js";
-import SectionFreeDemo from "views/PresentationPage/Sections/SectionFreeDemo.js";
-import SectionOverview from "views/PresentationPage/Sections/SectionOverview.js";
 import SectionPricing from "views/PresentationPage/Sections/SectionPricing.js";
 import presentationStyle from "assets/jss/material-kit-pro-react/views/presentationStyle.js";
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
-import Sticky from 'react-sticky-el';
+
+// import Sticky from 'react-sticky-el';
 
 const useStyles = makeStyles(presentationStyle);
 
@@ -51,7 +44,6 @@ export default function PresentationPage() {
           color: "info"
         }}
       />
-      
       <Parallax
         image={require("assets/img/bg4.jpg")}
         className={classes.parallax}
@@ -63,7 +55,7 @@ export default function PresentationPage() {
               <div className={classes.brand}>
                 <h1>
                 Ghost-Composer 
-                <Button  className={classes.proBadge}>vivez de votre art <ArrowRightAltRoundedIcon/> </Button>
+                {/* <Button  className={classes.proBadge}>vivez de votre art <ArrowRightAltRoundedIcon/> </Button> */}
                 </h1>
                 <h3 className={classes.title}>
                 La plateforme des amateur et professionel de la musique
@@ -75,15 +67,6 @@ export default function PresentationPage() {
         </div>
       </Parallax>
 
-      {/* <Sticky scrollElement=".scrollarea">
-      <AudioPlayer
-    autoPlay
-    src="http://example.com/audio.mp3"
-    onPlay={e => console.log("onPlay")}
-    // other props here
-  />
-      </Sticky> */}
-     
       <div className={classNames(classes.main, classes.mainRaised)}>
         <SectionDescription />
        

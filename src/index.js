@@ -40,9 +40,12 @@ import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.js";
 import SignupPage from "views/SignupPage/SignupPage.js";
 import ErrorPage from "views/ErrorPage/ErrorPage.js";
 import client from "apollo/client.js"
+import Player from "components/Player/Player"
+
 var hist = createBrowserHistory();
 ReactDOM.render(
   <ApolloProvider client={client}>
+  <Player/>
   <Router history={hist}>
     <Switch>
       <Route path="/about-us" component={AboutUsPage} />
