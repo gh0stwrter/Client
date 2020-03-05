@@ -11,9 +11,9 @@ import PauseCircleFilledOutlined from '@material-ui/icons/PauseCircleOutline';
 import avatar from "assets/img/faces/avatar.jpg";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    background: "#6e0d20",
-    color: "white",
+  root: { 
+      background:"#6e0d20",
+      color: "white",
     display: 'flex',
   },
   details: {

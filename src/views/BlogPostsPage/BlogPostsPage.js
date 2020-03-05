@@ -1,5 +1,6 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useCallback} from "react";
+import {useMutation} from "@apollo/react-hooks";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -18,17 +19,44 @@ import SectionPills from "./Sections/SectionPills.js";
 import SectionInterested from "./Sections/SectionInterested.js";
 import SectionImage from "./Sections/SectionImage.js";
 import SubscribeLine from "./Sections/SubscribeLine.js";
-
+import CustomFileInput from "components/CustomFileInput/CustomFileInput.js";
+import AttachFile from "@material-ui/icons/AttachFile";
+import { UPLOAD_WRITTEN_COMP } from "apollo/uploads";
 import blogPostsPageStyle from "assets/jss/material-kit-pro-react/views/blogPostsPageStyle.js";
+import {useDropzone} from 'react-dropzone'
 
 const useStyles = makeStyles(blogPostsPageStyle);
 
-export default function BlogPostsPage() {
+export default function BlogPostsPage() {   
+const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
+      onCompleted(){
+      },
+      variables:{
+          file: null,
+          writtenInput:{
+          userId:"5de4001874802333419ecd04",
+          title:"Oh Primaire",
+          category:"5e10ff08736953c91e4cf40e",
+          isPublish: true,
+          price: 12.33
+        }
+      }
+    })
+    const onDrop = useCallback(
+      ([file]) =>{
+        console.log(file)
+        addWrittenComp({ 
+          
+          variables:  {file}
+        })
+      },[addWrittenComp]
+    );
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
+  const {getRootProps,getInputProps, isDragActive} = useDropzone({ onDrop })
   return (
     <div>
       <Header
@@ -54,6 +82,15 @@ export default function BlogPostsPage() {
       </Parallax>
       <div className={classes.main}>
         <div className={classes.container}>
+        <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      {
+        isDragActive ?
+          <p>Drop the files here ...</p> :
+          <p>Drag 'n' drop some files here, or click to select files</p>
+      }
+    </div>
+
           <SectionPills />
           <SectionInterested />
         </div>
@@ -63,6 +100,7 @@ export default function BlogPostsPage() {
       <Footer
         content={
           <div>
+            
             <div className={classes.left}>
               <List className={classes.list}>
                 <ListItem className={classes.inlineBlock}>
