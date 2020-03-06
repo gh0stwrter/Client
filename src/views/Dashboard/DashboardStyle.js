@@ -42,7 +42,7 @@ export default {
         height: 50,
         width: 150,
         marginLeft: 70,
-        marginTop: 140,
+        marginTop: 50,
         marginBottom: 0,
         textAlign: "center",
         verticalAlign: "bottom",
@@ -111,7 +111,18 @@ export default {
         background: "#222224 !important",
         boxShadow: "0 0 0 0 rgba(0, 0, 0, 0) !important",
     },
-    instru: {
-
+    modal: {
+        fontSize: "1.25em",
+        display: "block",
+        backgroundColor: "#222224",
+        height: "auto",
+        width: 250,
+        marginLeft: 70,
+        marginTop: 100,
+        marginBottom: 0,
+        textAlign: "center",
+        verticalAlign: "bottom",
+        color: "#c0c0d1",
+        padding: "20px"
     }
 }

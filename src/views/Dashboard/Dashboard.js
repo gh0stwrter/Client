@@ -14,7 +14,7 @@ import CardBody from "components/Card/CardBody.js";
 import Button from "components/CustomButtons/Button.js";
 // sections for this page
 
-
+import UploadModal from "./utils/UploadModal.js"
 import Icon from "@material-ui/core/Icon";
 import CardHeader from "components/Card/CardHeader.js";
 import DashboardStyle from "./DashboardStyle.js"
@@ -84,10 +84,14 @@ export default function PresentationPage() {
                 color="dark"
             />
             <GridContainer>
-                <GridItem>
 
+                <GridItem>
+                <Card className={classes.modal}>
+                    <UploadModal/>
+                </Card>
                     <Card className={classes.header}>Stats</Card>
                     <Card className={classes.blackCard}>
+
                         <CardBody>
                             <div className={classes.stats}>
                                 <div className={classes.contentStat}>
@@ -136,6 +140,7 @@ export default function PresentationPage() {
                     </GridItem>
                 </GridContainer>
             </div>
+            <UploadModal/>
 
         </div>
     );
