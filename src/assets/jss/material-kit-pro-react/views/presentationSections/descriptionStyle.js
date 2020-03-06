@@ -8,7 +8,7 @@ const descriptionStyle = {
   container,
   description: {
     color: grayColor[0],
-    textAlign: "center"
+    textAlign: "center",
   },
   section: {
     ...section,

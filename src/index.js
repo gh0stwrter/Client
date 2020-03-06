@@ -39,6 +39,8 @@ import SectionsPage from "views/SectionsPage/SectionsPage.js";
 import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.js";
 import SignupPage from "views/SignupPage/SignupPage.js";
 import ErrorPage from "views/ErrorPage/ErrorPage.js";
+import Dashboard from "views/Dashboard/Dashboard.js";
+
 import client from "apollo/client.js"
 import Player from "components/Player/Player"
 
@@ -62,6 +64,7 @@ ReactDOM.render(
       <Route path="/sections" component={SectionsPage} />
       <Route path="/shopping-cart-page" component={ShoppingCartPage} />
       <Route path="/signup-page" component={SignupPage} />
+      <Route path="/dashboard" component={Dashboard} />
       <Route path="/error-page" component={ErrorPage} />
       <Route path="/" component={PresentationPage} />
     </Switch>
