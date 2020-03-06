@@ -18,7 +18,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Player() {
     const classes = useStyles();
-    const [played, setPlayed] = useState(JSON.parse(localStorage.getItem('player')).played);
 
     useEffect(() => {
         window.addEventListener('storage', (e) => {
@@ -28,14 +27,14 @@ export default function Player() {
 
     
 
-    return played ? (
+    return  (
         <div className={classes.player}>
             <AudioPlayer
             // "https://freesound.org/data/previews/507/507106_8682843-lq.mp3"
-                src={(JSON.parse(localStorage.getItem('player'))).sound}
-                onPlay={e => console.log(played)}
+                //src={}
+                onPlay={e => console.log(e)}
                 onPlayError={err => console.log(err)}
             />
         </div>
-    ) : "";
+    );
 }

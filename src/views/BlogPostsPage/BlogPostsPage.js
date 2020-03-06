@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, {useCallback} from "react";
+import React, {useCallback,useEffect, useState} from "react";
 import {useMutation} from "@apollo/react-hooks";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,7 +27,8 @@ import {useDropzone} from 'react-dropzone'
 
 const useStyles = makeStyles(blogPostsPageStyle);
 
-export default function BlogPostsPage() {   
+export default function BlogPostsPage() {  
+const [filesList, setFilesList] = useState([]); 
 const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
       onCompleted(){
       },
@@ -42,21 +43,30 @@ const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
         }
       }
     })
+    useEffect(()=>{
+      console.log(filesList ? filesList : null)
+    },[filesList])
     const onDrop = useCallback(
       ([file]) =>{
-        console.log(file)
-        addWrittenComp({ 
-          
-          variables:  {file}
-        })
-      },[addWrittenComp]
+       setFilesList([...filesList, file])
+       console.log(filesList)
+        
+      },[filesList]
     );
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   });
+ 
+
   const classes = useStyles();
-  const {getRootProps,getInputProps, isDragActive} = useDropzone({ onDrop })
+  const {acceptedFiles,getRootProps,getInputProps, isDragActive} = useDropzone({ onDrop })
+  
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
   return (
     <div>
       <Header
@@ -82,14 +92,22 @@ const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
       </Parallax>
       <div className={classes.main}>
         <div className={classes.container}>
-        <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      {
-        isDragActive ?
-          <p>Drop the files here ...</p> :
-          <p>Drag 'n' drop some files here, or click to select files</p>
-      }
-    </div>
+        <section className="container">
+      <div {...getRootProps({className: 'dropzone'})}>
+        <input multiple {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+      <button onClick={e => {
+        addWrittenComp({ 
+          variables:  {file:[filesList]}
+        })
+      }}>Send files</button>
+      <aside>
+        <h4>Files</h4>
+        <ul>{files}</ul>
+      </aside>
+    </section>
+    
 
           <SectionPills />
           <SectionInterested />

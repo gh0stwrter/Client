@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 const CardMusicPlayer = (props) => {
 
-  const [played, setPlayed] = useState(JSON.parse(localStorage.getItem('player')).played || false)
+  const [played, setPlayed] = useState(false)
   const title = props.title;
   const author = props.autor;
   const sound = props.sound || "";
@@ -49,27 +49,28 @@ const CardMusicPlayer = (props) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const play = () => {
-    let storage = JSON.parse(localStorage.getItem('player')).played
-    console.log(storage);
-    const data = {
-      sound: sound,
-      played: JSON.parse(localStorage.getItem('player')).played ? false : true,
-    }
-    localStorage.setItem('player', JSON.stringify(data));
-    setPlayed(!played)
-  }
+  
+  // const play = () => {
+  //   let storage = JSON.parse(localStorage.getItem('player'))
+  //   console.log(storage);
+  //   const data = {
+  //     sound: sound,
+  //     played: JSON.parse(localStorage.getItem('player')) ? false : true,
+  //   }
+  //   localStorage.setItem('player', JSON.stringify(data));
+  //   setPlayed(!played)
+  // }
 
   
   const buttonPlay = 
   played ? (
-      <IconButton aria-label="play/pause" onClick={play}>
+      <IconButton aria-label="play/pause" >
         <PauseCircleFilledOutlined 
         color="secondary" 
         className={classes.playIcon}
          />
       </IconButton> ) : (
-      <IconButton aria-label="play/pause" onClick={play}>
+      <IconButton aria-label="play/pause" >
               <PlayArrowIcon 
               color="secondary" 
               className={classes.playIcon}
