@@ -13,134 +13,14 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import Button from "components/CustomButtons/Button.js";
 // sections for this page
-import SectionDescription from "views/PresentationPage/Sections/SectionDescription.js";
-import SectionComponents from "views/PresentationPage/Sections/SectionComponents.js";
-import SectionPricing from "views/PresentationPage/Sections/SectionPricing.js";
 
-import { cardTitle } from "assets/jss/material-kit-pro-react.js";
-import { whiteColor, mlAuto, } from "assets/jss/material-kit-pro-react";
+
 import Icon from "@material-ui/core/Icon";
 import CardHeader from "components/Card/CardHeader.js";
-
-// import presentationStyle from "assets/jss/material-kit-pro-react/views/presentationStyle.js";
-
-// import Sticky from 'react-sticky-el';
+import DashboardStyle from "./DashboardStyle.js"
 
 
-const useStyles = makeStyles({
-    cardTitle: {
-        cardTitle,
-        color: whiteColor
-    },
-    main: {
-        backgroundColor: "#333436",
-
-    },
-    container: {
-        backgroundColor: "#333436",
-        zIndex: 10,
-        marginBottom: 60,
-
-    },
-
-    blackCard: {
-        color: whiteColor,
-        width: "auto",
-        backgroundColor: "#222224",
-        marginTop: -10,
-        margin: 50,
-
-    },
-    blackCard2: {
-        color: whiteColor,
-        width: "43%",
-        height: 500,
-        backgroundColor: "#222224",
-        marginTop: -10,
-        marginBottom: 150,
-        margin: 50,
-        display: "inline-block"
-    },
-    header: {
-        fontSize: "1.25em",
-        display: "block",
-        backgroundColor: "#222224",
-        height: 50,
-        width: 150,
-        marginLeft: 70,
-        marginTop: 140,
-        marginBottom: 0,
-        textAlign: "center",
-        verticalAlign: "bottom",
-        color: "#c0c0d1",
-        padding: "20px"
-    },
-
-    stats: {
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexWrap: "wrap",
-        alignContent: "space-between",
-        justifyContent: "space-between",
-        color: "#c0c0d1",
-        "& .fab,& .fas,& .far,& .fal,& .material-icons": {
-            position: "relative",
-            top: "3px",
-            marginRight: "3px",
-            marginLeft: "3px",
-            fontSize: "15px",
-            lineHeight: "15px",
-            margin: 10,
-
-        },
-        "& svg": {
-            position: "relative",
-            top: "3px",
-            marginRight: "3px",
-            marginLeft: "3px",
-            width: "18px",
-            height: "18px",
-        },
-    },
-    contentStat: {
-        fontSize: 20,
-        width: 250,
-        height: 80,
-        margin: 20,
-        verticalAlign: "baseline",
-        display: "inline-block",
-
-        alignItem: "center",
-        textAlign: "center",
-        "& i": {
-            color: "#96262b",
-            fontSize: "30px !important",
-            verticalAlign: "bottom",
-            marginRight: "10px !important",
-        }
-    },
-    dashboard: {
-        width: "100%",
-        // height: "100%",
-        display: "flex",
-        flexWrap: "wrap",
-        alignContent: "space-between",
-        justifyContent: "space-between",
-        color: "#c0c0d1",
-    },
-    head: {        
-        fontSize: "1.25em",
-        color: "#c0c0d1",
-        width: 150,
-        textAlign: "center",
-        background: "#222224 !important",
-        boxShadow: "0 0 0 0 rgba(0, 0, 0, 0) !important",
-    },
-    instru: {
-
-    }
-});
+const useStyles = makeStyles(DashboardStyle);
 
 
 // FAKE DATA
