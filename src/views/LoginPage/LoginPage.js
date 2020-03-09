@@ -1,5 +1,6 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useState} from "react";
+import {useMutation} from "@apollo/react-hooks";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -21,14 +22,27 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-
 import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.js";
-
 import image from "assets/img/bg7.jpg";
+import { SIGN_UP_COMPOSER } from "apollo/user";
+import Cookies from "js-cookie";
+import profilePageStyle from "assets/jss/material-kit-pro-react/views/profilePageStyle";
 
 const useStyles = makeStyles(loginPageStyle);
 
-export default function LoginPage() {
+export default function LoginPage(props) {
+  const [userInputs, setUserInputs] = useState({username:"", email:"", password:""})
+
+  const [addNewUser] = useMutation(SIGN_UP_COMPOSER, {
+    onCompleted({newUser}){
+      Cookies.set("x-token", newUser.token, {expires: 1})
+      props.history.push("/profile/dashboard")
+    }
+  })
+  const setInputs = (event) =>{
+    const {name, value} = event.target;
+    setUserInputs(({...userInputs,[name]: value }))
+  }
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -56,7 +70,7 @@ export default function LoginPage() {
               <Card>
                 <form className={classes.form}>
                   <CardHeader
-                    color="warning"
+                    color="danger"
                     signup
                     className={classes.cardHeader}
                   >
@@ -89,7 +103,7 @@ export default function LoginPage() {
                     </div>
                   </CardHeader>
                   <p className={classes.description + " " + classes.textCenter}>
-                    Or Be Classical
+                      Ghost-Composer
                   </p>
                   <CardBody signup>
                     <CustomInput
@@ -97,9 +111,13 @@ export default function LoginPage() {
                       formControlProps={{
                         fullWidth: true
                       }}
+                      
                       inputProps={{
+                        name:"username",
+                        onChange: ( setInputs),
                         placeholder: "First Name...",
                         type: "text",
+                        defaultValue: userInputs.username,
                         startAdornment: (
                           <InputAdornment position="start">
                             <Face className={classes.inputIconsColor} />
@@ -113,6 +131,9 @@ export default function LoginPage() {
                         fullWidth: true
                       }}
                       inputProps={{
+                        value: userInputs.email,
+                        name:"email",
+                        onChange: setInputs,
                         placeholder: "Email...",
                         type: "email",
                         startAdornment: (
@@ -128,6 +149,9 @@ export default function LoginPage() {
                         fullWidth: true
                       }}
                       inputProps={{
+                        value: userInputs.password,
+                        name:"password",
+                        onChange: setInputs,
                         placeholder: "Password",
                         type: "password",
                         startAdornment: (
@@ -142,7 +166,11 @@ export default function LoginPage() {
                     />
                   </CardBody>
                   <div className={classes.textCenter}>
-                    <Button simple color="primary" size="lg">
+                    <Button onClick={e => addNewUser({variables:{
+                        username: userInputs.username,
+                        email: userInputs.email,
+                        password: userInputs.password,
+                    }})} simple color="primary" size="lg">
                       Get started
                     </Button>
                   </div>

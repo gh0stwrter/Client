@@ -37,7 +37,7 @@ export default function SectionComponents() {
               project to the next level.
             </h5>
           </GridItem>
-          <GridItem xs={12} sm={12} md={6} lg={6} className={classes.mlAuto}>
+          {/* <GridItem xs={12} sm={12} md={6} lg={6} className={classes.mlAuto}>
             <div className={classes.imageContainer}>
               <img
                 src={macbookImage}
@@ -75,7 +75,7 @@ export default function SectionComponents() {
                 className={classes.repostImage}
               />
             </div>
-          </GridItem>
+          </GridItem> */}
         </GridContainer>
       </div>
     </div>

@@ -6,8 +6,8 @@ import { ApolloLink } from 'apollo-link';
 
 const cache = new InMemoryCache();
 const client = new ApolloClient({
-  uri: 'http://localhost:8000/api',
-  link :  createUploadLink({uri: 'http://localhost:8000/api'}),
+  uri: 'http://localhost:8007/api',
+  link :  createUploadLink({uri: 'http://localhost:8007/api'}),
   cache,
 
 });

@@ -17,8 +17,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router";
+import { Router, Route, Switch, Redirect } from "react-router";
 import { ApolloProvider } from '@apollo/react-hooks';
+import decode from 'jwt-decode';
 
 import "assets/scss/material-kit-pro-react.scss?v=1.8.0";
 
@@ -43,9 +44,40 @@ import Dashboard from "views/Dashboard/Dashboard.js";
 
 import client from "apollo/client.js"
 import Player from "components/Player/Player"
+import Cookies from "js-cookie";
 
 var hist = createBrowserHistory();
-ReactDOM.render(
+
+
+
+const isAllowed = (token) => {
+  try {
+    const now = new Date(0);
+    const decoded = decode(token);
+    console.log(decoded.nbf)
+    if (typeof decoded.exp !== 'undefined' && decoded.exp < now) {
+      throw new Error(`token expired: ${JSON.stringify(decoded)}`)
+    }
+    if (typeof decoded.nbf !== 'undefined' && decoded.nbf > now) {
+      throw new Error(`token expired: ${JSON.stringify(decoded)}`)
+    }
+    now.setUTCSeconds(decoded.exp);
+    return now.valueOf() > new Date().valueOf();
+  } catch (e) {
+    return false;
+  }
+}
+
+const ProtectedRoute = ({ ...rest }) => {
+  const token = Cookies.get('x-token');
+  return isAllowed(token)
+    ? <Route {...rest} />
+
+    : <Redirect to={"/auth/login"} />;
+}
+
+const App = (props) =>{
+  return(
   <ApolloProvider client={client}>
   <Player/>
   <Router history={hist}>
@@ -64,11 +96,20 @@ ReactDOM.render(
       <Route path="/sections" component={SectionsPage} />
       <Route path="/shopping-cart-page" component={ShoppingCartPage} />
       <Route path="/signup-page" component={SignupPage} />
-      <Route path="/dashboard" component={Dashboard} />
+      <ProtectedRoute path="/profile" render={props =>
+         <Route path="/profile/dashboard" component={Dashboard} /> 
+         
+         }/>
+      
       <Route path="/error-page" component={ErrorPage} />
       <Route path="/" component={PresentationPage} />
     </Switch>
   </Router>
-  </ApolloProvider>,
+  </ApolloProvider>
+  )
+}
+ReactDOM.render(
+  <App/>
+  ,
   document.getElementById("root")
 );

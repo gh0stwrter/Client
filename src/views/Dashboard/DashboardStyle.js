@@ -19,7 +19,7 @@ export default {
 
     blackCard: {
         color: whiteColor,
-        width: "auto",
+        width: '90%',
         backgroundColor: "#222224",
         marginTop: -10,
         margin: 50,

@@ -85,7 +85,7 @@ export default function ProfilePage({ ...rest }) {
                 </div>
                 <div className={classes.name}>
                   <h3 className={classes.title}>Christian Louboutin</h3>
-                  <h6>DESIGNER</h6>
+                  <h6>Composeur</h6>
                   <Button
                     justIcon
                     simple
@@ -129,6 +129,7 @@ export default function ProfilePage({ ...rest }) {
                   </Button>
                 </Tooltip>
               </div>
+              
             </GridItem>
           </GridContainer>
           <div className={classNames(classes.description, classes.textCenter)}>

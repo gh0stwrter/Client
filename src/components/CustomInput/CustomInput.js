@@ -30,6 +30,7 @@ export default function CustomInput(props) {
     inputRootCustomClasses,
     success
   } = props;
+  console.log(formControlProps)
   const classes = useStyles();
   const labelClasses = classNames({
     [" " + classes.labelRootError]: error,
