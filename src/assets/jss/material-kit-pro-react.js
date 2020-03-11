@@ -133,7 +133,7 @@ const grayColor = [
   "#1f1f1f"
 ];
 const whiteColor = "#FFF";
-const blackColor = "#000";
+const blackColor = "#2b2f45";
 const twitterColor = "#55acee";
 const facebookColor = "#3b5998";
 const googleColor = "#dd4b39";
@@ -355,7 +355,7 @@ const cardSubtitle = {
 };
 
 const main = {
-  background: whiteColor,
+  background: blackColor,
   position: "relative",
   zIndex: "3"
 };

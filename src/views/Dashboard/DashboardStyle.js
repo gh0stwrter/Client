@@ -1,5 +1,5 @@
 import { cardTitle } from "assets/jss/material-kit-pro-react.js";
-import { whiteColor, mlAuto, } from "assets/jss/material-kit-pro-react";
+import { whiteColor } from "assets/jss/material-kit-pro-react";
 
 export default {
     cardTitle: {
@@ -19,7 +19,7 @@ export default {
 
     blackCard: {
         color: whiteColor,
-        width: "auto",
+        width: '90%',
         backgroundColor: "#222224",
         marginTop: -10,
         margin: 50,

@@ -15,23 +15,23 @@ import descriptionStyle from "assets/jss/material-kit-pro-react/views/presentati
 
 const useStyles = makeStyles(descriptionStyle);
 
-export default function SectionDescription() {
+export default function SectionDescription({compositions: getCompositions}) {
   const classes = useStyles();
   return (
     <div className={classes.section}>
       <div className={classes.container}>
        
         <div className={classes.features}>
+          <h2 style={{color:"white"}}>Top 10 of the week</h2>
           <GridContainer>
-            <GridItem md={4} sm={4}>
-              <CardMusicPlayer/>
-            </GridItem>
-            <GridItem md={4} sm={4}>
-            <CardMusicPlayer/>
-            </GridItem>
-            <GridItem md={4} sm={4}>
-            <CardMusicPlayer/>
-            </GridItem>
+            {getCompositions ?
+              getCompositions.getCompositions.map((item) =>
+              <GridItem md={4} sm={4}>
+              <CardMusicPlayer title={item.title} image={item.image} id={item.id} composer={item.composer} musicUri={item.file} />
+              </GridItem>
+              )  : null
+          }
+           
           </GridContainer>
         </div>
       </div>

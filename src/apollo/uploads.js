@@ -10,3 +10,11 @@ export const UPLOAD_WRITTEN_COMP = gql`
         }
     
 `
+
+export const DATA_PLAYER = gql`
+    query {
+        play @client {
+            url
+        }
+    }
+`

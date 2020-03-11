@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from "react";
+import React, {useState} from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
@@ -13,7 +13,6 @@ import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
-import PersonAddTwoToneIcon from '@material-ui/icons/PersonAddTwoTone';
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import ViewDay from "@material-ui/icons/ViewDay";
 import Dns from "@material-ui/icons/Dns";
@@ -38,16 +37,23 @@ import Layers from "@material-ui/icons/Layers";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import LineStyle from "@material-ui/icons/LineStyle";
 import Error from "@material-ui/icons/Error";
+import Cookies from "js-cookie";
+import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.js";
+import { Redirect } from "react-router-dom";
+import Person from '@material-ui/icons/Person';
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
+import LoginModal from "components/LoginModal/LoginModal.js"
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
+  const [redirect, setRedirect] = useState(null);
+
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t + b;
@@ -89,8 +95,41 @@ export default function HeaderLinks(props) {
 
   const { dropdownHoverColor } = props;
   const classes = useStyles();
+
+  const loginButton = Cookies.get("x-token") ?
+  <>
+  <ListItem className={classes.listItem}>
+    <Link
+      to="/dashboard"
+      className={classes.navLink}
+      onClick={e => smoothScroll(e, "headers")}
+    >
+      <Person/>
+    </Link>
+  </ListItem>
+  <ListItem className={classes.listItem}>
+    <Button
+    color="transparent"
+    target="_blank"
+    className={classes.navButton}
+    round
+    onClick={() => {
+      Cookies.remove("x-token"); 
+      setRedirect("/");
+    }}>Déconnection</Button> </ListItem></> : 
+    <LoginModal/>;
+
+
+    const redirectComp = () => {
+      if (redirect)
+          return <Redirect to={"/profile/dashboard"} />
+      else
+          return <></>; 
+
+  }
   return (
     <List className={classes.list + " " + classes.mlAuto}>
+      {redirectComp()}
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
@@ -246,24 +285,8 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem>
-      <ListItem className={classes.listItem}>
-      <Link to="/login-page" >
+          {loginButton}
 
-        <Button
-          color={window.innerWidth < 960 ? "info" : "white"}
-          target="_blank"
-          className={classes.navButton}
-          round
-        >
-                              <PersonAddTwoToneIcon/>
-
-          Signup
-          
-          {/* <ShoppingCart className={classes.icons} />  */}
-        </Button>
-        </Link>
-
-        </ListItem>
     </List>
   );
 }

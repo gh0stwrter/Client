@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 // core components
+import {useQuery, useApolloClient} from "@apollo/react-hooks";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
@@ -20,12 +21,18 @@ import SectionDescription from "views/PresentationPage/Sections/SectionDescripti
 import SectionComponents from "views/PresentationPage/Sections/SectionComponents.js";
 import SectionPricing from "views/PresentationPage/Sections/SectionPricing.js";
 import presentationStyle from "assets/jss/material-kit-pro-react/views/presentationStyle.js";
-
+import SectionOverview from "./Sections/SectionOverview";
+import {GET_ALL_COMPOSITIONS} from "apollo/composition";
 // import Sticky from 'react-sticky-el';
 
 const useStyles = makeStyles(presentationStyle);
-
 export default function PresentationPage() {
+const client = useApolloClient();
+  const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
+    onCompleted(){
+      console.log(getCompositions)
+    }
+  })
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -41,7 +48,7 @@ export default function PresentationPage() {
         color="transparent"
         changeColorOnScroll={{
           height: 400,
-          color: "info"
+          color: "dark"
         }}
       />
       <Parallax
@@ -68,12 +75,12 @@ export default function PresentationPage() {
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <SectionDescription />
-       
-        <SectionComponents />
-        
-      </div>
+      <SectionDescription compositions={getCompositions} />
+      <SectionComponents />
       <SectionPricing />
+      <SectionOverview/>
+      </div>
+     
       <Footer
         theme="white"
         content={

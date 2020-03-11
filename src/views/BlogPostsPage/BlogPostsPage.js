@@ -35,21 +35,19 @@ const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
       variables:{
           file: null,
           writtenInput:{
-          userId:"5e3d8cd01682214532762daf",
-          title:"Oh Primaire",
+          userId:"5de4001874802333419ecd04",
+          title:"Etincelle - SNEAZZY",
           category:"5e10ff08736953c91e4cf40e",
           isPublish: true,
-          price: 12.33
+          price: 12.33,
+          compo_type: "sonore"
         }
       }
     })
-    useEffect(()=>{
-      console.log(filesList ? filesList : null)
-    },[filesList])
+
     const onDrop = useCallback(
       ([file]) =>{
        setFilesList([...filesList, file])
-       console.log(filesList)
         
       },[filesList]
     );

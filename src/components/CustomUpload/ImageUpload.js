@@ -44,7 +44,7 @@ export default function ImageUpload(props) {
     <div className="fileinput text-center">
       <input type="file" onChange={handleImageChange} ref={fileInput} />
       <div className={"thumbnail" + (avatar ? " img-circle" : "")}>
-        <img src={imagePreviewUrl} alt="..." />
+        <img src={imagePreviewUrl} alt="..."/>
       </div>
       <div>
         {file === null ? (

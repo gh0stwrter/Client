@@ -44,13 +44,9 @@ export default function UploadModal() {
             }
         }
     })
-    useEffect(() => {
-        console.log(filesList ? filesList : null)
-    }, [filesList])
     const onDrop = useCallback(
         ([file]) => {
             setFilesList([...filesList, file])
-            console.log(filesList)
 
         }, [filesList]
     );

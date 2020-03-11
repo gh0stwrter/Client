@@ -116,7 +116,7 @@ export default function PresentationPage() {
             </GridContainer>
             <div>
                 <GridContainer>
-                    <GridItem>
+                    <GridItem xs={12} sm={12} md={12}>
 
                         <Card className={classes.blackCard2}>
                         <CardHeader className={classes.head} noShadow={true} color="danger" >Dashboard</CardHeader>
