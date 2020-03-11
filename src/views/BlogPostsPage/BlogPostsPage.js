@@ -35,7 +35,7 @@ const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
       variables:{
           file: null,
           writtenInput:{
-          userId:"5e5cde8d44edde2c70339d07",
+          userId:"5e3d8cd01682214532762daf",
           title:"Oh Primaire",
           category:"5e10ff08736953c91e4cf40e",
           isPublish: true,
