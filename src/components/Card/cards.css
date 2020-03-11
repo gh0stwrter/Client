@@ -1,0 +1,12 @@
+.root:hover .playIcon{
+    display: block;
+    z-index: 10;
+}
+.container:hover .button{
+    display: block;
+    z-index: 10;
+}
+​
+.container:hover .background{
+    opacity: 0.8;
+}

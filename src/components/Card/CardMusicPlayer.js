@@ -10,68 +10,85 @@ import Typography from '@material-ui/core/Typography';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseCircleOutlineIcon from '@material-ui/icons/PlayArrow';
 import PauseCircleFilledOutlined from '@material-ui/icons/PauseCircleOutline';
-import avatar from "assets/img/faces/avatar.jpg";
 import Cookies from "js-cookie";
-import {useQuery} from "@apollo/react-hooks";
+import {useQuery, useApolloClient} from "@apollo/react-hooks";
 
-const useStyles = makeStyles(theme => ({
-  root: { 
-    height: "210px",
-      backgroundImage:`url(${avatar})`,
-      backgroundSize: 'cover',
-      backgroundRepeat: "no-repeat",
-      color: "white",
-      display: 'flex',
-    "&:hover": {
-      opacity: 0.54
-    }
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    flex: '1 0 auto',
-   
-  },
- 
-  controls: {
-   },
-  playIcon: {
-      background:"red",
-     position: "relative",
-    top: "50%",
-    display: "flex",
-    justifContent: "center",
-    "&:hover": {
-      opacity: 1,
-    transform: 'scale(1.3)',
-
-  },
-    border: "solid white 3px",
-    borderRadius: "50%",
-    height: 78,
-    width: 78,
-  },
-}));
 
 
 const CardMusicPlayer = ({title, image, composer, musicUri, id}) => {
+  const useStyles = makeStyles(theme => ({
+    root: { 
+      height: "210px",
+       
+        color: "white",
+        display: 'flex',
+        "&:hover .background": {
+          opacity: 0.54
+        }
+
+    },
+    details: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    content: {
+      flex: '1 0 auto',
+     
+    },
+   
+    controls: {
+     },
+    background:{
+      backgroundImage:`url(https://global-compositions.s3.eu-west-3.amazonaws.com/${image})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: "no-repeat",
+      height:"100%",
+      
+    },
+
+    playIcon: {
+        background:"red",
+       position: "relative",
+      top: "50%",
+      display: "flex",
+      justifContent: "center",
+      "&:hover": {
+      transform: 'scale(1.3)',
+  
+    },
+      border: "solid white 3px",
+      borderRadius: "50%",
+      height: 78,
+      width: 78,
+    },
+  }));
+  
   const [played, setPlayed] = useState(false);
   const [showButton, setShowbutton] = useState(false);
-  const {data: streamMusic} = useQuery(STREAM_MUSIC, {
-    onCompleted(){
-        console.log(streamMusic)
-    },
-})
+  const [imageComposition, setImageComposition]= useState(null)
+  const client = useApolloClient();
+
+  console.log(musicUri)
   const classes = useStyles();
-  const theme = useTheme();
-  
+  useEffect(()=>{
+    setImageComposition(image)
+  },[imageComposition])
   const play = () => {
         Cookies.set('played', true)
-        Cookies.set("song", `http://localhost:8007/api/api/graphql/services/compostions/${composer}/${id}/${musicUri}`)
+        Cookies.set("song", musicUri)
+        Cookies.set('played', true)
+        Cookies.set("show", true  )
         setPlayed(true)
-        console.log(played)
+        client.writeData({data:{
+              play:{
+                __typename:"Play",
+                id:1,
+                url: musicUri, 
+                show: true
+              },
+          
+          }});
+        console.log(client)
   }
 const pause = () =>{
   if(played === true) Cookies.set('played', false)
@@ -95,14 +112,15 @@ const pause = () =>{
 
   return (
     <div>
-      
     <Card style={{ width: "15rem" }} onMouseOver={e => setShowbutton(true)  } onMouseLeave={e => setShowbutton(false)} className={classes.root}>
-        <CardContent className={classes.content}>
+      <div className={classes.background}>
         {
           showButton ?
         buttonPlay 
         : null
         }
+        <CardContent className={classes.content}>
+
         </CardContent>
         
      <CardFooter>
@@ -112,6 +130,7 @@ const pause = () =>{
           <Typography variant="subtitle1" >
           </Typography>
           </CardFooter>
+          </div>
     </Card>
     </div>
   );

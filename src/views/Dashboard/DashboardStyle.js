@@ -1,5 +1,5 @@
 import { cardTitle } from "assets/jss/material-kit-pro-react.js";
-import { whiteColor, mlAuto, } from "assets/jss/material-kit-pro-react";
+import { whiteColor } from "assets/jss/material-kit-pro-react";
 
 export default {
     cardTitle: {

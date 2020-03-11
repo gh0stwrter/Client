@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
+import { makeStyles } from '@material-ui/core/styles';
 import 'assets/css/PresentationPage/presentationPage.css';
 import Cookies from "js-cookie";
-import {STREAM_MUSIC}from "apollo/composition";
-import { checkPropTypes } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 const useStyles = makeStyles(theme => ({
     player: {
         position: "fixed",
@@ -14,26 +12,35 @@ const useStyles = makeStyles(theme => ({
         width: "100%",
         zIndex: 10,
     }
-        
 }));
 
-export default function Player() {
-
+export default function Player(props) {
+    console.log()
+    const song = Cookies.get("song")
+    const [cookieSong, setCookieSong] = useState(null)
     const classes = useStyles();
     useEffect(() => {
-        window.addEventListener('storage', (e) => {
-            console.log(e)
-        });
-    }, []);
-    const song = Cookies.get("song")
+        if(song){
+            setCookieSong(song)
+            //playerMethod.show_player(true)
 
+        }
+      
+    }, [cookieSong]);
+            console.log(cookieSong)
     return  (
         <div className={classes.player}>
+            <button onClick={e => {
+                e.preventDefault();
+                Cookies.set("show", false)
+                }}>Fermer</button>
             <AudioPlayer
-        
-                src="/Users/Hayze/Desktop/Ghost_Composer/API/src/api/graphql/services/CompositionService/../compositions/5de4001874802333419ecd04/compositions/5e654ddbc991e033ec47c50e/ÉTINCELLES_feat_Alpha-Wan_Nekfeu_SPri-Noir.mp3"
+                src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${cookieSong ? cookieSong : null}`} 
                 onPlay={e => console.log(e)}
                 onPlayError={err => console.log(err)}
+                preload="auto"
+                loop={true}
+                onCanPlay={e => console.log(e)}
             />
         </div>
     );
