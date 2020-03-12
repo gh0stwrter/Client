@@ -15,6 +15,7 @@ export const DATA_PLAYER = gql`
     query {
         play @client {
             url
+            show
         }
     }
 `

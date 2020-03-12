@@ -15,6 +15,7 @@ import popoverStyles from "assets/jss/material-kit-pro-react/popoverStyles.js";
 import tooltipsStyle from "assets/jss/material-kit-pro-react/tooltipsStyle.js";
 import { useDropzone } from 'react-dropzone'
 import { UPLOAD_WRITTEN_COMP } from "apollo/uploads";
+import StepperComposition from "components/Stepper/StepperComposition"
 
 const style = theme => ({
     ...modalStyle(theme),
@@ -81,6 +82,7 @@ export default function UploadModal() {
                 aria-labelledby="classic-modal-slide-title"
                 aria-describedby="classic-modal-slide-description"
             >
+                <StepperComposition/>
                 <DialogTitle
                     id="classic-modal-slide-title"
                     disableTypography

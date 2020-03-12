@@ -26,7 +26,7 @@ import {GET_ALL_COMPOSITIONS} from "apollo/composition";
 // import Sticky from 'react-sticky-el';
 
 const useStyles = makeStyles(presentationStyle);
-export default function PresentationPage() {
+export default function PresentationPage({method}) {
 const client = useApolloClient();
   const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
     onCompleted(){
@@ -75,7 +75,7 @@ const client = useApolloClient();
       </Parallax>
 
       <div className={classNames(classes.main, classes.mainRaised)}>
-      <SectionDescription compositions={getCompositions} />
+      <SectionDescription methodPlayer={method} compositions={getCompositions} />
       <SectionComponents />
       <SectionPricing />
       <SectionOverview/>

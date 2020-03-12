@@ -15,7 +15,7 @@ import {useQuery, useApolloClient} from "@apollo/react-hooks";
 
 
 
-const CardMusicPlayer = ({title, image, composer, musicUri, id}) => {
+const CardMusicPlayer = ({title, image, composer, musicUri, id, lastChild}) => {
   const useStyles = makeStyles(theme => ({
     root: { 
       height: "210px",
@@ -72,24 +72,19 @@ const CardMusicPlayer = ({title, image, composer, musicUri, id}) => {
   useEffect(()=>{
     setImageComposition(image)
   },[imageComposition])
-  const play = () => {
-        Cookies.set('played', true)
-        Cookies.set("song", musicUri)
-        Cookies.set('played', true)
-        Cookies.set("show", true  )
+  const play =  async() => {
         setPlayed(true)
         client.writeData({data:{
               play:{
                 __typename:"Play",
-                id:1,
                 url: musicUri, 
                 show: true
               },
-          
           }});
+     await lastChild(true)
+
   }
 const pause = () =>{
-  if(played === true) Cookies.set('played', false)
   setPlayed(false)
 }
   const buttonPlay = 
@@ -100,7 +95,10 @@ const pause = () =>{
         className={classes.playIcon}
          />
       </IconButton> ) : (
-      <IconButton onClick={play} aria-label="play/pause" >
+      <IconButton onClick={ e => {
+        e.preventDefault()
+        play()
+      }} aria-label="play/pause" >
               <PlayArrowIcon 
               color="primary" 
               className={classes.playIcon}
@@ -110,7 +108,10 @@ const pause = () =>{
 
   return (
     <div>
-    <Card style={{ width: "15rem" }} onMouseOver={e => setShowbutton(true)  } onMouseLeave={e => setShowbutton(false)} className={classes.root}>
+    <Card style={{ width: "15rem" }} 
+    onMouseOver={e => setShowbutton(true)} 
+    onMouseLeave={e => setShowbutton(false)} 
+    className={classes.root}>
       <div className={classes.background}>
         {
           showButton ?

@@ -4,52 +4,40 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-
+import {GET_URL} from "apollo/composition";
+import {DATA_PLAYER} from "apollo/uploads"
+import {useApolloClient, useMutation} from "@apollo/react-hooks";
 const useStyles = makeStyles(theme => ({
     player: {
         position: "fixed",
         left: 0,
         bottom: 0,
         width: "100%",
-        zIndex: 10
+        zIndex: 10,
     }
 }));
 
-export default function Player(props) {
+export default function Player({method}) {
+    const [getVideosUrl] = useMutation(GET_URL, {onCompleted(data){
+        console.log(data)
+    }})
     const song = Cookies.get("song")
-    const [cookieSong, setCookieSong] = useState(null)
+    const [cookieSong, setCacheSong] = useState(null)
     const classes = useStyles();
-    const [isPlayed, setIsPlayed] = useState(false);
-
-
+    const client = useApolloClient()
+    const {play} = client.readQuery({query: DATA_PLAYER})
+    console.log(play)
     useEffect(() => {
-
-    //     window.addEventListener("storage", e => {
-    //     });
-    // }, []);
-
-    // return isPlayed ? (
-    //     <div className={classes.player}>
-    //         <button onClick={()=> setIsPlayed(false)}>Close</button>
-    //         <AudioPlayer
-    //             // "https://freesound.org/data/previews/507/507106_8682843-lq.mp3"
-    //             //src={}
-
-        if(song){
-            setCookieSong(song)
-            //playerMethod.show_player(true)
-
-        }
-      
+      setCacheSong(play ? play.url : null)
     }, [cookieSong]);
     return  (
         <div className={classes.player}>
             <button onClick={e => {
-                e.preventDefault();
-                Cookies.set("show", false)
+                     method(false)
+                    
                 }}>Fermer</button>
             <AudioPlayer
-                src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${cookieSong ? cookieSong : null}`} 
+                src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ play ? play.url : null}`} 
                 onPlay={e => console.log(e)}
                 onPlayError={err => console.log(err)}
                 preload="auto"

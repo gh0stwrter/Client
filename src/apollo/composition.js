@@ -13,6 +13,11 @@ query {
   }
 }
 `
+export const GET_URL = gql`
+  mutation{
+    getVideosUrl @client
+  }
+`
 export const STREAM_MUSIC = gql`
       query streamMusic($composer: ID, $_id:ID!, $file: String!){
             streamMusic(composer: $composer, _id: $_id, file: $file)

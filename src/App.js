@@ -28,8 +28,7 @@ import Dashboard from "views/Dashboard/Dashboard.js";
 import Player from "components/Player/Player"
 import Cookies from "js-cookie";
 import {useQuery, useApolloClient} from "@apollo/react-hooks";
-
-import {DATA_PLAYER} from "apollo/uploads.js"
+import {DATA_PLAYER} from "apollo/uploads"
 var hist = createBrowserHistory();
 
 
@@ -64,24 +63,20 @@ const App = (props) =>{
   const [dataPlayer, setDataPlayer] = useState(null)
   const client = useApolloClient();
 
-  
+
+  const {play} = client.readQuery({query: DATA_PLAYER})
+  console.log(play)
   
   useEffect(()=>{
-    const data  = client.readQuery({query: DATA_PLAYER}) 
-    setDataPlayer(data)
-    console.log(dataPlayer)
-  setShowPlayer(Cookies.get('show') === "true" ? true : false);
-
-},[showPlayer, dataPlayer])
-const show_player = (bool) =>{
-  return setShowPlayer(bool)
-}
+    console.log(showPlayer)
+},[showPlayer])
+const playerShow = (bool) => setShowPlayer(bool)
 
   return(
   
   <Router history={hist}>
-      { showPlayer  === true  ?   <Player playerMethod={showPlayer} />
- : null }
+   {showPlayer  === false  ? null : <Player method={ playerShow } />} 
+ 
     <Switch>
       <Route path="/about-us" component={AboutUsPage} />
       <Route path="/blog-post" component={BlogPostPage} />
@@ -104,8 +99,9 @@ const show_player = (bool) =>{
          }/>
       
       <Route path="/error-page" component={ErrorPage} />
-      <Route path="/" component={PresentationPage} />
+      <Route path="/" component={() => <PresentationPage method={playerShow}/>} />
     </Switch>
+
   </Router>
   )
 }
