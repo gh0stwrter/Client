@@ -82,12 +82,13 @@ export default function UploadModal() {
                 aria-labelledby="classic-modal-slide-title"
                 aria-describedby="classic-modal-slide-description"
             >
-                <StepperComposition/>
                 <DialogTitle
                     id="classic-modal-slide-title"
                     disableTypography
                     className={classes.modalHeader}
                 >
+                <StepperComposition/>
+
                     <Button
                         simple
                         className={classes.modalCloseButton}

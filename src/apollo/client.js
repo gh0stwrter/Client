@@ -3,11 +3,13 @@ import ApolloClient from 'apollo-client';
 import { createUploadLink } from "apollo-upload-client";
 import resolvers from "./resolvers/index";
 import {DATA_PLAYER} from "apollo/uploads.js"
+import env from "envGetter";
 
+console.log(env)
 const cache = new InMemoryCache();
 const client = new ApolloClient({
-  uri: 'http://localhost:8007/api',
-  link :  createUploadLink({uri: 'http://localhost:8007/api'}),
+  uri: `http://${env.api.url}:${env.api.pass}/api`,
+  link :  createUploadLink({uri: `http://${env.api.url}:${env.api.port}/api`}),
   cache,
   resolvers:{
     resolvers,

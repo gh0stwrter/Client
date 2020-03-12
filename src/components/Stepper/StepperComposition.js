@@ -34,7 +34,8 @@ function getSteps() {
   return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 }
 const firstStep = () =>{
-    return(<div>
+    return(
+      <>
         <GridContainer>
             <GridItem>
         <h3>Entré le titre de votre oeuvre</h3>
@@ -62,21 +63,21 @@ const firstStep = () =>{
           <CustomSelect data="droit"/>
       </GridItem>
       </GridContainer>
-    </div>)
-}
+      </>
+  )}
 function getStepContent(step) {
   switch (step) {
     case 0:
       return firstStep();
     case 1:
-      return 'An ad group contains one or more ads which target a shared set of keywords.';
+      return <Typography>An ad group contains one or more ads which target a shared set of keywords.</Typography>;
     case 2:
-      return `Try out different ad text to see what brings in the most customers,
+      return <Typography>Try out different ad text to see what brings in the most customers,
               and learn how to enhance your ads using features like ad extensions.
               If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
+              they're running and how to resolve approval issues.</Typography>;
     default:
-      return 'Unknown step';
+      return <Typography>Unknown step</Typography>;
   }
 }
 
@@ -105,7 +106,7 @@ export default function VerticalLinearStepper() {
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
             <StepContent>
-              <Typography>{getStepContent(index)}</Typography>
+              {getStepContent(index)}
               <div className={classes.actionsContainer}>
                 <div>
                   <Button

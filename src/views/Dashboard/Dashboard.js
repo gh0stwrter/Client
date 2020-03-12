@@ -56,7 +56,7 @@ const fakeData = {
 const blockIntru = (data) => {
     return (
         <>
-            <div class>
+            <div>
                 <img scr={data.img}/>
                 {data.name}
                 {data.time}
@@ -112,9 +112,6 @@ export default function PresentationPage() {
                         </CardBody>
                     </Card>
                 </GridItem>
-            </GridContainer>
-            <div>
-                <GridContainer>
                     <GridItem xs={12} sm={12} md={12}>
 
                         <Card className={classes.blackCard2}>
@@ -138,8 +135,6 @@ export default function PresentationPage() {
                         </Card>
                     </GridItem>
                 </GridContainer>
-            </div>
-            <UploadModal/>
 
         </div>
     );
