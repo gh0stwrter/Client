@@ -13,14 +13,22 @@ import Button from "components/CustomButtons/Button.js";
 import modalStyle from "assets/jss/material-kit-pro-react/modalStyle.js";
 import popoverStyles from "assets/jss/material-kit-pro-react/popoverStyles.js";
 import tooltipsStyle from "assets/jss/material-kit-pro-react/tooltipsStyle.js";
-import { useDropzone } from 'react-dropzone'
-import { UPLOAD_WRITTEN_COMP } from "apollo/uploads";
-import StepperComposition from "components/Stepper/StepperComposition"
 
+import StepperComposition from "components/Stepper/StepperComposition"
+import styles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.js";
+import AlbumIcon from '@material-ui/icons/Album';
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader"
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
+import BorderColorIcon from '@material-ui/icons/BorderColor';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import CreateIcon from '@material-ui/icons/Create';
 const style = theme => ({
     ...modalStyle(theme),
     ...popoverStyles,
-    ...tooltipsStyle
+    ...tooltipsStyle,
+    ...styles,
 });
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
@@ -31,84 +39,54 @@ export default function UploadModal() {
     const [openModal, setOpen] = React.useState(false);
     const classes = useStyles();
     const [filesList, setFilesList] = useState([]);
-    const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP, {
-        onCompleted() {
-        },
-        variables: {
-            file: null,
-            writtenInput: {
-                userId: "5e5cde8d44edde2c70339d07",
-                title: "Oh Primaire",
-                category: "5e10ff08736953c91e4cf40e",
-                isPublish: true,
-                price: 12.33
-            }
-        }
-    })
-    const onDrop = useCallback(
-        ([file]) => {
-            setFilesList([...filesList, file])
-
-        }, [filesList]
-    );
+    
     React.useEffect(() => {
-        window.scrollTo(0, 0);
         document.body.scrollTop = 0;
     });
 
 
-    const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    const files = acceptedFiles.map(file => (
-        <li key={file.path}>
-            {file.path} - {file.size} bytes
-      </li>
-    ));
-
+   
     return (
         <div>
-            <Button color="transparent" onClick={() => setOpen(true)}>
-                Publier une intru
-      </Button>
+           
+         <Card style={{ textAlign: "center", background:"#333436",color:"white", height:"150px"}}  onClick={() => setOpen(true)}>
+           <CardBody>
+            <h5> <MusicNoteIcon style={{fontSize:50}}/>  <br/>  Publier une composition</h5> 
+            </CardBody>
+            </Card>
             <Dialog
                 classes={{
                     root: classes.modalRoot,
-                    paper: classes.modal
+                    paper: classes.modal + " " + classes.modalSignup
                 }}
                 open={openModal}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={() => setOpen(false)}
-                aria-labelledby="classic-modal-slide-title"
-                aria-describedby="classic-modal-slide-description"
+                aria-labelledby="large-modal-slide-title"
+                aria-describedby="large-modal-slide-description"
             >
+               
                 <DialogTitle
                     id="classic-modal-slide-title"
                     disableTypography
                     className={classes.modalHeader}
                 >
-                <StepperComposition/>
 
-                    <Button
-                        simple
-                        className={classes.modalCloseButton}
-                        key="close"
-                        aria-label="Close"
-                        onClick={() => setOpen(false)}
-                    >
-                        {" "}
-                        <Close className={classes.modalClose} />
-                    </Button>
-                    <h4 className={classes.modalTitle}>Publication intru</h4>
+
+                    
+                    <h3 className={classes.modalTitle}>Partager/Mettre en vente votre composition</h3>
                 </DialogTitle>
                 <DialogContent
                     id="classic-modal-slide-description"
                     className={classes.modalBody}
                 >
+                <StepperComposition/>
 
                     {/* UPLOAD */}
 
-                    <section className="container">
+                    {/* <section className="container">
 
 
                         <div {...getRootProps({ className: 'dropzone' })}>
@@ -121,19 +99,15 @@ export default function UploadModal() {
                             <ul>{files}</ul>
                         </aside>
 
-                        {/*  */}
+                        
 
-                    </section>
+                    </section> */}
                 </DialogContent>
                 <DialogActions className={classes.modalFooter}>
                     <Button onClick={() => setOpen(false)} color="secondary">
                         Close
           </Button>
-                    <Button color="success" onClick={e => {
-                        addWrittenComp({
-                            variables: { file: [filesList] }
-                        })
-                    }}>Send files</Button>
+                    
                 </DialogActions>
             </Dialog>
         </div>

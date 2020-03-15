@@ -7,9 +7,11 @@ import Button from "components/CustomButtons/Button.js";
 
 import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/placeholder.jpg";
-
+import CheckIcon from '@material-ui/icons/Check';
 export default function ImageUpload(props) {
-  const [file, setFile] = React.useState(null);
+  const {setImage} = props;
+  console.log(props)
+    const [file, setFile] = React.useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = React.useState(
     props.avatar ? defaultAvatar : defaultImage
   );
@@ -19,14 +21,15 @@ export default function ImageUpload(props) {
     let reader = new FileReader();
     let file = e.target.files[0];
     reader.onloadend = () => {
-      setFile(file);
+      setFile([file]);
       setImagePreviewUrl(reader.result);
     };
     reader.readAsDataURL(file);
   };
   // eslint-disable-next-line
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    await setImage(file)
     // file is the file/image uploaded
     // in this function you can save the image (file) on form submit
     // you have to call it yourself
@@ -59,6 +62,10 @@ export default function ImageUpload(props) {
             {avatar ? <br /> : null}
             <Button {...removeButtonProps} onClick={() => handleRemove()}>
               <i className="fas fa-times" /> Remove
+            </Button>
+            {avatar ? <br /> : null}
+            <Button  onClick={handleSubmit}>
+              <CheckIcon/> Validate
             </Button>
           </span>
         )}

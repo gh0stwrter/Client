@@ -24,7 +24,6 @@ import SectionsPage from "views/SectionsPage/SectionsPage.js";
 import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.js";
 import SignupPage from "views/SignupPage/SignupPage.js";
 import ErrorPage from "views/ErrorPage/ErrorPage.js";
-import Dashboard from "views/Dashboard/Dashboard.js";
 import Player from "components/Player/Player"
 import Cookies from "js-cookie";
 import {useQuery, useApolloClient} from "@apollo/react-hooks";
@@ -73,7 +72,6 @@ const App = (props) =>{
 const playerShow = (bool) => setShowPlayer(bool)
 
   return(
-  
   <Router history={hist}>
    {showPlayer  === false  ? null : <Player method={ playerShow } />} 
  
@@ -92,12 +90,12 @@ const playerShow = (bool) => setShowPlayer(bool)
       <Route path="/sections" component={SectionsPage} />
       <Route path="/shopping-cart-page" component={ShoppingCartPage} />
       <Route path="/signup-page" component={SignupPage} />
-      <Route path="/dashboard" component={Dashboard} />
+{/*       
       <ProtectedRoute path="/profile" render={props =>
          <Route path="/profile/dashboard" component={Dashboard} /> 
          
          }/>
-      
+       */}
       <Route path="/error-page" component={ErrorPage} />
       <Route path="/" component={() => <PresentationPage method={playerShow}/>} />
     </Switch>

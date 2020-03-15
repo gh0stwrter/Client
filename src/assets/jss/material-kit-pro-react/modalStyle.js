@@ -7,14 +7,14 @@ const modalStyle = theme => ({
   },
   modal: {
     [theme.breakpoints.up("sm")]: {
-      maxWidth: "500px",
+      maxWidth: "800px",
       margin: "auto"
     },
     borderRadius: "6px",
     overflow: "visible",
     maxHeight: "unset",
     width: "100%",
-    marginTop: "130px !important"
+    marginTop: "70px !important"
   },
   modalHeader: {
     borderBottom: "none",
@@ -136,7 +136,7 @@ const modalStyle = theme => ({
     }
   },
   modalSignup: {
-    maxWidth: "900px",
+    maxWidth: "1000px",
     width: "100%",
     "& $modalHeader": {
       paddingTop: "0"

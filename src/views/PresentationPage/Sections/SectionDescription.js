@@ -16,6 +16,7 @@ import descriptionStyle from "assets/jss/material-kit-pro-react/views/presentati
 const useStyles = makeStyles(descriptionStyle);
 
 export default function SectionDescription({compositions: getCompositions, methodPlayer}) {
+  console.log(getCompositions)
   const classes = useStyles();
   return (
     <div className={classes.section}>

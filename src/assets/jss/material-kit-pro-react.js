@@ -133,7 +133,7 @@ const grayColor = [
   "#1f1f1f"
 ];
 const whiteColor = "#FFF";
-const blackColor = "#2b2f45";
+const blackColor = "#333436";
 const twitterColor = "#55acee";
 const facebookColor = "#3b5998";
 const googleColor = "#dd4b39";
@@ -243,11 +243,7 @@ const warningBoxShadow = {
 const dangerBoxShadow = {
   boxShadow:
     "0 12px 20px -10px rgba(" +
-    hexToRgb(dangerColor[0]) +
-    ", 0.28), 0 4px 20px 0px rgba(" +
-    hexToRgb(blackColor) +
-    ", 0.12), 0 7px 8px -5px rgba(" +
-    hexToRgb(dangerColor[0]) +
+    hexToRgb("#222224") +
     ", 0.2)"
 };
 const roseBoxShadow = {
@@ -273,8 +269,7 @@ const successCardHeader = {
 };
 const dangerCardHeader = {
   color: whiteColor,
-  background:
-    "linear-gradient(60deg, " + dangerColor[1] + ", " + dangerColor[2] + ")",
+  background:"#222224 !important",
   ...dangerBoxShadow
 };
 const infoCardHeader = {
@@ -357,7 +352,7 @@ const cardSubtitle = {
 const main = {
   background: blackColor,
   position: "relative",
-  zIndex: "3"
+  zIndex: "3",
 };
 
 const mainRaised = {

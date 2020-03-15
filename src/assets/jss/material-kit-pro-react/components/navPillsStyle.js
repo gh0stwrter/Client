@@ -91,10 +91,9 @@ const navPillsStyle = theme => ({
   info: {
     "&,&:hover": {
       color: whiteColor,
-      backgroundColor: infoColor[0],
+      backgroundColor: "grey",
       boxShadow:
         "0 4px 20px 0px rgba(" +
-        hexToRgb(blackColor) +
         ", 0.14), 0 7px 10px -5px rgba(" +
         hexToRgb(successColor[0]) +
         ", 0.4)"

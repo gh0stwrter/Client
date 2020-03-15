@@ -34,7 +34,6 @@ export default function Player({method}) {
         <div className={classes.player}>
             <button onClick={e => {
                      method(false)
-                    
                 }}>Fermer</button>
             <AudioPlayer
                 src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ play ? play.url : null}`} 

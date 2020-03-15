@@ -151,7 +151,7 @@ const buttonStyle = {
     }
   },
   info: {
-    backgroundColor: infoColor[0],
+    backgroundColor: "rgb(34, 34, 36)",
     boxShadow:
       "0 2px 2px 0 rgba(" +
       hexToRgb(infoColor[0]) +
@@ -160,17 +160,6 @@ const buttonStyle = {
       ", 0.2), 0 1px 5px 0 rgba(" +
       hexToRgb(infoColor[0]) +
       ", 0.12)",
-    "&:hover,&:focus": {
-      backgroundColor: infoColor[0],
-      boxShadow:
-        "0 14px 26px -12px rgba(" +
-        hexToRgb(infoColor[0]) +
-        ", 0.42), 0 4px 23px 0px rgba(" +
-        hexToRgb(blackColor) +
-        ", 0.12), 0 8px 10px -5px rgba(" +
-        hexToRgb(infoColor[0]) +
-        ", 0.2)"
-    }
   },
   success: {
     backgroundColor: successColor[0],

@@ -12,13 +12,14 @@ import PauseCircleOutlineIcon from '@material-ui/icons/PlayArrow';
 import PauseCircleFilledOutlined from '@material-ui/icons/PauseCircleOutline';
 import Cookies from "js-cookie";
 import {useQuery, useApolloClient} from "@apollo/react-hooks";
-
+import GridContainer from "components/Grid/GridContainer";
+import GridItem from "components/Grid/GridItem";
 
 
 const CardMusicPlayer = ({title, image, composer, musicUri, id, lastChild}) => {
   const useStyles = makeStyles(theme => ({
     root: { 
-      height: "210px",
+      height: "200px",
        
         color: "white",
         display: 'flex',
@@ -71,7 +72,7 @@ const CardMusicPlayer = ({title, image, composer, musicUri, id, lastChild}) => {
   const classes = useStyles();
   useEffect(()=>{
     setImageComposition(image)
-  },[imageComposition])
+  },[imageComposition,showButton])
   const play =  async() => {
         setPlayed(true)
         client.writeData({data:{
@@ -107,31 +108,31 @@ const pause = () =>{
     )
 
   return (
-    <div>
+    <GridContainer spacing={0} >
+      
     <Card style={{ width: "15rem" }} 
     onMouseOver={e => setShowbutton(true)} 
     onMouseLeave={e => setShowbutton(false)} 
     className={classes.root}>
       <div className={classes.background}>
+       
+        <CardContent className={classes.content}>
         {
           showButton ?
         buttonPlay 
         : null
         }
-        <CardContent className={classes.content}>
-
         </CardContent>
         
-     <CardFooter>
-        <Typography component="h5" variant="h5">
+          </div>
+          
+    </Card>
+    
+         
+    <Typography color="primary"  component="h6" variant="h6">
             {title}  
           </Typography>
-          <Typography variant="subtitle1" >
-          </Typography>
-          </CardFooter>
-          </div>
-    </Card>
-    </div>
+    </GridContainer>
   );
 }
 

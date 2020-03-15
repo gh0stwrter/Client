@@ -28,7 +28,7 @@ import Muted from "components/Typography/Muted.js";
 import Parallax from "components/Parallax/Parallax.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
 import Button from "components/CustomButtons/Button.js";
-
+import PeopleIcon from '@material-ui/icons/People';
 import christian from "assets/img/faces/christian.jpg";
 import oluEletu from "assets/img/examples/olu-eletu.jpg";
 import clemOnojeghuo from "assets/img/examples/clem-onojeghuo.jpg";
@@ -40,8 +40,18 @@ import avatar from "assets/img/faces/avatar.jpg";
 import marc from "assets/img/faces/marc.jpg";
 import kendall from "assets/img/faces/kendall.jpg";
 import cardProfile2Square from "assets/img/faces/card-profile2-square.jpg";
-
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import profilePageStyle from "assets/jss/material-kit-pro-react/views/profilePageStyle.js";
+import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import RateReviewIcon from '@material-ui/icons/RateReview';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import UploadModal from "views/Dashboard/utils/UploadModal";
+import ListCompo from "components/Lists/CompostionList";
+import LatestSection from "./Section/LatestSection";
+import ImageUpload from "components/CustomUpload/ImageUpload";
+import UplaodAlbum from 'views/Dashboard/UploadAlbum';
+import UploadCompleteAlbum from "views/Dashboard/UploadCompleteAlbum";
 
 const useStyles = makeStyles(profilePageStyle);
 
@@ -50,15 +60,51 @@ export default function ProfilePage({ ...rest }) {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   });
+
   const classes = useStyles();
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
+
   );
+
+  
+  const fakeData = [
+        {
+          component: <AttachMoneyIcon/>,
+          value:"Vente : " + 123
+        },
+        {
+          component: <PeopleIcon/> ,
+          value:"Follower : "+84,
+        },
+        {
+          component:<VolumeUpIcon/>,
+          value: "Son écouté : " + 5642
+        },
+        {
+          component: <CloudDownloadIcon/>,
+          value:"Télechargement : " + 24
+        },
+        {
+          component: <RateReviewIcon/>,
+          value: "Commentaires : "+843
+        },
+        {
+          component: <RateReviewIcon/>,
+          value: "Commentaires : "+843
+        },
+        {
+          component: <RateReviewIcon/>,
+          value: "Commentaires : "+843
+        },
+        
+    ]
+// 
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
-    <div>
+    <div style={{color:"white"}}>
       <Header
         color="transparent"
         brand="Material Kit PRO React"
@@ -77,203 +123,145 @@ export default function ProfilePage({ ...rest }) {
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <GridContainer justify="center">
+          <GridContainer  fluid justify="center">
             <GridItem xs={12} sm={12} md={6}>
               <div className={classes.profile}>
                 <div>
                   <img src={christian} alt="..." className={imageClasses} />
                 </div>
-                <div className={classes.name}>
-                  <h3 className={classes.title}>Christian Louboutin</h3>
-                  <h6>Composeur</h6>
-                  <Button
-                    justIcon
-                    simple
-                    color="dribbble"
-                    className={classes.margin5}
-                  >
-                    <i className={classes.socials + " fab fa-dribbble"} />
-                  </Button>
-                  <Button
-                    justIcon
-                    simple
-                    color="twitter"
-                    className={classes.margin5}
-                  >
-                    <i className={classes.socials + " fab fa-twitter"} />
-                  </Button>
-                  <Button
-                    justIcon
-                    simple
-                    color="pinterest"
-                    className={classes.margin5}
-                  >
-                    <i className={classes.socials + " fab fa-pinterest"} />
-                  </Button>
+                <div  className={classes.name}>
+                  <h3 >Christian Louboutin</h3>
+                  <h6 >Composer</h6>
+                 
                 </div>
               </div>
               <div className={classes.follow}>
                 <Tooltip
-                  id="tooltip-top"
+                  id="tooltip-bottom"
                   title="Follow this user"
-                  placement="top"
+                  placement="bot"
                   classes={{ tooltip: classes.tooltip }}
                 >
+                  
                   <Button
                     justIcon
-                    round
-                    color="primary"
+                    color="info"
                     className={classes.followButton}
                   >
                     <Add className={classes.followIcon} />
                   </Button>
                 </Tooltip>
               </div>
-              
+              <div className={classes.follow2}>
+                <Tooltip
+                  id="tooltip-bottom"
+                  title="Follow this user"
+                  placement="bot"
+                  classes={{ tooltip: classes.tooltip }}
+                >
+                  
+                  <Button
+                    round
+                    color="info"
+                    className={classes.followButton}
+                  >
+                    <Add className={classes.followIcon} /> Creer une <br/> composition
+                  </Button>
+                </Tooltip>
+              </div>
             </GridItem>
           </GridContainer>
           <div className={classNames(classes.description, classes.textCenter)}>
-            <p>
-              An artist of considerable range, Chet Faker — the name taken by
-              Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-              and records all of his own music, giving it a warm, intimate feel
-              with a solid groove structure.{" "}
-            </p>
           </div>
           <div className={classes.profileTabs}>
             <NavPills
               alignCenter
-              color="primary"
+              color="info"
               tabs={[
+                
                 {
                   tabButton: "Work",
                   tabIcon: Palette,
                   tabContent: (
-                    <GridContainer>
+                    <GridContainer fluid>
                       <GridItem
                         xs={12}
                         sm={12}
-                        md={7}
+                        md={12}
                         className={classes.gridItem}
                       >
-                        <h4 className={classes.title}>Latest Collections</h4>
-                        <GridContainer className={classes.collections}>
-                          <GridItem xs={12} sm={12} md={6}>
-                            <Card
-                              background
-                              style={{
-                                backgroundImage: "url(" + mariyaGeorgieva + ")"
-                              }}
-                            >
-                              <CardBody background className={classes.cardBody}>
-                                <Badge
-                                  color="warning"
-                                  className={classes.badge}
-                                >
-                                  Spring 2016
-                                </Badge>
-                                <a href="#pablo">
-                                  <h2 className={classes.cardTitleWhite}>
-                                    Stilleto
-                                  </h2>
-                                </a>
-                              </CardBody>
-                            </Card>
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={6}>
-                            <Card
-                              background
-                              style={{
-                                backgroundImage: "url(" + clemOnojeghuo + ")"
-                              }}
-                            >
-                              <CardBody background className={classes.cardBody}>
-                                <Badge color="info" className={classes.badge}>
-                                  Spring 2016
-                                </Badge>
-                                <a href="#pablo">
-                                  <h2 className={classes.cardTitleWhite}>
-                                    High Heels
-                                  </h2>
-                                </a>
-                              </CardBody>
-                            </Card>
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={6}>
-                            <Card
-                              background
-                              style={{
-                                backgroundImage: "url(" + oluEletu + ")"
-                              }}
-                            >
-                              <CardBody background className={classes.cardBody}>
-                                <Badge color="danger" className={classes.badge}>
-                                  Summer 2016
-                                </Badge>
-                                <a href="#pablo">
-                                  <h2 className={classes.cardTitleWhite}>
-                                    Flats
-                                  </h2>
-                                </a>
-                              </CardBody>
-                            </Card>
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={6}>
-                            <Card
-                              background
-                              style={{
-                                backgroundImage: "url(" + darrenColeshill + ")"
-                              }}
-                            >
-                              <CardBody background className={classes.cardBody}>
-                                <Badge
-                                  color="success"
-                                  className={classes.badge}
-                                >
-                                  Winter 2016
-                                </Badge>
-                                <a href="#pablo">
-                                  <h2 className={classes.cardTitleWhite}>
-                                    Men{"'"}s Sneakers
-                                  </h2>
-                                </a>
-                              </CardBody>
-                            </Card>
-                          </GridItem>
-                        </GridContainer>
+                      
+                        <Card style={{
+                          background:"#222224",
+                          boxShadow: "10px 10px 5px black",
+                        }}>
+                        <CardHeader  style={{ textAlign:"center",width: "30%"}}color="danger">
+                          <h4>
+                          <EqualizerIcon/> Stats
+                          </h4>
+                          </CardHeader>
+                          
+                        <CardBody style={{color:"#ef5350", padding: "4%"}}>
+                            <GridContainer  spacing={2}   sm={12} md={12}>
+                               { fakeData.map((item) =>
+                               <GridItem md={3} sm={3} lg={3} >
+                               <GridContainer md={12} sm={12} >
+                                 <GridItem sm={2}>
+                              <h4>  {item.component}</h4>
+                             </GridItem>
+                             <GridItem md={10}>
+                            <h4>{item.value}</h4>  
+                             </GridItem>
+                             </GridContainer>
+                             </GridItem>
+                               ) }
+                                
+                                  {/* 
+                                <div className={classes.contentStat}>
+                                </div>
+                                <div className={classes.contentStat}>
+                                </div>
+                                <div className={classes.contentStat}>
+                                </div>
+                            </div> */}
+                            </GridContainer>
+                        </CardBody>
+                    </Card>
                       </GridItem>
-                      <GridItem
-                        xs={12}
-                        sm={12}
-                        md={2}
-                        className={classes.gridItem}
-                      >
-                        <h4 className={classes.title}>Stats</h4>
-                        <ul className={classes.listUnstyled}>
-                          <li>
-                            <b>60</b> Products
-                          </li>
-                          <li>
-                            <b>4</b> Collections
-                          </li>
-                          <li>
-                            <b>331</b> Influencers
-                          </li>
-                          <li>
-                            <b>1.2K</b> Likes
-                          </li>
-                        </ul>
-                        <hr />
-                        <h4 className={classes.title}>About this work</h4>
-                        <p className={classes.description}>
-                          French luxury footwear and fashion. The footwear has
-                          incorporated shiny, red-lacquered soles that have
-                          become his signature.
-                        </p>
-                        <hr />
-                        <h4 className={classes.title}>Focus</h4>
-                        <Badge color="primary">Footwear</Badge>
-                        <Badge color="rose">Luxury</Badge>
+                      <GridItem>
+                            <GridContainer md={12} sm={12}>
+                         <GridItem md={5}>                          <Card style={{
+                          background:"#222224",
+                          boxShadow: "10px 10px 5px black"
+                          }}>
+                            <CardHeader style={{textAlign:"center",width: "60%"}} color="danger">
+                            <h5>
+                          <EqualizerIcon/>Mes Compositions
+                          </h5>
+                              </CardHeader>
+                            <CardBody>
+                              <ListCompo/>
+                            </CardBody>
+                         </Card>
+                         </GridItem>
+                             <GridItem md={7}>
+                      <Card style={{
+                          background:"#222224",
+                          boxShadow: "10px 10px 5px black"
+                          }}>
+                            <CardHeader style={{textAlign:"center",width: "40%"}} color="danger">
+                            <h5>
+                          <EqualizerIcon/> Dernieres ventes
+
+                          </h5>
+                              </CardHeader>
+                            <CardBody>
+                              <LatestSection/>
+                            </CardBody>
+                         </Card>
+                         </GridItem>
+                        
+                            </GridContainer>
                       </GridItem>
                     </GridContainer>
                   )
@@ -282,171 +270,34 @@ export default function ProfilePage({ ...rest }) {
                   tabButton: "Connections",
                   tabIcon: People,
                   tabContent: (
-                    <div>
-                      <GridContainer justify="center">
-                        <GridItem
-                          xs={12}
-                          sm={12}
-                          md={5}
-                          className={classes.gridItem}
-                        >
-                          <Card profile plain className={classes.card}>
-                            <GridContainer>
-                              <GridItem xs={12} sm={12} md={5}>
-                                <CardHeader image plain>
-                                  <a href="#pablo">
-                                    <img src={avatar} alt="..." />
-                                  </a>
-                                  <div
-                                    className={classes.coloredShadow}
-                                    style={{
-                                      backgroundImage: "url(" + avatar + ")",
-                                      opacity: "1"
-                                    }}
-                                  />
-                                </CardHeader>
-                              </GridItem>
-                              <GridItem xs={12} sm={12} md={7}>
-                                <CardBody plain>
-                                  <h4 className={classes.cardTitle}>
-                                    Gigi Hadid
-                                  </h4>
-                                  <Muted>
-                                    <h6>MODEL</h6>
-                                  </Muted>
-                                  <p className={classes.description}>
-                                    Don{"'"}t be scared of the truth because we
-                                    need to restart the human foundation in
-                                    truth...
-                                  </p>
-                                </CardBody>
-                              </GridItem>
-                            </GridContainer>
-                          </Card>
-                        </GridItem>
-                        <GridItem
-                          xs={12}
-                          sm={12}
-                          md={5}
-                          className={classes.gridItem}
-                        >
-                          <Card profile plain className={classes.card}>
-                            <GridContainer>
-                              <GridItem xs={12} sm={12} md={5}>
-                                <CardHeader image plain>
-                                  <a href="#pablo">
-                                    <img src={marc} alt="..." />
-                                  </a>
-                                  <div
-                                    className={classes.coloredShadow}
-                                    style={{
-                                      backgroundImage: "url(" + marc + ")",
-                                      opacity: "1"
-                                    }}
-                                  />
-                                </CardHeader>
-                              </GridItem>
-                              <GridItem xs={12} sm={12} md={7}>
-                                <CardBody plain>
-                                  <h4 className={classes.cardTitle}>
-                                    Marc Jacobs
-                                  </h4>
-                                  <Muted>
-                                    <h6>DESIGNER</h6>
-                                  </Muted>
-                                  <p className={classes.description}>
-                                    Don{"'"}t be scared of the truth because we
-                                    need to restart the human foundation in
-                                    truth...
-                                  </p>
-                                </CardBody>
-                              </GridItem>
-                            </GridContainer>
-                          </Card>
-                        </GridItem>
-                      </GridContainer>
-                      <GridContainer justify="center">
-                        <GridItem
-                          xs={12}
-                          sm={12}
-                          md={5}
-                          className={classes.gridItem}
-                        >
-                          <Card profile plain className={classes.card}>
-                            <GridContainer>
-                              <GridItem xs={12} sm={12} md={5}>
-                                <CardHeader image plain>
-                                  <a href="#pablo">
-                                    <img src={kendall} alt="..." />
-                                  </a>
-                                  <div
-                                    className={classes.coloredShadow}
-                                    style={{
-                                      backgroundImage: "url(" + kendall + ")",
-                                      opacity: "1"
-                                    }}
-                                  />
-                                </CardHeader>
-                              </GridItem>
-                              <GridItem xs={12} sm={12} md={7}>
-                                <CardBody plain>
-                                  <h4 className={classes.cardTitle}>
-                                    Kendall Jenner
-                                  </h4>
-                                  <Muted>
-                                    <h6>MODEL</h6>
-                                  </Muted>
-                                  <p className={classes.description}>
-                                    I love you like Kanye loves Kanye. Don
-                                    {"'"}t be scared of the truth.
-                                  </p>
-                                </CardBody>
-                              </GridItem>
-                            </GridContainer>
-                          </Card>
-                        </GridItem>
-                        <GridItem
-                          xs={12}
-                          sm={12}
-                          md={5}
-                          className={classes.gridItem}
-                        >
-                          <Card profile plain className={classes.card}>
-                            <GridContainer>
-                              <GridItem xs={12} sm={12} md={5}>
-                                <CardHeader image plain>
-                                  <a href="#pablo">
-                                    <img src={cardProfile2Square} alt="..." />
-                                  </a>
-                                  <div
-                                    className={classes.coloredShadow}
-                                    style={{
-                                      backgroundImage:
-                                        "url(" + cardProfile2Square + ")",
-                                      opacity: "1"
-                                    }}
-                                  />
-                                </CardHeader>
-                              </GridItem>
-                              <GridItem xs={12} sm={12} md={7}>
-                                <CardBody plain>
-                                  <h4 className={classes.cardTitle}>
-                                    George West
-                                  </h4>
-                                  <Muted>
-                                    <h6>MODEL/DJ</h6>
-                                  </Muted>
-                                  <p className={classes.description}>
-                                    I love you like Kanye loves Kanye.
-                                  </p>
-                                </CardBody>
-                              </GridItem>
-                            </GridContainer>
-                          </Card>
-                        </GridItem>
-                      </GridContainer>
-                    </div>
-                  )
+                    <Card style={{
+                      background:"#222224",
+                      boxShadow: "10px 10px 5px black",
+                    }}>
+                    <CardHeader  style={{ textAlign:"center",width: "30%"}}color="danger">
+                      <h4>
+                      <EqualizerIcon/> Creation de composition
+                      </h4>
+                      </CardHeader>
+                      
+                    <CardBody style={{color:"#ef5350", padding: "4%"}}>
+                        <GridContainer  spacing={2}   sm={12} md={12}>
+                           <GridItem md={3} sm={3} lg={3} >
+
+                          <UploadModal/>
+                         </GridItem>
+                         <GridItem md={3} sm={3} lg={3} >
+
+                          <UplaodAlbum/>
+                         </GridItem>
+                         <GridItem md={3} sm={3} lg={3} >
+
+                          <UploadCompleteAlbum/>
+                         </GridItem>
+                        </GridContainer>
+                    </CardBody>
+                </Card>
+                   )
                 },
                 {
                   tabButton: "Media",
