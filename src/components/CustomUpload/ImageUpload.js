@@ -20,6 +20,7 @@ export default function ImageUpload(props) {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
+    setImage(file)
     reader.onloadend = () => {
       setFile([file]);
       setImagePreviewUrl(reader.result);
@@ -27,9 +28,8 @@ export default function ImageUpload(props) {
     reader.readAsDataURL(file);
   };
   // eslint-disable-next-line
-  const handleSubmit = async e => {
+  const handleSubmit =  e => {
     e.preventDefault();
-    await setImage(file)
     // file is the file/image uploaded
     // in this function you can save the image (file) on form submit
     // you have to call it yourself
@@ -64,9 +64,7 @@ export default function ImageUpload(props) {
               <i className="fas fa-times" /> Remove
             </Button>
             {avatar ? <br /> : null}
-            <Button  onClick={handleSubmit}>
-              <CheckIcon/> Validate
-            </Button>
+            
           </span>
         )}
       </div>

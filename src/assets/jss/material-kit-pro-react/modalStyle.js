@@ -3,12 +3,13 @@ import { whiteColor, grayColor } from "assets/jss/material-kit-pro-react.js";
 const modalStyle = theme => ({
   modalRoot: {
     overflow: "auto",
-    display: "block"
+    display: "block",
   },
   modal: {
     [theme.breakpoints.up("sm")]: {
       maxWidth: "800px",
-      margin: "auto"
+      margin: "auto",
+
     },
     borderRadius: "6px",
     overflow: "visible",
@@ -17,6 +18,7 @@ const modalStyle = theme => ({
     marginTop: "70px !important"
   },
   modalHeader: {
+
     borderBottom: "none",
     paddingTop: "24px",
     paddingRight: "24px",

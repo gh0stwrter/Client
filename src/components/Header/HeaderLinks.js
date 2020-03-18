@@ -100,7 +100,7 @@ export default function HeaderLinks(props) {
   <>
   <ListItem className={classes.listItem}>
     <Link
-      to="/dashboard"
+      to="/profile/page"
       className={classes.navLink}
       onClick={e => smoothScroll(e, "headers")}
     >

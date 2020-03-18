@@ -36,7 +36,6 @@ const isAllowed = (token) => {
   try {
     const now = new Date(0);
     const decoded = decode(token);
-    console.log(decoded.nbf)
     if (typeof decoded.exp !== 'undefined' && decoded.exp < now) {
       throw new Error(`token expired: ${JSON.stringify(decoded)}`)
     }
@@ -54,7 +53,7 @@ const ProtectedRoute = ({ ...rest }) => {
   const token = Cookies.get('x-token');
   return isAllowed(token)
     ? <Route {...rest} />
-    : <Redirect to={"/auth/login"} />;
+    : <Redirect to={"/"} />;
 }
 
 const App = (props) =>{
@@ -85,17 +84,15 @@ const playerShow = (bool) => setShowPlayer(bool)
       <Route path="/landing-page" component={LandingPage} />
       <Route path="/login-page" component={LoginPage} />
       <Route path="/pricing" component={PricingPage} />
-      <Route path="/profile-page" component={ProfilePage} />
       <Route path="/product-page" component={ProductPage} />
       <Route path="/sections" component={SectionsPage} />
       <Route path="/shopping-cart-page" component={ShoppingCartPage} />
       <Route path="/signup-page" component={SignupPage} />
-{/*       
+      
       <ProtectedRoute path="/profile" render={props =>
-         <Route path="/profile/dashboard" component={Dashboard} /> 
-         
+         <Route path="/profile/page" component={ProfilePage} /> 
          }/>
-       */}
+      
       <Route path="/error-page" component={ErrorPage} />
       <Route path="/" component={() => <PresentationPage method={playerShow}/>} />
     </Switch>

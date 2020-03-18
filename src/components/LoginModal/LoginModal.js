@@ -57,7 +57,8 @@ export default function LoginModal(props) {
   const [addNewUser] = useMutation(SIGN_UP_COMPOSER, {
     onCompleted({newUser}){
       Cookies.set("x-token", newUser.token, {expires: 1})
-      setRedirect("/profile/dashboard");
+
+      setRedirect("/profile/page");
     }
   })
   const setInputs = (event) =>{
@@ -72,7 +73,7 @@ export default function LoginModal(props) {
     const redirectComp = () => {
         // console.log("cookie :  " ,Cookies.get("x-token"))
         if ((redirect || Cookies.get("x-token")) && openModal)
-            return <Redirect to={"/profile/dashboard"} />
+            return <Redirect to={"/profile/page"} />
         else
             return <></>; 
 

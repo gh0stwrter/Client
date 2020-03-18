@@ -72,30 +72,38 @@ export default function ProfilePage({ ...rest }) {
   
   const fakeData = [
         {
+          id: 0,
           component: <AttachMoneyIcon/>,
           value:"Vente : " + 123
         },
         {
+          id: 1,
+
           component: <PeopleIcon/> ,
           value:"Follower : "+84,
         },
         {
+          id: 2,
           component:<VolumeUpIcon/>,
           value: "Son écouté : " + 5642
         },
         {
+          id: 3,
           component: <CloudDownloadIcon/>,
           value:"Télechargement : " + 24
         },
         {
+          id: 4,
           component: <RateReviewIcon/>,
           value: "Commentaires : "+843
         },
         {
+          id: 5,
           component: <RateReviewIcon/>,
           value: "Commentaires : "+843
         },
         {
+          id: 6,
           component: <RateReviewIcon/>,
           value: "Commentaires : "+843
         },
@@ -123,7 +131,7 @@ export default function ProfilePage({ ...rest }) {
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <GridContainer  fluid justify="center">
+          <GridContainer   justify="center">
             <GridItem xs={12} sm={12} md={6}>
               <div className={classes.profile}>
                 <div>
@@ -137,9 +145,9 @@ export default function ProfilePage({ ...rest }) {
               </div>
               <div className={classes.follow}>
                 <Tooltip
-                  id="tooltip-bottom"
+                  id="tooltip-top"
                   title="Follow this user"
-                  placement="bot"
+                  placement="top"
                   classes={{ tooltip: classes.tooltip }}
                 >
                   
@@ -154,9 +162,9 @@ export default function ProfilePage({ ...rest }) {
               </div>
               <div className={classes.follow2}>
                 <Tooltip
-                  id="tooltip-bottom"
+                  id="tooltip-top"
                   title="Follow this user"
-                  placement="bot"
+                  placement="top"
                   classes={{ tooltip: classes.tooltip }}
                 >
                   
@@ -183,7 +191,7 @@ export default function ProfilePage({ ...rest }) {
                   tabButton: "Work",
                   tabIcon: Palette,
                   tabContent: (
-                    <GridContainer fluid>
+                    <GridContainer>
                       <GridItem
                         xs={12}
                         sm={12}
@@ -202,10 +210,10 @@ export default function ProfilePage({ ...rest }) {
                           </CardHeader>
                           
                         <CardBody style={{color:"#ef5350", padding: "4%"}}>
-                            <GridContainer  spacing={2}   sm={12} md={12}>
+                            <GridContainer  spacing={2} >
                                { fakeData.map((item) =>
-                               <GridItem md={3} sm={3} lg={3} >
-                               <GridContainer md={12} sm={12} >
+                               <GridItem key={item.id} md={3} sm={3} lg={3} >
+                               <GridContainer  >
                                  <GridItem sm={2}>
                               <h4>  {item.component}</h4>
                              </GridItem>
@@ -229,7 +237,7 @@ export default function ProfilePage({ ...rest }) {
                     </Card>
                       </GridItem>
                       <GridItem>
-                            <GridContainer md={12} sm={12}>
+                            <GridContainer>
                          <GridItem md={5}>                          <Card style={{
                           background:"#222224",
                           boxShadow: "10px 10px 5px black"
@@ -281,7 +289,7 @@ export default function ProfilePage({ ...rest }) {
                       </CardHeader>
                       
                     <CardBody style={{color:"#ef5350", padding: "4%"}}>
-                        <GridContainer  spacing={2}   sm={12} md={12}>
+                        <GridContainer  spacing={2}>
                            <GridItem md={3} sm={3} lg={3} >
 
                           <UploadModal/>

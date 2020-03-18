@@ -13,22 +13,29 @@ import styles from "assets/jss/material-kit-pro-react/customSelectStyle.js";
 import CreateIcon from '@material-ui/icons/Create';
 import PublicIcon from '@material-ui/icons/Public';
 import LockIcon from '@material-ui/icons/Lock';
-
+import {useQuery, useApolloClient} from "@apollo/react-hooks";
+import {GET_CACHE_CATEGORY} from "apollo/categories";
 
 const useStyles = makeStyles(styles);
 
-export default function Example({data, setSelect}){
+export default function Example({data, categoriesData,setSelect}){
   const droits = ["PUBLIC", "PRIVATE"]
   const compo_type = ["SONORE", "WRITTEN"]
-  const compo_categorie = ["POP","ROCK","ALTERNATIVE","RAP","RNB"];
+  const compo_categorie = ["TRAP","GRIMM","RAP","RNB"];
   const [simpleSelect, setSimpleSelect] = React.useState("");
+  const [simpleCategories, setSimpleCategories] = React.useState([]);
+  const client = useApolloClient(); 
+
   const handleSimple = event => {
     setSimpleSelect(event.target.value);
     setSelect(event)
   };
 useEffect(()=>{
-   
-})
+
+},[simpleCategories])
+
+
+
   const classes = useStyles();
   return (
     data === "droit" ? 
@@ -65,6 +72,7 @@ useEffect(()=>{
             {
                    droits.map((item)=>
             <MenuItem
+              key={item}
               classes={{
                 root: classes.selectMenuItem,
                 selected: classes.selectMenuItemSelected
@@ -114,6 +122,7 @@ useEffect(()=>{
           {
                  compo_type.map((item)=>
           <MenuItem
+          key={item}
             classes={{
               root: classes.selectMenuItem,
               selected: classes.selectMenuItemSelected
@@ -134,46 +143,40 @@ useEffect(()=>{
             htmlFor="simple-select"
             className={classes.selectLabel}
             >
-            Type de composition
+            Categorie de composition
         </InputLabel>
-              <Select
-              MenuProps={{
-                className: classes.selectMenu
-              }}
-              classes={{
-                select: classes.select
-              }}
-              value={simpleSelect}
-              onChange={e => handleSimple(e)}
-              inputProps={{
-                name: "category",
-                id: "simple-select"
-              }}
-            >
-               
-              <MenuItem
-                disabled
-                classes={{
-                  root: classes.selectMenuItem
-                }}
-              >
-                  SONORE/WRITTEN
-              </MenuItem>
-              {
-                     compo_categorie.map((item)=>
-              <MenuItem
-                classes={{
-                  root: classes.selectMenuItem,
-                  selected: classes.selectMenuItemSelected
-                }}
-                value={item}
-              >
-               <h6>{item}</h6> 
-              </MenuItem>
-                    )
-                }
-                         
-            </Select> 
+       <Select
+        MenuProps={{
+          className: classes.selectMenu
+        }}
+        classes={{
+          select: classes.select
+        }}
+        value={simpleSelect}
+        onChange={e => handleSimple(e)}
+        inputProps={{
+          name: "category",
+          id: "simple-select"
+        }}
+      >
+     {  categoriesData.map((item)=>
+
+<MenuItem
+      key={item._id}
+      classes={{
+      root: classes.selectMenuItem,
+      selected: classes.selectMenuItemSelected
+      }}
+      value={item._id}
+      >
+      <h6>{item.name}</h6> 
+</MenuItem>)}
+       
+        
+                   
+      </Select> 
+       
+              
             </FormControl>: null
       
   );

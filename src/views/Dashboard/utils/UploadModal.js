@@ -49,12 +49,17 @@ export default function UploadModal() {
    
     return (
         <div>
-           
+           <div style={{
+               ":hover": {
+                cursor:"pointer",
+               } 
+           }}>
          <Card style={{ textAlign: "center", background:"#333436",color:"white", height:"150px"}}  onClick={() => setOpen(true)}>
            <CardBody>
             <h5> <MusicNoteIcon style={{fontSize:50}}/>  <br/>  Publier une composition</h5> 
             </CardBody>
             </Card>
+            </div>
             <Dialog
                 classes={{
                     root: classes.modalRoot,
