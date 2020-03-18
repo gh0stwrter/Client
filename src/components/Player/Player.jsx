@@ -7,6 +7,8 @@ import 'react-h5-audio-player/lib/styles.css';
 import {GET_URL} from "apollo/composition";
 import {DATA_PLAYER} from "apollo/uploads"
 import {useApolloClient, useMutation} from "@apollo/react-hooks";
+import Button from '@material-ui/core/Button';
+
 const useStyles = makeStyles(theme => ({
     player: {
         position: "fixed",
@@ -21,19 +23,28 @@ export default function Player({method}) {
     const [getVideosUrl] = useMutation(GET_URL, {onCompleted(data){
         console.log(data)
     }})
-    const song = Cookies.get("song")
+    
     const [cookieSong, setCacheSong] = useState(null)
-    const classes = useStyles();
+
     const client = useApolloClient()
-    const {play} = client.readQuery({query: DATA_PLAYER})
-    console.log(play)
     useEffect(() => {
       setCacheSong(play ? play.url : null)
     }, [cookieSong]);
-    return  (
+    const {play} = client.readQuery({query: DATA_PLAYER})
+    const song = Cookies.get("song")
+    const [played, setPlayed] = useState(play.show)
+    const classes = useStyles();
+    
+    const openPlayer = () => {
+        setPlayed(true);
+        method(true);
+;    }
+    
+    return played ? (
         <div className={classes.player}>
             <button onClick={e => {
-                     method(false)
+                method(false);
+                setPlayed(false);
                 }}>Fermer</button>
             <AudioPlayer
                 src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ play ? play.url : null}`} 
@@ -43,8 +54,9 @@ export default function Player({method}) {
                 loop={true}
                 onCanPlay={e => console.log(e)}
             />
-        </div>
-    ) 
+        </div>) : (
+        <div className={classes.player}>
+        <Button onClick={()=> openPlayer()}>Open</Button> </div>); 
     
     // : (
     //     <div className={classes.player}>

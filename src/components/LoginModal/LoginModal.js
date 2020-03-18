@@ -31,7 +31,7 @@ import popoverStyles from "assets/jss/material-kit-pro-react/popoverStyles.js";
 import tooltipsStyle from "assets/jss/material-kit-pro-react/tooltipsStyle.js";
 import PersonAddTwoToneIcon from '@material-ui/icons/PersonAddTwoTone';
 import { Redirect } from "react-router-dom";
-
+import NavPills from "components/NavPills/NavPills.js";
 
 
 
@@ -82,6 +82,7 @@ export default function LoginModal(props) {
     return (
         <>
         {redirectComp()}
+        
         <Button
           color="transparent"
           target="_blank"
@@ -99,7 +100,7 @@ export default function LoginModal(props) {
                 open={openModal}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={() => setOpen(false)}
+                // onClose={() => setOpen(false)}
                 aria-labelledby="classic-modal-slide-title"
                 aria-describedby="classic-modal-slide-description"
             >
@@ -113,9 +114,7 @@ export default function LoginModal(props) {
                         className={classes.modalCloseButton}
                         key="close"
                         aria-label="Close"
-                        onClick={() => setOpen(false)}
                     >
-                        {" "}
                         <Close className={classes.modalClose} />
                     </Button>
                 </DialogTitle>
@@ -124,8 +123,13 @@ export default function LoginModal(props) {
                     className={classes.modalBody}
                 >
 
-                    {/* UPLOAD */}
-                    <section className="container">
+<NavPills
+      color="warning"
+      tabs={[
+        {
+          tabButton: "Profile",
+          tabContent: (
+            <section className="container">
 
                     {/* <GridContainer justify="center"> */}
                 <form className={classes.form}>
@@ -230,9 +234,34 @@ export default function LoginModal(props) {
                         {/*  */}
 
                     </section>
+          )
+        },
+        {
+          tabButton: "Settings",
+          tabContent: (
+            <span>
+              <p>
+                Efficiently unleash cross-media information without
+                cross-media value. Quickly maximize timely
+                deliverables for real-time schemas.
+              </p>
+              <br />
+              <p>
+                Dramatically maintain clicks-and-mortar solutions
+                without functional solutions.
+              </p>
+            </span>
+          )
+        }
+      ]}
+    />
+
+                    {/* UPLOAD */}
+                    
                 </DialogContent>
                 <DialogActions className={classes.modalFooter}>
-                    <Button onClick={() => setOpen(false)} color="secondary">
+                    <Button 
+                    onClick={() => {setOpen(false); console.log(openModal)}} color="secondary">
                         Close
                     </Button>
                 </DialogActions>

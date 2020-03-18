@@ -62,7 +62,6 @@ const client = useApolloClient();
               <div className={classes.brand}>
                 <h1>
                 Ghost-Composer 
-                {/* <Button  className={classes.proBadge}>vivez de votre art <ArrowRightAltRoundedIcon/> </Button> */}
                 </h1>
                 <h3 className={classes.title}>
                 La plateforme des amateur et professionel de la musique

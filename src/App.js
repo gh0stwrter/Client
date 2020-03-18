@@ -65,15 +65,14 @@ const App = (props) =>{
   const {play} = client.readQuery({query: DATA_PLAYER})
   console.log(play)
   
-  useEffect(()=>{
-    console.log(showPlayer)
-},[showPlayer])
+//   useEffect(()=>{
+//     console.log(showPlayer)
+// },[showPlayer])
 const playerShow = (bool) => setShowPlayer(bool)
 
   return(
   <Router history={hist}>
-   {showPlayer  === false  ? null : <Player method={ playerShow } />} 
- 
+   <Player method={ playerShow }/>
     <Switch>
       <Route path="/about-us" component={AboutUsPage} />
       <Route path="/blog-post" component={BlogPostPage} />
