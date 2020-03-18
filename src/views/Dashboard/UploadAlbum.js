@@ -101,8 +101,7 @@ export default function UploadModal() {
                 <DialogActions className={classes.modalFooter}>
                     <Button onClick={() => setOpen(false)} color="secondary">
                         Close
-          </Button>
-                    
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>

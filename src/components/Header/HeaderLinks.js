@@ -45,7 +45,7 @@ import Person from '@material-ui/icons/Person';
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
-import LoginModal from "components/LoginModal/LoginModal.js"
+import GlobalModal from "components/LoginModal/GlobalModal.js"
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
 
@@ -117,7 +117,7 @@ export default function HeaderLinks(props) {
       Cookies.remove("x-token"); 
       setRedirect("/");
     }}>Déconnection</Button> </ListItem></> : 
-    <LoginModal/>;
+    <GlobalModal/>;
 
 
     const redirectComp = () => {

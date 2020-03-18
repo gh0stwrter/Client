@@ -17,7 +17,6 @@ import Menu from "@material-ui/icons/Menu";
 import Close from "@material-ui/icons/Close";
 // core components
 import styles from "assets/jss/material-kit-pro-react/components/headerStyle.js";
-import LoginModal from "../LoginModal/LoginModal"
 
 
 
