@@ -17,18 +17,7 @@ export default function SectionComponents() {
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem md={5} lg={5} sm={12} xs={12}>
-            <h3 className={classes.title}>Basic Components</h3>
-            <h6 className={classes.description}>
-              The core elements of your website
-            </h6>
-            <h5 className={classes.description}>
-              We re-styled every Bootstrap element to make it resemble Material
-              Design and also fit with each other. All the Bootstrap components
-              that you need in a development have been re-design with the new
-              look. Besides the numerous basic elements, we have also created
-              additional classes. All these items will help you take your
-              project to the next level.
-            </h5>
+           Grid for put Data
           </GridItem>
           {/* <GridItem xs={12} sm={12} md={6} lg={6} className={classes.mlAuto}>
             <div className={classes.imageContainer}>

@@ -77,10 +77,11 @@ const client = useApolloClient();
       <div className={classNames(classes.main, classes.mainRaised)}>
       <SectionDescription methodPlayer={method} compositions={getCompositions} />
       <SectionComponents />
-      <SectionPricing />
       <SectionOverview/>
       </div>
-     
+      <div>
+      <SectionPricing />
+      </div>
       <Footer
         theme="white"
         content={
