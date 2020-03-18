@@ -10,7 +10,7 @@ export const SIGN_UP_COMPOSER = gql`
 `
 
 export const SIGN_IN_COMPOSER = gql`
-    query login($email: String, $password: String){
+    mutation login($email: String, $password: String){
         login(email: $email, password: $password){
             token
         }

@@ -24,7 +24,13 @@ export default function LoginModal(props) {
   const classes = useStyles();
   const [userInputs, setUserInputs] = useState({ email:"", password:""});
   const [dataLogin, setDataLogin] = useState(null)
-  const { loading, error, data } = useQuery(SIGN_IN_COMPOSER, dataLogin);
+  const [login] = useMutation(SIGN_IN_COMPOSER, {
+    onCompleted(data){
+      Cookies.set("x-token", data.login.token, {expires: 1})
+      sendRedirectParent()
+    }
+    
+  });
 
   const sendRedirectParent = () => {
     props.getterData({redirect: true});
@@ -37,14 +43,9 @@ export default function LoginModal(props) {
     setUserInputs(({...userInputs,[name]: value }))
   };
 
-  const login = () => {
-    setDataLogin({variables: {
-      email: userInputs.email,
-      password: userInputs.password,
-    }})
-    console.log("data", data)
-    console.log("loading", loading)
-    console.log("error", error)
+  const logins = () => {
+    
+    
   }
 
   return (
@@ -119,8 +120,15 @@ export default function LoginModal(props) {
           />
         </CardBody>
         <div className={classes.textCenter}>
-          <Button onClick={e =>
-            login()
+          <Button onClick={e =>{
+            
+           login({variables: {
+            email: userInputs.email,
+            password: userInputs.password,
+          }})
+         
+        }
+          
           }
             simple color="success" size="lg">
             Connection

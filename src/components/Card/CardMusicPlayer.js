@@ -14,10 +14,18 @@ import Cookies from "js-cookie";
 import {useQuery, useApolloClient} from "@apollo/react-hooks";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
+import CardBody from './CardBody';
+import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/productsStyle.js";
+import CardHeader from "components/Card/CardHeader"
+import Tooltip from "@material-ui/core/Tooltip";
+import Favorite from "@material-ui/icons/Favorite";
+import Button from "components/CustomButtons/Button.js";
+import classNames from "classnames";
 
 
 const CardMusicPlayer = ({title, image, composer, musicUri, id, lastChild}) => {
   const useStyles = makeStyles(theme => ({
+    styles,
     root: { 
       height: "200px",
        
@@ -44,7 +52,6 @@ const CardMusicPlayer = ({title, image, composer, musicUri, id, lastChild}) => {
       backgroundSize: 'cover',
       backgroundRepeat: "no-repeat",
       height:"100%",
-      
     },
 
     playIcon: {
@@ -88,6 +95,59 @@ const CardMusicPlayer = ({title, image, composer, musicUri, id, lastChild}) => {
 const pause = () =>{
   setPlayed(false)
 }
+const Returning =() =>{
+  return (
+    <Card  onMouseOver={e => setShowbutton(true)} 
+    onMouseLeave={e => setShowbutton(false)}  product plain>
+        {
+          showButton ?
+        buttonPlay 
+        : null
+        }
+              <CardHeader className={classes.root} image plain>
+                <a href="#pablo">
+                  <img style={{width: "60%", height:"70%"}} src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${image}`} alt="..." />
+              
+                </a>
+                <div
+                  className={classes.coloredShadow}
+                  style={{ backgroundImage: `url(https://global-compositions.s3.eu-west-3.amazonaws.com/${image})`,
+                  backgroundSize: 'cover',
+                  backgroundRepeat: "no-repeat",
+                  height:"100%",
+                  opacity: 1 
+                }}
+                >
+             
+                </div>
+              </CardHeader>
+             
+              <CardFooter plain>
+                <div className={classes.priceContainer}>
+                  <span className={classNames(classes.price, classes.priceOld)}>
+                    {" "}
+                    €1,430
+                  </span>
+                  <span className={classNames(classes.price, classes.priceNew)}>
+                  {title} 
+                  </span>
+                </div>
+                <div className={classNames(classes.stats, classes.mlAuto)}>
+                  <Tooltip
+                    id="tooltip-top"
+                    title="Saved to Wishlist"
+                    placement="top"
+                    classes={{ tooltip: classes.tooltip }}
+                  >
+                    <Button justIcon simple color="rose">
+                      <Favorite />
+                    </Button>
+                  </Tooltip>
+                </div>
+              </CardFooter>
+            </Card>
+  )
+}
   const buttonPlay = 
   played ? (
       <IconButton onClick={pause} aria-label="play/pause" >
@@ -108,26 +168,26 @@ const pause = () =>{
     )
 
   return (
-    <GridContainer spacing={0} >
+    <GridContainer>
       
-    <Card style={{ width: "15rem" }} 
+    <Card product plain style={{ width: "250px" }} 
     onMouseOver={e => setShowbutton(true)} 
     onMouseLeave={e => setShowbutton(false)} 
     className={classes.root}>
       <div className={classes.background}>
        
-        <CardContent className={classes.content}>
+        <CardBody className={classes.content}>
         {
           showButton ?
         buttonPlay 
         : null
         }
-        </CardContent>
+        </CardBody>
         
           </div>
           
     </Card>
-    
+    {/* <Returning/>     */}
          
     <Typography color="primary"  component="h6" variant="h6">
             {title}  

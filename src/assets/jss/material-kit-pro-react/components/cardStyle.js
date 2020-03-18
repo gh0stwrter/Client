@@ -139,7 +139,8 @@ const cardStyle = {
     }
   },
   cardProduct: {
-    marginTop: "30px"
+    marginTop: "10px",
+    margin: "1%"
   },
   primary: {
     background:

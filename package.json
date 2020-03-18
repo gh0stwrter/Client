@@ -42,14 +42,15 @@
     "react-numeric-input": "^2.2.3",
     "react-router-dom": "5.0.1",
     "react-scripts": "3.1.0",
-    "react-slick": "0.25.2",
+    "react-slick": "^0.25.2",
     "react-sticky": "^6.0.3",
     "react-sticky-el": "^1.1.0",
     "react-swipeable-views": "0.13.3",
     "react-syntax-highlighter": "^12.2.1",
     "react-tagsinput": "3.19.0",
     "react-text-mask": "^5.4.3",
-    "react-window": "^1.8.5"
+    "react-window": "^1.8.5",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",

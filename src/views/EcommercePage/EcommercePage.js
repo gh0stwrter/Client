@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // core components
@@ -12,6 +12,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Footer from "components/Footer/Footer.js";
+import {useQuery, useMutation} from "@apollo/react-hooks";
 // sections for this page
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import SectionLatestOffers from "views/EcommercePage/Sections/SectionLatestOffers.js";
@@ -34,12 +35,17 @@ import face5 from "assets/img/faces/marc.jpg";
 import face6 from "assets/img/faces/kendall.jpg";
 import face7 from "assets/img/faces/card-profile5-square.jpg";
 import face8 from "assets/img/faces/card-profile2-square.jpg";
-
+import {GET_ALL_COMPOSITIONS} from "apollo/composition"
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function EcommercePage() {
+const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
+  onCompleted(){
+    console.log(getCompositions)
+  }
+})
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;

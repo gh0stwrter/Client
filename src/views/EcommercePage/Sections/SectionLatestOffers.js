@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
+import "./section.css"
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -14,24 +15,59 @@ import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 // @material-ui icons
 import Favorite from "@material-ui/icons/Favorite";
-
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/latestOffersStyle.js";
 
 import gucci from "assets/img/examples/gucci.jpg";
 import tomFord from "assets/img/examples/tom-ford.jpg";
 import dolce from "assets/img/examples/dolce.jpg";
+import Slider from "react-slick";
 
 const useStyles = makeStyles(styles);
 
 export default function SectionLatestOffers() {
   const classes = useStyles();
+  var settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
   return (
     <div className={classes.section}>
       <div className={classes.container}>
         <h2>Latest Offers</h2>
         <GridContainer>
-          <GridItem md={4} sm={4}>
-            <Card product plain>
+        <GridItem md={12} sm={12}>
+
+        <Slider {...settings}>
+        <Card product plain>
               <CardHeader image plain>
                 <a href="#pablo">
                   <img src={gucci} alt="..." />
@@ -41,14 +77,7 @@ export default function SectionLatestOffers() {
                   style={{ backgroundImage: `url(${gucci})`, opacity: 1 }}
                 />
               </CardHeader>
-              <CardBody className={classes.textCenter} plain>
-                <h4 className={classes.cardTitle}>Gucci</h4>
-                <p className={classes.cardDescription}>
-                  The structured shoulders and sleek detailing ensure a sharp
-                  silhouette. Team it with a silk pocket square and leather
-                  loafers.
-                </p>
-              </CardBody>
+             
               <CardFooter plain>
                 <div className={classes.priceContainer}>
                   <span className={classNames(classes.price, classes.priceOld)}>
@@ -74,26 +103,18 @@ export default function SectionLatestOffers() {
                 </div>
               </CardFooter>
             </Card>
-          </GridItem>
-          <GridItem md={4} sm={4}>
-            <Card product plain>
+           
+            <Card  product plain>
               <CardHeader image plain>
                 <a href="#pablo">
-                  <img src={dolce} alt="..." />
+                  <img src={gucci} alt="..." />
                 </a>
                 <div
                   className={classes.coloredShadow}
-                  style={{ backgroundImage: `url(${dolce})`, opacity: 1 }}
+                  style={{ backgroundImage: `url(${gucci})`, opacity: 1 }}
                 />
               </CardHeader>
-              <CardBody className={classes.textCenter} plain>
-                <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
-                <p className={classes.cardDescription}>
-                  The structured shoulders and sleek detailing ensure a sharp
-                  silhouette. Team it with a silk pocket square and leather
-                  loafers.
-                </p>
-              </CardBody>
+             
               <CardFooter plain>
                 <div className={classes.priceContainer}>
                   <span className={classNames(classes.price, classes.priceOld)}>
@@ -119,26 +140,18 @@ export default function SectionLatestOffers() {
                 </div>
               </CardFooter>
             </Card>
-          </GridItem>
-          <GridItem md={4} sm={4}>
-            <Card product plain>
+           
+            <Card  product plain>
               <CardHeader image plain>
                 <a href="#pablo">
-                  <img src={tomFord} alt="..." />
+                  <img src={gucci} alt="..." />
                 </a>
                 <div
                   className={classes.coloredShadow}
-                  style={{ backgroundImage: `url(${tomFord})`, opacity: 1 }}
+                  style={{ backgroundImage: `url(${gucci})`, opacity: 1 }}
                 />
               </CardHeader>
-              <CardBody className={classes.textCenter} plain>
-                <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
-                <p className={classes.cardDescription}>
-                  The structured shoulders and sleek detailing ensure a sharp
-                  silhouette. Team it with a silk pocket square and leather
-                  loafers.
-                </p>
-              </CardBody>
+             
               <CardFooter plain>
                 <div className={classes.priceContainer}>
                   <span className={classNames(classes.price, classes.priceOld)}>
@@ -164,7 +177,10 @@ export default function SectionLatestOffers() {
                 </div>
               </CardFooter>
             </Card>
+           
+          </Slider>
           </GridItem>
+
         </GridContainer>
       </div>
     </div>

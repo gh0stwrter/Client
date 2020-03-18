@@ -41,7 +41,7 @@ import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/pr
 
 const useStyles = makeStyles(styles);
 
-export default function SectionProducts() {
+export default function SectionProducts(props) {
   const [checked, setChecked] = React.useState([1, 9, 27]);
   const [priceRange, setPriceRange] = React.useState([101, 790]);
   React.useEffect(() => {
