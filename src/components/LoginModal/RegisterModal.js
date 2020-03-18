@@ -45,7 +45,7 @@ export default function Register (props) {
     return (
       <section className="container">
         <form className={classes.form}>
-          <h2 className={classes.textCenter}>Connection</h2>
+          <h2 className={classes.textCenter}>Inscription</h2>
           <div className={classes.socialLine}>
             <Button
               justIcon

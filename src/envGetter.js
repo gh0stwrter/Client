@@ -13,5 +13,6 @@ export default {
     client: {
         url: process.env.REACT_APP_SERVER_URL,
         port: process.env.REACT_APP_SERVER_PORT
-    }
+    },
+    stripe: process.env.REACT_APP_STRIPE
 }

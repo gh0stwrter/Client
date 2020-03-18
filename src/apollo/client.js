@@ -5,7 +5,6 @@ import resolvers from "./resolvers/index";
 import {DATA_PLAYER} from "apollo/uploads.js"
 import env from "envGetter";
 
-console.log(env)
 const cache = new InMemoryCache();
 const client = new ApolloClient({
   uri: `http://${env.api.url}:${env.api.pass}/api`,
