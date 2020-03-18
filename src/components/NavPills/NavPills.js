@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -18,14 +18,20 @@ import styles from "assets/jss/material-kit-pro-react/components/navPillsStyle.j
 
 const useStyles = makeStyles(styles);
 
-export default function NavPills(props) {
-  const [active, setActive] = React.useState(props.active);
+ const NavPills = (props) => {
+  const [active, setActive] = useState(props.active);
   const handleChange = (event, active) => {
     setActive(active);
   };
   const handleChangeIndex = index => {
     setActive(index);
   };
+
+  useEffect(() => {
+    setActive(props.active)
+    console.log(props.active)
+  }, [props.active])
+
   const { tabs, direction, color, horizontal, alignCenter } = props;
   const classes = useStyles();
   const flexContainerClasses = classNames({
@@ -129,3 +135,5 @@ NavPills.propTypes = {
   }),
   alignCenter: PropTypes.bool
 };
+
+export default NavPills;

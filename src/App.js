@@ -63,11 +63,7 @@ const App = (props) =>{
 
 
   const {play} = client.readQuery({query: DATA_PLAYER})
-  console.log(play)
-  
-//   useEffect(()=>{
-//     console.log(showPlayer)
-// },[showPlayer])
+
 const playerShow = (bool) => setShowPlayer(bool)
 
   return(

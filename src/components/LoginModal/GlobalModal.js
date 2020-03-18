@@ -28,6 +28,7 @@ export default function GlobalModal(props) {
   const classes = useStyles();
   const [redirect, setRedirect] = useState(null);
   const [error, setError] = useState(false)
+  const [page, setPage] = useState(1);
   const redirectComp = () => {
     if ((redirect || Cookies.get("x-token")) && openModal)
         return <Redirect to={"/profile/page"} />
@@ -39,11 +40,9 @@ export default function GlobalModal(props) {
       else if (childData.error) 
         setError(true);
   };
-
   useEffect(() => {
     setError(false);
   },[openModal])
-
   return (
     <>
     {redirectComp()}
@@ -52,14 +51,30 @@ export default function GlobalModal(props) {
       target="_blank"
       className={classes.navButton}
       round
-      onClick={() => setOpenModal(true)}
+      onClick={() => {
+        setPage(0)
+        setOpenModal(true)
+      }}
     >
       Connection
     </Button>
+    <Button
+      color="transparent"
+      target="_blank"
+      className={classes.navButton}
+      round
+      onClick={() => {
+        setPage(1)
+        setOpenModal(true)
+
+      }}
+    >
+      Inscription
+    </Button>
       <Dialog
         classes={{
-            root: classes.modalRoot,
-            paper: classes.modal
+          root: classes.modalRoot,
+          paper: classes.modal
         }}
         open={openModal}
         TransitionComponent={Transition}
@@ -79,12 +94,13 @@ export default function GlobalModal(props) {
           
         /> : ""}
         
-        <DialogContent
+        {/* <DialogContent
             id="classic-modal-slide-description"
             className={classes.modalBody}
-        >
+        > */}
           <NavPills
-            color="dark"
+            color="white"
+            active={page}
             tabs={[
               {
                 tabButton: "Connection",
@@ -100,7 +116,7 @@ export default function GlobalModal(props) {
               }
             ]}
           />
-        </DialogContent>
+        {/* </DialogContent> */}
             <DialogActions className={classes.modalFooter}>
                 <Button 
                 onClick={() => setOpenModal(false)} color="secondary">
