@@ -68,5 +68,6 @@ export default function MediaControlCard() {
                 title="Live from space album cover"
             />
         </Card>
+
     );
 }
