@@ -5,6 +5,7 @@ import { Router, Route, Switch, Redirect } from "react-router";
 import { ApolloProvider } from '@apollo/react-hooks';
 import decode from 'jwt-decode';
 
+
 import "assets/scss/material-kit-pro-react.scss?v=1.8.0";
 
 // pages for this product
@@ -28,6 +29,7 @@ import Player from "components/Player/Player"
 import Cookies from "js-cookie";
 import {useQuery, useApolloClient} from "@apollo/react-hooks";
 import {DATA_PLAYER} from "apollo/uploads"
+import Stripe from "views/Stripe/Billing.js"
 var hist = createBrowserHistory();
 
 
@@ -83,6 +85,7 @@ const playerShow = (bool) => setShowPlayer(bool)
       <Route path="/sections" component={SectionsPage} />
       <Route path="/shopping-cart-page" component={ShoppingCartPage} />
       <Route path="/signup-page" component={SignupPage} />
+      <Route path="/payment" component={Stripe} />
       
       <ProtectedRoute path="/profile" render={props =>
          <Route path="/profile/page" component={ProfilePage} /> 
