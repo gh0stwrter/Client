@@ -1,0 +1,4 @@
+.slick-slider .slick-slide > div:first-child {
+    position: relative;
+    margin: 3%;
+}
