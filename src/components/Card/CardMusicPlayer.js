@@ -22,13 +22,15 @@ import Favorite from "@material-ui/icons/Favorite";
 import Button from "components/CustomButtons/Button.js";
 import classNames from "classnames";
 import {MusicProvider} from "_utils/CompositionContext";
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import {Link} from "react-router-dom";
 
-const CardMusicPlayer = ({data:{title, image, composer, file, id}, lastChild}) => {
+
+const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChild}, show) => {
   const useStyles = makeStyles(theme => ({
     styles,
     root: { 
       height: "200px",
-       
         color: "white",
         display: 'flex',
         "&:hover .background": {
@@ -42,6 +44,8 @@ const CardMusicPlayer = ({data:{title, image, composer, file, id}, lastChild}) =
     },
     content: {
       flex: '1 0 auto',
+      textAlign: "center",
+      marginTop: "10%", 
      
     },
    
@@ -56,19 +60,19 @@ const CardMusicPlayer = ({data:{title, image, composer, file, id}, lastChild}) =
     },
 
     playIcon: {
-        background:"red",
-       position: "relative",
+      background:"black",
+      color:"white",
+      position: "relative",
       top: "50%",
       display: "flex",
       justifContent: "center",
       "&:hover": {
-      transform: 'scale(1.3)',
-  
+      transform: 'scale(1.1)',
     },
-      border: "solid white 3px",
+      border: "solid white 1px",
       borderRadius: "50%",
-      height: 78,
-      width: 78,
+      height: 68,
+      width: 68,
     },
   }));
   
@@ -97,59 +101,7 @@ const CardMusicPlayer = ({data:{title, image, composer, file, id}, lastChild}) =
 const pause = () =>{
   setPlayed(false)
 }
-const Returning =() =>{
-  return (
-    <Card  onMouseOver={e => setShowbutton(true)} 
-    onMouseLeave={e => setShowbutton(false)}>
-        {
-          showButton ?
-        buttonPlay 
-        : null
-        }
-              <CardHeader className={classes.root} image plain>
-                <a href="#pablo">
-                  <img style={{width: "60%", height:"70%"}} src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${image}`} alt="..." />
-              
-                </a>
-                <div
-                  className={classes.coloredShadow}
-                  style={{ backgroundImage: `url(https://global-compositions.s3.eu-west-3.amazonaws.com/${image})`,
-                  backgroundSize: 'cover',
-                  backgroundRepeat: "no-repeat",
-                  height:"100%",
-                  opacity: 1 
-                }}
-                >
-             
-                </div>
-              </CardHeader>
-             
-              <CardFooter plain>
-                <div className={classes.priceContainer}>
-                  <span className={classNames(classes.price, classes.priceOld)}>
-                    {" "}
-                    €1,430
-                  </span>
-                  <span className={classNames(classes.price, classes.priceNew)}>
-                  {title} 
-                  </span>
-                </div>
-                <div className={classNames(classes.stats, classes.mlAuto)}>
-                  <Tooltip
-                    id="tooltip-top"
-                    title="Saved to Wishlist"
-                    placement="top"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button justIcon simple color="rose">
-                      <Favorite />
-                    </Button>
-                  </Tooltip>
-                </div>
-              </CardFooter>
-            </Card>
-  )
-}
+
   const buttonPlay = 
   played ? (
       <IconButton onClick={pause} aria-label="play/pause" >
@@ -171,13 +123,15 @@ const Returning =() =>{
 
   return (
       <div>
-    <Card  product plain style={{ width: "270px" }} 
+    <Card  product plain style={{ width: "270px",textAlign: "center" }} 
     onMouseOver={e => setShowbutton(true)} 
     onMouseLeave={e => setShowbutton(false)} 
     className={classes.root}>
+       <Button style={{width: "35%"}} round size="sm">{price} € <br/>
+        <AddShoppingCartIcon/></Button>
       <div className={classes.background}>
        
-        <CardBody className={classes.content}>
+        <CardBody  className={classes.content}>
         {
           showButton ?
         buttonPlay 
@@ -190,9 +144,22 @@ const Returning =() =>{
     </Card>
     {/* <Returning/>     */}
          
-    <Typography color="primary"  component="h6" variant="h6">
-            {title}  
-          </Typography>
+      <GridContainer>
+        
+        <GridItem sm={8} md={8}>
+    <Typography color="info"  component="h6" variant="h6">
+
+        <Link>{title}</Link>
+        </Typography>
+
+        </GridItem>
+        <GridItem style={{textAlign: "center"}} sm={2} md={2}>
+
+       
+        
+        </GridItem>
+      </GridContainer>
+        
           </div>
   );
 }

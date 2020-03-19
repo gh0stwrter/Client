@@ -29,7 +29,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import Button from "components/CustomButtons/Button.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
-
+import CardMusicPlayer from "components/Card/CardMusicPlayer"
 import suit1 from "assets/img/examples/suit-1.jpg";
 import suit2 from "assets/img/examples/suit-2.jpg";
 import suit3 from "assets/img/examples/suit-3.jpg";
@@ -49,16 +49,8 @@ const useStyles = makeStyles(styles);
 export default function SectionProducts({data}) {
   const [checked, setChecked] = React.useState([1, 9, 27]);
   const [priceRange, setPriceRange] = React.useState([101, 790]);
-  const createListTable = () =>{
-    if(data){
-     return data.getCompositions.map((item,key)=>{
-      const emptyArray = []
-      [key, item.title, "Develop", "2013", "€ 99,225", fillButtons]
-    })
-    }
-  }
+
   
-console.log(createListTable())
   React.useEffect(() => {
     if (
       !document
@@ -76,39 +68,7 @@ console.log(createListTable())
     }
     return function cleanup() {};
   });
-  const fillButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
-  ].map((prop, key) => {
-    return (
-      <Button justIcon size="sm" color={prop.color} key={key}>
-        <prop.icon />
-      </Button>
-    );
-  });
-  const simpleButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
-  ].map((prop, key) => {
-    return (
-      <Button simple justIcon size="sm" color={prop.color} key={key}>
-        <prop.icon />
-      </Button>
-    );
-  });
-  const roundButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
-  ].map((prop, key) => {
-    return (
-      <Button round justIcon size="sm" color={prop.color} key={key}>
-        <prop.icon />
-      </Button>
-    );
-  });
+
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -917,70 +877,19 @@ console.log(createListTable())
             </Card>
           </GridItem>
           <GridItem md={9} sm={9}>
+            
             <GridContainer>
-              <GridItem>
-               
-                
-              <Table
-      tableHead={["#", "Name", "Job Position", "Since", "Salary", "Actions"]}
-      tableData={[
-        ["1", "Andrew Mike", "Develop", "2013", "€ 99,225", fillButtons],
-        ["2", "John Doe", "Design", "2012", "€ 89,241", roundButtons],
-        ["3", "Alex Mike", "Design", "2010", "€ 92,144", simpleButtons]
-      ]}
-      customCellClasses={[
-        classes.textCenter,
-        classes.textRight,
-        classes.textRight
-      ]}
-      customClassesForCells={[0, 4, 5]}
-      customHeadCellClasses={[
-        classes.textCenter,
-        classes.textRight,
-        classes.textRight
-      ]}
-      customHeadClassesForCells={[0, 4, 5]}
-    />
-              </GridItem>
-              {/* <GridItem md={4} sm={4}>
-                <Card plain product>
-                  <CardHeader noShadow image>
-                    <a href="#pablo">
-                      <img src={suit6} alt=".." />
-                    </a>
-                  </CardHeader>
-                  <CardBody plain>
-                    <a href="#pablo">
-                      <h4 className={classes.cardTitle}>Boglioli</h4>
-                    </a>
-                    <p className={classes.description}>
-                      Masterfully crafted in Northern Italy.
-                    </p>
-                  </CardBody>
-                  <CardFooter plain className={classes.justifyContentBetween}>
-                    <div className={classes.priceContainer}>
-                      <span className={classes.price}> €699</span>
-                    </div>
-                    <Tooltip
-                      id="tooltip-top"
-                      title="Save to Wishlist"
-                      placement="left"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <Button
-                        justIcon
-                        simple
-                        color="rose"
-                        className={classes.pullRight}
-                      >
-                        <FavoriteBorder />
-                      </Button>
-                    </Tooltip>
-                  </CardFooter>
-                </Card>
-              </GridItem> */}
 
-              <GridItem
+              { data ? data.getCompositions.map((item)=>
+          <GridItem md={4} sm={4}>
+            <CardMusicPlayer show={"price"} data={item}/>
+          </GridItem>
+
+          ) : null}
+
+              
+            </GridContainer>
+            <GridItem
                 md={3}
                 sm={3}
                 className={classNames(classes.mlAuto, classes.mrAuto)}
@@ -989,7 +898,6 @@ console.log(createListTable())
                   Load more...
                 </Button>
               </GridItem>
-            </GridContainer>
           </GridItem>
         </GridContainer>
         <br />
