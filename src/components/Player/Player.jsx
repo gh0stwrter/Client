@@ -26,7 +26,7 @@ export default function Player({method}) {
         console.log(data)
     }})
     
-    const [cookieSong, setCacheSong] = useState("")
+    const [cookieSong, setCacheSong] = useState(localStorage.getItem("musicUrl"))
     const client = useApolloClient()
     useEffect(() => {
       setCacheSong(localStorage.getItem("musicUrl"))
@@ -34,24 +34,30 @@ export default function Player({method}) {
     }, [cookieSong]);
     const {play} = client.readQuery({query: DATA_PLAYER})
     const song = Cookies.get("song")
-    console.log("song: ",localStorage.getItem("musicUrl"))
     const [played, setPlayed] = useState(play.show)
     const classes = useStyles();
 
     const openPlayer = () => {
         setPlayed(true);
         method(true);
-;    }
-    
-    return played ? (
+    }
+
+    useState(()=>{
+        setPlayed(play.show)
+    },[play.url])
+
+    return (played) ? (
         <div className={classes.player}>
+        {console.log("song: ",cookieSong)}
+        {console.log("playVar : ",play.url)}
+
             <button onClick={e => {
                 method(false);
                 setPlayed(false);
                 }}>Fermer</button>
                 
             <AudioPlayer
-                src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ play ? play.url : null}`} 
+                src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ cookieSong ? cookieSong : null}`} 
                 onPlay={e => console.log(e.srcElement)}
                 onPlayError={err => console.log(err)}
                 preload="auto"
