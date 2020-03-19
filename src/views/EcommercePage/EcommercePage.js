@@ -65,7 +65,7 @@ const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
         color="transparent"
         changeColorOnScroll={{
           height: 300,
-          color: "primary"
+          color: "dark"
         }}
       />
       <Parallax

@@ -882,7 +882,7 @@ export default function SectionProducts({data}) {
 
               { data ? data.getCompositions.map((item)=>
           <GridItem md={4} sm={4}>
-            <CardMusicPlayer show={"price"} data={item}/>
+            <CardMusicPlayer show="price" data={item}/>
           </GridItem>
 
           ) : null}

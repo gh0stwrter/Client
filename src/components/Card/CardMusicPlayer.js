@@ -26,7 +26,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {Link} from "react-router-dom";
 
 
-const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChild}, show) => {
+const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChild,show} ) => {
   const useStyles = makeStyles(theme => ({
     styles,
     root: { 
@@ -121,14 +121,19 @@ const pause = () =>{
       </IconButton>
     )
 
+
   return (
       <div>
     <Card  product plain style={{ width: "270px",textAlign: "center" }} 
     onMouseOver={e => setShowbutton(true)} 
     onMouseLeave={e => setShowbutton(false)} 
     className={classes.root}>
-       <Button style={{width: "35%"}} round size="sm">{price} € <br/>
-        <AddShoppingCartIcon/></Button>
+      {
+        show === "price" ?
+        <Button style={{width: "35%"}} round size="sm">{price} € <br/>
+        <AddShoppingCartIcon/></Button> : null
+      }
+      
       <div className={classes.background}>
        
         <CardBody  className={classes.content}>
@@ -146,18 +151,14 @@ const pause = () =>{
          
       <GridContainer>
         
-        <GridItem sm={8} md={8}>
+        <GridItem sm={12} md={12}>
     <Typography color="info"  component="h6" variant="h6">
 
         <Link>{title}</Link>
         </Typography>
 
         </GridItem>
-        <GridItem style={{textAlign: "center"}} sm={2} md={2}>
-
-       
         
-        </GridItem>
       </GridContainer>
         
           </div>
