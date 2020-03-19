@@ -9,6 +9,11 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 // @material-ui icons
+import Person from "@material-ui/icons/Person";
+import Edit from "@material-ui/icons/Edit";
+import Close from "@material-ui/icons/Close";
+// core components
+import Table from "components/Table/Table.js";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Cached from "@material-ui/icons/Cached";
@@ -41,9 +46,19 @@ import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/pr
 
 const useStyles = makeStyles(styles);
 
-export default function SectionProducts(props) {
+export default function SectionProducts({data}) {
   const [checked, setChecked] = React.useState([1, 9, 27]);
   const [priceRange, setPriceRange] = React.useState([101, 790]);
+  const createListTable = () =>{
+    if(data){
+     return data.getCompositions.map((item,key)=>{
+      const emptyArray = []
+      [key, item.title, "Develop", "2013", "€ 99,225", fillButtons]
+    })
+    }
+  }
+  
+console.log(createListTable())
   React.useEffect(() => {
     if (
       !document
@@ -60,6 +75,39 @@ export default function SectionProducts(props) {
       });
     }
     return function cleanup() {};
+  });
+  const fillButtons = [
+    { color: "info", icon: Person },
+    { color: "success", icon: Edit },
+    { color: "danger", icon: Close }
+  ].map((prop, key) => {
+    return (
+      <Button justIcon size="sm" color={prop.color} key={key}>
+        <prop.icon />
+      </Button>
+    );
+  });
+  const simpleButtons = [
+    { color: "info", icon: Person },
+    { color: "success", icon: Edit },
+    { color: "danger", icon: Close }
+  ].map((prop, key) => {
+    return (
+      <Button simple justIcon size="sm" color={prop.color} key={key}>
+        <prop.icon />
+      </Button>
+    );
+  });
+  const roundButtons = [
+    { color: "info", icon: Person },
+    { color: "success", icon: Edit },
+    { color: "danger", icon: Close }
+  ].map((prop, key) => {
+    return (
+      <Button round justIcon size="sm" color={prop.color} key={key}>
+        <prop.icon />
+      </Button>
+    );
   });
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
@@ -870,192 +918,31 @@ export default function SectionProducts(props) {
           </GridItem>
           <GridItem md={9} sm={9}>
             <GridContainer>
-              <GridItem md={4} sm={4}>
-                <Card plain product>
-                  <CardHeader noShadow image>
-                    <a href="#pablo">
-                      <img src={suit1} alt=".." />
-                    </a>
-                  </CardHeader>
-                  <CardBody plain>
-                    <a href="#pablo">
-                      <h4 className={classes.cardTitle}>Polo Ralph Lauren</h4>
-                    </a>
-                    <p className={classes.description}>
-                      Impeccably tailored in Italy from lightweight navy wool.
-                    </p>
-                  </CardBody>
-                  <CardFooter plain className={classes.justifyContentBetween}>
-                    <div className={classes.priceContainer}>
-                      <span className={classes.price}> €800</span>
-                    </div>
-                    <Tooltip
-                      id="tooltip-top"
-                      title="Saved to Wishlist"
-                      placement="left"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <Button
-                        justIcon
-                        simple
-                        color="rose"
-                        className={classes.pullRight}
-                      >
-                        <Favorite />
-                      </Button>
-                    </Tooltip>
-                  </CardFooter>
-                </Card>
+              <GridItem>
+               
+                
+              <Table
+      tableHead={["#", "Name", "Job Position", "Since", "Salary", "Actions"]}
+      tableData={[
+        ["1", "Andrew Mike", "Develop", "2013", "€ 99,225", fillButtons],
+        ["2", "John Doe", "Design", "2012", "€ 89,241", roundButtons],
+        ["3", "Alex Mike", "Design", "2010", "€ 92,144", simpleButtons]
+      ]}
+      customCellClasses={[
+        classes.textCenter,
+        classes.textRight,
+        classes.textRight
+      ]}
+      customClassesForCells={[0, 4, 5]}
+      customHeadCellClasses={[
+        classes.textCenter,
+        classes.textRight,
+        classes.textRight
+      ]}
+      customHeadClassesForCells={[0, 4, 5]}
+    />
               </GridItem>
-              <GridItem md={4} sm={4}>
-                <Card plain product>
-                  <CardHeader noShadow image>
-                    <a href="#pablo">
-                      <img src={suit2} alt=".." />
-                    </a>
-                  </CardHeader>
-                  <CardBody plain>
-                    <a href="#pablo">
-                      <h4 className={classes.cardTitle}>Wooyoungmi</h4>
-                    </a>
-                    <p className={classes.description}>
-                      Dark-grey slub wool, pintucked notch lapels.
-                    </p>
-                  </CardBody>
-                  <CardFooter plain className={classes.justifyContentBetween}>
-                    <div className={classes.priceContainer}>
-                      <span className={classes.price}> €555</span>
-                    </div>
-                    <Tooltip
-                      id="tooltip-top"
-                      title="Save to Wishlist"
-                      placement="left"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <Button
-                        justIcon
-                        simple
-                        color="rose"
-                        className={classes.pullRight}
-                      >
-                        <FavoriteBorder />
-                      </Button>
-                    </Tooltip>
-                  </CardFooter>
-                </Card>
-              </GridItem>
-              <GridItem md={4} sm={4}>
-                <Card plain product>
-                  <CardHeader noShadow image>
-                    <a href="#pablo">
-                      <img src={suit3} alt=".." />
-                    </a>
-                  </CardHeader>
-                  <CardBody plain>
-                    <a href="#pablo">
-                      <h4 className={classes.cardTitle}>Tom Ford</h4>
-                    </a>
-                    <p className={classes.description}>
-                      Immaculate tailoring is TOM FORD{"'"}s forte.
-                    </p>
-                  </CardBody>
-                  <CardFooter plain className={classes.justifyContentBetween}>
-                    <div className={classes.priceContainer}>
-                      <span className={classes.price}> €879</span>
-                    </div>
-                    <Tooltip
-                      id="tooltip-top"
-                      title="Save to Wishlist"
-                      placement="left"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <Button
-                        justIcon
-                        simple
-                        color="rose"
-                        className={classes.pullRight}
-                      >
-                        <FavoriteBorder />
-                      </Button>
-                    </Tooltip>
-                  </CardFooter>
-                </Card>
-              </GridItem>
-              <GridItem md={4} sm={4}>
-                <Card plain product>
-                  <CardHeader noShadow image>
-                    <a href="#pablo">
-                      <img src={suit4} alt=".." />
-                    </a>
-                  </CardHeader>
-                  <CardBody plain>
-                    <a href="#pablo">
-                      <h4 className={classes.cardTitle}>Thom Sweeney</h4>
-                    </a>
-                    <p className={classes.description}>
-                      It{"'"}s made from lightweight grey wool woven.
-                    </p>
-                  </CardBody>
-                  <CardFooter plain className={classes.justifyContentBetween}>
-                    <div className={classes.priceContainer}>
-                      <span className={classes.price}> €680</span>
-                    </div>
-                    <Tooltip
-                      id="tooltip-top"
-                      title="Save to Wishlist"
-                      placement="left"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <Button
-                        justIcon
-                        simple
-                        color="rose"
-                        className={classes.pullRight}
-                      >
-                        <FavoriteBorder />
-                      </Button>
-                    </Tooltip>
-                  </CardFooter>
-                </Card>
-              </GridItem>
-              <GridItem md={4} sm={4}>
-                <Card plain product>
-                  <CardHeader noShadow image>
-                    <a href="#pablo">
-                      <img src={suit5} alt=".." />
-                    </a>
-                  </CardHeader>
-                  <CardBody plain>
-                    <a href="#pablo">
-                      <h4 className={classes.cardTitle}>Kingsman</h4>
-                    </a>
-                    <p className={classes.description}>
-                      Crafted from khaki cotton and fully canvassed.
-                    </p>
-                  </CardBody>
-                  <CardFooter plain className={classes.justifyContentBetween}>
-                    <div className={classes.priceContainer}>
-                      <span className={classes.price}> €725</span>
-                    </div>
-                    <Tooltip
-                      id="tooltip-top"
-                      title="Saved to Wishlist"
-                      placement="left"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <Button
-                        justIcon
-                        simple
-                        color="rose"
-                        className={classes.pullRight}
-                      >
-                        <Favorite />
-                      </Button>
-                    </Tooltip>
-                  </CardFooter>
-                </Card>
-              </GridItem>
-              <GridItem md={4} sm={4}>
+              {/* <GridItem md={4} sm={4}>
                 <Card plain product>
                   <CardHeader noShadow image>
                     <a href="#pablo">
@@ -1091,7 +978,8 @@ export default function SectionProducts(props) {
                     </Tooltip>
                   </CardFooter>
                 </Card>
-              </GridItem>
+              </GridItem> */}
+
               <GridItem
                 md={3}
                 sm={3}

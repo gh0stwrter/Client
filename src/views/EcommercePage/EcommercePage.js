@@ -25,6 +25,7 @@ import ListItem from "@material-ui/core/ListItem";
 import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui icons
 import Mail from "@material-ui/icons/Mail";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ecommerceHeader from "assets/img/examples/ecommerce-header.jpg";
 import face1 from "assets/img/faces/card-profile6-square.jpg";
@@ -40,7 +41,9 @@ import styles from "assets/jss/material-kit-pro-react/views/ecommerceStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function EcommercePage() {
+export default function EcommercePage(props) {
+  const [progress, setProgress] = React.useState(0);
+
 const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
   onCompleted(){
     console.log(getCompositions)
@@ -49,7 +52,9 @@ const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-  });
+  },[]);
+  
+  
   const classes = useStyles();
   return (
     <div>
@@ -60,7 +65,7 @@ const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
         color="transparent"
         changeColorOnScroll={{
           height: 300,
-          color: "info"
+          color: "primary"
         }}
       />
       <Parallax
@@ -90,11 +95,16 @@ const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
           </GridContainer>
         </div>
       </Parallax>
-
+       
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <SectionLatestOffers />
-        <SectionProducts />
-      </div>
+     
+        <SectionLatestOffers  data={getCompositions}/> 
+        <SectionProducts data={getCompositions}/>
+             
+       </div>
+
+      
+
       <SectionBlog />
       <div
         className={classNames(

@@ -2,3 +2,6 @@
     position: relative;
     margin: 3%;
 }
+.slick-dots{
+    bottom: -20% !important;
+}

@@ -21,9 +21,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Favorite from "@material-ui/icons/Favorite";
 import Button from "components/CustomButtons/Button.js";
 import classNames from "classnames";
+import {MusicProvider} from "_utils/CompositionContext";
 
-
-const CardMusicPlayer = ({title, image, composer, musicUri, id, lastChild}) => {
+const CardMusicPlayer = ({data:{title, image, composer, file, id}, lastChild}) => {
   const useStyles = makeStyles(theme => ({
     styles,
     root: { 
@@ -48,6 +48,7 @@ const CardMusicPlayer = ({title, image, composer, musicUri, id, lastChild}) => {
     controls: {
      },
     background:{
+      borderRadius: "4%",
       backgroundImage:`url(https://global-compositions.s3.eu-west-3.amazonaws.com/${image})`,
       backgroundSize: 'cover',
       backgroundRepeat: "no-repeat",
@@ -82,14 +83,15 @@ const CardMusicPlayer = ({title, image, composer, musicUri, id, lastChild}) => {
   },[imageComposition,showButton])
   const play =  async() => {
         setPlayed(true)
+        localStorage.setItem('musicUrl', file);
         client.writeData({data:{
               play:{
                 __typename:"Play",
-                url: musicUri, 
+                url: file, 
                 show: true
               },
           }});
-     await lastChild(true)
+     //await lastChild(true)
 
   }
 const pause = () =>{
@@ -98,7 +100,7 @@ const pause = () =>{
 const Returning =() =>{
   return (
     <Card  onMouseOver={e => setShowbutton(true)} 
-    onMouseLeave={e => setShowbutton(false)}  product plain>
+    onMouseLeave={e => setShowbutton(false)}>
         {
           showButton ?
         buttonPlay 
@@ -168,9 +170,8 @@ const Returning =() =>{
     )
 
   return (
-    <GridContainer>
-      
-    <Card product plain style={{ width: "250px" }} 
+      <div>
+    <Card  product plain style={{ width: "270px" }} 
     onMouseOver={e => setShowbutton(true)} 
     onMouseLeave={e => setShowbutton(false)} 
     className={classes.root}>
@@ -192,7 +193,7 @@ const Returning =() =>{
     <Typography color="primary"  component="h6" variant="h6">
             {title}  
           </Typography>
-    </GridContainer>
+          </div>
   );
 }
 

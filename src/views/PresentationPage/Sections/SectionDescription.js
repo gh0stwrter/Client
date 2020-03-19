@@ -28,7 +28,7 @@ export default function SectionDescription({compositions: getCompositions, metho
             {getCompositions ?
               getCompositions.getCompositions.map((item) =>
               <GridItem key={item._id} md={3} sm={3}>
-              <CardMusicPlayer lastChild={methodPlayer} title={item.title} image={item.image} id={item.id} composer={item.composer} musicUri={item.file} />
+              <CardMusicPlayer lastChild={methodPlayer} data={item}  />
               </GridItem>
               )  : null
           }

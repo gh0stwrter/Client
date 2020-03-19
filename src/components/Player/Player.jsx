@@ -8,7 +8,9 @@ import {GET_URL} from "apollo/composition";
 import {DATA_PLAYER} from "apollo/uploads"
 import {useApolloClient, useMutation} from "@apollo/react-hooks";
 import Button from '@material-ui/core/Button';
-
+import ReactJkMusicPlayer from "react-jinke-music-player";
+import "react-jinke-music-player/assets/index.css";
+import {MusicConsumer} from "_utils/CompositionContext";
 const useStyles = makeStyles(theme => ({
     player: {
         position: "fixed",
@@ -24,11 +26,14 @@ export default function Player({method}) {
         console.log(data)
     }})
     
-    const [cookieSong, setCacheSong] = useState(null)
+    const [cookieSong, setCacheSong] = useState("")
 
     const client = useApolloClient()
+    console.log(client.readQuery({query : DATA_PLAYER}))
     useEffect(() => {
-      setCacheSong(play ? play.url : null)
+        
+      setCacheSong(localStorage.getItem("musicUrl"))
+      console.log(cookieSong)
     }, [cookieSong]);
     const {play} = client.readQuery({query: DATA_PLAYER})
     const song = Cookies.get("song")
@@ -46,12 +51,14 @@ export default function Player({method}) {
                 method(false);
                 setPlayed(false);
                 }}>Fermer</button>
+                
             <AudioPlayer
                 src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ play ? play.url : null}`} 
                 onPlay={e => console.log(e)}
                 onPlayError={err => console.log(err)}
                 preload="auto"
                 loop={true}
+                autoPlay={true}
                 onCanPlay={e => console.log(e)}
             />
         </div>) : (
