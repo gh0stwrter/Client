@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import 'assets/css/PresentationPage/presentationPage.css';
 import Cookies from "js-cookie";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import {GET_URL} from "apollo/composition";
@@ -10,7 +10,7 @@ import {useApolloClient, useMutation} from "@apollo/react-hooks";
 import Button from '@material-ui/core/Button';
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
-import {MusicConsumer} from "_utils/CompositionContext";
+import MusicContext from "_utils/CompositionContext";
 const useStyles = makeStyles(theme => ({
     player: {
         position: "fixed",
@@ -26,13 +26,13 @@ export default function Player(props) {
     const [getVideosUrl] = useMutation(GET_URL, {onCompleted(data){
         console.log(data)
     }})
-    
+    const value = useContext(MusicContext)
     const [cookieSong, setCacheSong] = useState("")
     console.log(props)
     const client = useApolloClient()
     console.log(client.readQuery({query : DATA_PLAYER}))
     useEffect(() => {
-        
+        console.log(value)
       setCacheSong(localStorage.getItem("musicUrl"))
       console.log(cookieSong)
     }, [cookieSong]);

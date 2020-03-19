@@ -1,6 +1,6 @@
 import React from "react";
 
-const MusicContext = React.createContext(true);
+const MusicContext = (value) => React.createContext(value);
 
 export const MusicProvider = MusicContext.Provider;
 export const MusicConsumer = MusicContext.Consumer;

@@ -21,7 +21,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Favorite from "@material-ui/icons/Favorite";
 import Button from "components/CustomButtons/Button.js";
 import classNames from "classnames";
-import {MusicProvider} from "_utils/CompositionContext";
+import MusicContext from "_utils/CompositionContext";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {Link} from "react-router-dom";
 
@@ -86,16 +86,19 @@ const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChi
     setImageComposition(image)
   },[imageComposition,showButton])
   const play =  async() => {
-        setPlayed(true)
-        localStorage.setItem('musicUrl', file);
-        client.writeData({data:{
-              play:{
-                __typename:"Play",
-                url: file, 
-                show: true
-              },
-          }});
-     //await lastChild(true)
+    //     setPlayed(true)
+    //     localStorage.setItem('musicUrl', file);
+    //     client.writeData({data:{
+    //           play:{
+    //             __typename:"Play",
+    //             url: file, 
+    //             show: true
+    //           },
+    //       }});
+    //  //await lastChild(true)
+    return MusicContext({value:file})
+
+    
 
   }
 const pause = () =>{
@@ -124,13 +127,13 @@ const pause = () =>{
 
   return (
       <div>
-    <Card  product plain style={{ width: "270px",textAlign: "center" }} 
+    <Card  product plain style={{ width: "270px" }} 
     onMouseOver={e => setShowbutton(true)} 
     onMouseLeave={e => setShowbutton(false)} 
     className={classes.root}>
       {
         show === "price" ?
-        <Button style={{width: "35%"}} round size="sm">{price} € <br/>
+        <Button style={{width: "35%" ,textAlign: "center"}} round size="sm">{price} € <br/>
         <AddShoppingCartIcon/></Button> : null
       }
       
@@ -151,10 +154,10 @@ const pause = () =>{
          
       <GridContainer>
         
-        <GridItem sm={12} md={12}>
-    <Typography color="info"  component="h6" variant="h6">
+        <GridItem style={{color:"white", textAlign: "left"}} sm={12} md={12}>
+    <Typography  color="secondary"  component="h6" variant="h6">
 
-        <Link>{title}</Link>
+        <Link style={{color:"white", textDecoration:"underline"}}>{title}</Link>
         </Typography>
 
         </GridItem>
