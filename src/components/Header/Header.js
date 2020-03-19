@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -17,12 +17,26 @@ import Menu from "@material-ui/icons/Menu";
 import Close from "@material-ui/icons/Close";
 // core components
 import styles from "assets/jss/material-kit-pro-react/components/headerStyle.js";
-
-
+import Player from "../Player/Player";
+import {useQuery, useApolloClient} from "@apollo/react-hooks";
+import {DATA_PLAYER} from "apollo/uploads"
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
+
+
+  const [showPlayer, setShowPlayer] = useState(false)
+  const [dataPlayer, setDataPlayer] = useState(null)
+  const client = useApolloClient();
+
+
+  const {play} = client.readQuery({query: DATA_PLAYER})
+
+  const playerShow = (bool) => setShowPlayer(bool)
+
+
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const classes = useStyles();
   React.useEffect(() => {
@@ -65,8 +79,11 @@ export default function Header(props) {
     [classes.absolute]: absolute,
     [classes.fixed]: fixed
   });
-  return (
+  return (<>
+
+   <Player method={ playerShow } showP={showPlayer || false}/>
     <AppBar className={appBarClasses}>
+
       <Toolbar className={classes.container}>
         <Button className={classes.title}>
           <Link to="/">{brand}</Link>
@@ -106,6 +123,7 @@ export default function Header(props) {
         </Drawer>
       </Hidden>
     </AppBar>
+    </>
   );
 }
 

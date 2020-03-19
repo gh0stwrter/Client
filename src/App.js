@@ -59,18 +59,18 @@ const ProtectedRoute = ({ ...rest }) => {
 }
 
 const App = (props) =>{
-  const [showPlayer, setShowPlayer] = useState(false)
-  const [dataPlayer, setDataPlayer] = useState(null)
-  const client = useApolloClient();
+//   const [showPlayer, setShowPlayer] = useState(false)
+//   const [dataPlayer, setDataPlayer] = useState(null)
+//   const client = useApolloClient();
 
 
-  const {play} = client.readQuery({query: DATA_PLAYER})
+//   const {play} = client.readQuery({query: DATA_PLAYER})
 
-const playerShow = (bool) => setShowPlayer(bool)
+// const playerShow = (bool) => setShowPlayer(bool)
 
   return(
   <Router history={hist}>
-   <Player method={ playerShow }/>
+   {/* <Player method={ playerShow }/> */}
     <Switch>
       <Route path="/about-us" component={AboutUsPage} />
       <Route path="/blog-post" component={BlogPostPage} />
@@ -92,7 +92,8 @@ const playerShow = (bool) => setShowPlayer(bool)
          }/>
       
       <Route path="/error-page" component={ErrorPage} />
-      <Route path="/" component={() => <PresentationPage method={playerShow}/>} />
+      <Route path="/" component={() => <PresentationPage/>} />
+      {/* <Route path="/" component={() => <PresentationPage method={playerShow}/>} /> */}
     </Switch>
 
   </Router>

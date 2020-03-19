@@ -21,13 +21,14 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Player({method}) {
+export default function Player(props) {
+    const method = props.method
     const [getVideosUrl] = useMutation(GET_URL, {onCompleted(data){
         console.log(data)
     }})
     
     const [cookieSong, setCacheSong] = useState("")
-
+    console.log(props)
     const client = useApolloClient()
     console.log(client.readQuery({query : DATA_PLAYER}))
     useEffect(() => {
@@ -35,11 +36,12 @@ export default function Player({method}) {
       setCacheSong(localStorage.getItem("musicUrl"))
       console.log(cookieSong)
     }, [cookieSong]);
-    const {play} = client.readQuery({query: DATA_PLAYER})
+    const data = client.readQuery({query: DATA_PLAYER})
+    const [play] = useState(data.play)
     const song = Cookies.get("song")
     const [played, setPlayed] = useState(play.show)
     const classes = useStyles();
-    
+
     const openPlayer = () => {
         setPlayed(true);
         method(true);
@@ -54,7 +56,7 @@ export default function Player({method}) {
                 
             <AudioPlayer
                 src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ play ? play.url : null}`} 
-                onPlay={e => console.log(e)}
+                onPlay={e => console.log(e.srcElement)}
                 onPlayError={err => console.log(err)}
                 preload="auto"
                 loop={true}
