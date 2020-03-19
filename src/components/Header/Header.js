@@ -80,8 +80,8 @@ export default function Header(props) {
     [classes.fixed]: fixed
   });
   return (<>
-
-   <Player method={ playerShow } showP={showPlayer || false}/>
+  
+   <Player method={ playerShow }/>
     <AppBar className={appBarClasses}>
 
       <Toolbar className={classes.container}>

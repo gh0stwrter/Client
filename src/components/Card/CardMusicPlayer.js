@@ -86,7 +86,7 @@ const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChi
     setImageComposition(image)
   },[imageComposition,showButton])
   const play =  async() => {
-    //     setPlayed(true)
+         setPlayed(true)
     //     localStorage.setItem('musicUrl', file);
     //     client.writeData({data:{
     //           play:{

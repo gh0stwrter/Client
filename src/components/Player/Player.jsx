@@ -21,24 +21,21 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Player(props) {
-    const method = props.method
+export default function Player({method}) {
     const [getVideosUrl] = useMutation(GET_URL, {onCompleted(data){
         console.log(data)
     }})
     const value = useContext(MusicContext)
     const [cookieSong, setCacheSong] = useState("")
-    console.log(props)
     const client = useApolloClient()
-    console.log(client.readQuery({query : DATA_PLAYER}))
     useEffect(() => {
         console.log(value)
       setCacheSong(localStorage.getItem("musicUrl"))
-      console.log(cookieSong)
+      console.log("cookieSong: ",cookieSong)
     }, [cookieSong]);
-    const data = client.readQuery({query: DATA_PLAYER})
-    const [play] = useState(data.play)
+    const {play} = client.readQuery({query: DATA_PLAYER})
     const song = Cookies.get("song")
+    console.log("song: ",localStorage.getItem("musicUrl"))
     const [played, setPlayed] = useState(play.show)
     const classes = useStyles();
 
