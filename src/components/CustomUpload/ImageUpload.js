@@ -7,7 +7,7 @@ import Button from "components/CustomButtons/Button.js";
 
 import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/placeholder.jpg";
-import CheckIcon from '@material-ui/icons/Check';
+
 export default function ImageUpload(props) {
   const {setImage} = props;
   console.log(props)

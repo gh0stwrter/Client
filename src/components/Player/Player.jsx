@@ -1,14 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 import 'assets/css/PresentationPage/presentationPage.css';
-import Cookies from "js-cookie";
 import React, { useEffect, useState, useContext } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-import {GET_URL} from "apollo/composition";
-import {DATA_PLAYER} from "apollo/uploads"
-import {useApolloClient, useMutation} from "@apollo/react-hooks";
+import {DATA_PLAYER} from "apollo/composition";
+import {useApolloClient} from "@apollo/react-hooks";
 import Button from '@material-ui/core/Button';
-import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import MusicContext from "_utils/CompositionContext";
 const useStyles = makeStyles(theme => ({
@@ -22,32 +19,29 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Player({method}) {
-    const [getVideosUrl] = useMutation(GET_URL, {onCompleted(data){
-        console.log(data)
-    }})
     const value = useContext(MusicContext)
-    const [cookieSong, setCacheSong] = useState("")
+    const [playData, setPlayData] = useState(null)
+    const [played, setPlayed] = useState(false)
+
     const client = useApolloClient()
+    const { play } = client.readQuery({query:DATA_PLAYER})
+
     useEffect(() => {
-        console.log(value)
-      setCacheSong(localStorage.getItem("musicUrl"))
-      console.log("cookieSong: ",cookieSong)
-    }, [cookieSong]);
-    const {play} = client.readQuery({query: DATA_PLAYER})
-    const song = Cookies.get("song")
-    console.log("song: ",localStorage.getItem("musicUrl"))
-    const [played, setPlayed] = useState(play.show)
+       if(play) setPlayData(play)
+    }, [play]);
+    
     const classes = useStyles();
 
     const openPlayer = () => {
         setPlayed(true);
-        method(true);
-;    }
+    }
+
     
-    return played ? (
+
+    return (played) ? (
         <div className={classes.player}>
+
             <button onClick={e => {
-                method(false);
                 setPlayed(false);
                 }}>Fermer</button>
                 

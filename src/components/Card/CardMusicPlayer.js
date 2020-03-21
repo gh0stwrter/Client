@@ -1,49 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from 'components/Card/Card';
-import CardFooter from 'components/Card/CardFooter';
-import {STREAM_MUSIC}from "apollo/composition";
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import {STREAM_MUSIC,DATA_PLAYER}from "apollo/composition";
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import PauseCircleOutlineIcon from '@material-ui/icons/PlayArrow';
 import PauseCircleFilledOutlined from '@material-ui/icons/PauseCircleOutline';
-import Cookies from "js-cookie";
-import {useQuery, useApolloClient} from "@apollo/react-hooks";
+import {useQuery, useMutation, useApolloClient} from "@apollo/react-hooks";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import CardBody from './CardBody';
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/productsStyle.js";
-import CardHeader from "components/Card/CardHeader"
-import Tooltip from "@material-ui/core/Tooltip";
-import Favorite from "@material-ui/icons/Favorite";
 import Button from "components/CustomButtons/Button.js";
-import classNames from "classnames";
 import MusicContext from "_utils/CompositionContext";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {Link} from "react-router-dom";
-
+import Player from "components/Player/Player";
+import { useHistory } from "react-router-dom";
 
 const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChild,show} ) => {
+  let history = useHistory()
   const useStyles = makeStyles(theme => ({
     styles,
     root: { 
       height: "200px",
         color: "white",
         display: 'flex',
-        "&:hover .background": {
+        "&:hover": {
           opacity: 0.54
         }
-
     },
-    details: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
+    
     content: {
-      flex: '1 0 auto',
       textAlign: "center",
       marginTop: "10%", 
      
@@ -66,6 +54,7 @@ const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChi
       top: "50%",
       display: "flex",
       justifContent: "center",
+      zIndex: 2,
       "&:hover": {
       transform: 'scale(1.1)',
     },
@@ -76,37 +65,55 @@ const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChi
     },
   }));
   
-  const [played, setPlayed] = useState(false);
   const [showButton, setShowbutton] = useState(false);
+  const [idPlayed, setIdPlayed] = useState(null)
   const [imageComposition, setImageComposition]= useState(null)
   const client = useApolloClient();
-
+  const [playMusic] = useMutation(STREAM_MUSIC,{
+    onCompleted(data){
+      console.log(data)
+    },
+  })
+  // const {refetch,data} = useQuery(DATA_PLAYER,{
+  //   onCompleted(){
+  //     console.log(data)
+  //   }
+  // })
   const classes = useStyles();
+  const {play} = client.readQuery({query: DATA_PLAYER})
   useEffect(()=>{
     setImageComposition(image)
-  },[imageComposition,showButton])
-  const play =  async() => {
-         setPlayed(true)
-    //     localStorage.setItem('musicUrl', file);
-    //     client.writeData({data:{
-    //           play:{
-    //             __typename:"Play",
-    //             url: file, 
-    //             show: true
-    //           },
-    //       }});
+  },[imageComposition,showButton, play])
+
+  const addToShoppingCart = () =>{}
+
+  const plays =  async() => {
+    playMusic({
+    variables:{
+           _id: id,
+           url: file,
+          show : true,
+          play: true,
+        }});
+        localStorage.setItem('musicUrl', file);       
     //  //await lastChild(true)
+    history.push("/")
+
     return MusicContext({value:file})
-
-    
-
   }
-const pause = () =>{
-  setPlayed(false)
+const pause = (e) =>{
+  e.preventDefault()
+  playMusic({
+    variables:{
+           _id: id,
+           url: file,
+          show : true,
+          play: false,
+        }});
 }
 
   const buttonPlay = 
-  played ? (
+ play && play.playActually === true  && play._id === id ? (
       <IconButton onClick={pause} aria-label="play/pause" >
         <PauseCircleFilledOutlined 
         color="primary" 
@@ -115,7 +122,7 @@ const pause = () =>{
       </IconButton> ) : (
       <IconButton onClick={ e => {
         e.preventDefault()
-        play()
+        plays()
       }} aria-label="play/pause" >
               <PlayArrowIcon 
               color="primary" 
@@ -127,7 +134,11 @@ const pause = () =>{
 
   return (
       <div>
-    <Card  product plain style={{ width: "270px" }} 
+        {
+          play && idPlayed === play._id ?
+          <Player/>:null
+        }
+    <Card  product  style={{ width: "230px" }} 
     onMouseOver={e => setShowbutton(true)} 
     onMouseLeave={e => setShowbutton(false)} 
     className={classes.root}>

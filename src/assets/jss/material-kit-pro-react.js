@@ -363,7 +363,7 @@ const mainRaised = {
     marginLeft: "10px",
     marginRight: "10px"
   },
-  margin: "-60px 30px 0px",
+  margin: "-20px 20px 0px",
   borderRadius: "6px",
   boxShadow:
     "0 16px 24px 2px rgba(" +

@@ -6,22 +6,18 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import styles from "assets/jss/material-kit-pro-react/customSelectStyle.js";
 import CreateIcon from '@material-ui/icons/Create';
 import PublicIcon from '@material-ui/icons/Public';
 import LockIcon from '@material-ui/icons/Lock';
-import {useQuery, useApolloClient} from "@apollo/react-hooks";
-import {GET_CACHE_CATEGORY} from "apollo/categories";
+import {useApolloClient} from "@apollo/react-hooks";
 
 const useStyles = makeStyles(styles);
 
 export default function Example({data, categoriesData,setSelect}){
   const droits = ["PUBLIC", "PRIVATE"]
   const compo_type = ["SONORE", "WRITTEN"]
-  const compo_categorie = ["TRAP","GRIMM","RAP","RNB"];
   const [simpleSelect, setSimpleSelect] = React.useState("");
   const [simpleCategories, setSimpleCategories] = React.useState([]);
   const client = useApolloClient(); 

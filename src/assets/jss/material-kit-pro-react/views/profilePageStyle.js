@@ -7,7 +7,7 @@ import {
   main,
   whiteColor,
   mainRaised,
-  grayColor
+  //grayColor
 } from "assets/jss/material-kit-pro-react.js";
 
 import imagesStyle from "assets/jss/material-kit-pro-react/imagesStyles.js";

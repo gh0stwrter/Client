@@ -7,15 +7,5 @@ export const UPLOAD_WRITTEN_COMP = gql`
             mimetype
             encoding
         }
-        }
-    
-`
-
-export const DATA_PLAYER = gql`
-    query {
-        play @client {
-            url
-            show
-        }
-    }
-`
+        }`
+        

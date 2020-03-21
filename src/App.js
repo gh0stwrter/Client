@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from "react";
-import ReactDOM from "react-dom";
+import React, {useState} from "react";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router";
-import { ApolloProvider } from '@apollo/react-hooks';
 import decode from 'jwt-decode';
 
 
@@ -27,9 +25,9 @@ import SignupPage from "views/SignupPage/SignupPage.js";
 import ErrorPage from "views/ErrorPage/ErrorPage.js";
 import Player from "components/Player/Player"
 import Cookies from "js-cookie";
-import {useQuery, useApolloClient} from "@apollo/react-hooks";
-import {DATA_PLAYER} from "apollo/uploads"
+import {useApolloClient} from "@apollo/react-hooks";
 import Stripe from "views/Stripe/Billing.js"
+
 var hist = createBrowserHistory();
 
 
@@ -58,19 +56,26 @@ const ProtectedRoute = ({ ...rest }) => {
     : <Redirect to={"/"} />;
 }
 
+const PlayerRoutes = ({...rest}) =>{
+  return (
+    <div>
+      <Route {...rest}/>
+      <Player/>
+      </div>
+  )
+}
 const App = (props) =>{
-//   const [showPlayer, setShowPlayer] = useState(false)
-//   const [dataPlayer, setDataPlayer] = useState(null)
-//   const client = useApolloClient();
-
-
-//   const {play} = client.readQuery({query: DATA_PLAYER})
-
-// const playerShow = (bool) => setShowPlayer(bool)
-
+  console.log(props)
+  const [showPlayer, setShowPlayer] = useState(false);
+  const clients = useApolloClient();
+  const sendPlayerShow = (bool) =>{
+    setShowPlayer(bool)
+  }
+  clients.writeData({
+    data:{showThePlayer: {__typename:"Method"}}
+  })
   return(
   <Router history={hist}>
-   {/* <Player method={ playerShow }/> */}
     <Switch>
       <Route path="/about-us" component={AboutUsPage} />
       <Route path="/blog-post" component={BlogPostPage} />
@@ -81,12 +86,11 @@ const App = (props) =>{
       <Route path="/landing-page" component={LandingPage} />
       <Route path="/login-page" component={LoginPage} />
       <Route path="/pricing" component={PricingPage} />
-      <Route path="/product-page" component={ProductPage} />
-      <Route path="/sections" component={SectionsPage} />
-      <Route path="/shopping-cart-page" component={ShoppingCartPage} />
-      <Route path="/signup-page" component={SignupPage} />
-      <Route path="/payment" component={Stripe} />
-      
+<Route path="/product-page" component={ProductPage} />
+<Route path="/sections" component={SectionsPage} />
+<Route path="/shopping-cart-page" component={ShoppingCartPage} />
+<Route path="/signup-page" component={SignupPage} />
+<Route path="/payment" component={Stripe} />
       <ProtectedRoute path="/profile" render={props =>
          <Route path="/profile/page" component={ProfilePage} /> 
          }/>
@@ -95,8 +99,8 @@ const App = (props) =>{
       <Route path="/" component={() => <PresentationPage/>} />
       {/* <Route path="/" component={() => <PresentationPage method={playerShow}/>} /> */}
     </Switch>
-
   </Router>
+
   )
 }
 

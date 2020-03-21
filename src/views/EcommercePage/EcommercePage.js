@@ -38,6 +38,7 @@ import face7 from "assets/img/faces/card-profile5-square.jpg";
 import face8 from "assets/img/faces/card-profile2-square.jpg";
 import {GET_ALL_COMPOSITIONS} from "apollo/composition"
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceStyle.js";
+import Player from "components/Player/Player"
 
 const useStyles = makeStyles(styles);
 
@@ -93,7 +94,7 @@ const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
           </GridContainer>
         </div>
       </Parallax>
-       
+       <Player/>
       <div className={classNames(classes.main, classes.mainRaised)}>
      
         <SectionLatestOffers  data={getCompositions}/> 

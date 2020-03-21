@@ -1,29 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slide from "@material-ui/core/Slide";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
-import Tooltip from "@material-ui/core/Tooltip";
-import Popover from "@material-ui/core/Popover";
-import Close from "@material-ui/icons/Close";
 import Button from "components/CustomButtons/Button.js";
 import modalStyle from "assets/jss/material-kit-pro-react/modalStyle.js";
 import popoverStyles from "assets/jss/material-kit-pro-react/popoverStyles.js";
 import tooltipsStyle from "assets/jss/material-kit-pro-react/tooltipsStyle.js";
-
 import StepperComposition from "components/Stepper/StepperComposition"
 import styles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.js";
-import AlbumIcon from '@material-ui/icons/Album';
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader"
-import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
-import BorderColorIcon from '@material-ui/icons/BorderColor';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import CreateIcon from '@material-ui/icons/Create';
 const style = theme => ({
     ...modalStyle(theme),
     ...popoverStyles,
@@ -38,7 +28,6 @@ const useStyles = makeStyles(style);
 export default function UploadModal() {
     const [openModal, setOpen] = React.useState(false);
     const classes = useStyles();
-    const [filesList, setFilesList] = useState([]);
     
     React.useEffect(() => {
         document.body.scrollTop = 0;

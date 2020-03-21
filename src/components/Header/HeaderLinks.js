@@ -41,7 +41,7 @@ import Cookies from "js-cookie";
 import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.js";
 import { Redirect } from "react-router-dom";
 import Person from '@material-ui/icons/Person';
-
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
@@ -107,6 +107,7 @@ export default function HeaderLinks(props) {
       <Person/>
     </Link>
   </ListItem>
+  
   <ListItem className={classes.listItem}>
     <Button
     color="transparent"
@@ -285,6 +286,15 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem>
+      <ListItem className={classes.listItem}>
+    <Link
+      to="/shopping-cart-page"
+      className={classes.navLink}
+      onClick={e => smoothScroll(e, "headers")}
+    >
+      <ShoppingCart/>
+    </Link>
+  </ListItem>
           {loginButton}
 
     </List>

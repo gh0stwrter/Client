@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useState} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -24,24 +24,26 @@ import presentationStyle from "assets/jss/material-kit-pro-react/views/presentat
 import SectionOverview from "./Sections/SectionOverview";
 import {GET_ALL_COMPOSITIONS} from "apollo/composition";
 // import Sticky from 'react-sticky-el';
-
+import Player from "components/Player/Player"
 const useStyles = makeStyles(presentationStyle);
-export default function PresentationPage({method}) {
+export default function PresentationPage(props) {
+  console.log(props)
+  const [showPlayer, setShowPlayer] = useState(false)
 const client = useApolloClient();
   const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
     onCompleted(){
       console.log(getCompositions)
-    }
-  })
+  }})
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-  });
+  },[showPlayer]);
   const classes = useStyles();
   return (
     <div className="scrollarea" style={{overflow: 'scroll'}}>
 
       <Header
+        show={showPlayer}
         brand="Ghost-Composer"
         links={<HeaderLinks dropdownHoverColor="info" />}
         fixed
@@ -72,9 +74,8 @@ const client = useApolloClient();
           </GridContainer>
         </div>
       </Parallax>
-
       <div className={classNames(classes.main, classes.mainRaised)}>
-      <SectionDescription methodPlayer={method} compositions={getCompositions} />
+      <SectionDescription methodPlayer={setShowPlayer} compositions={getCompositions} />
       <SectionComponents />
       <SectionPricing />
       <SectionOverview/>

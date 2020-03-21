@@ -9,33 +9,18 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 // @material-ui icons
-import Person from "@material-ui/icons/Person";
-import Edit from "@material-ui/icons/Edit";
-import Close from "@material-ui/icons/Close";
-// core components
-import Table from "components/Table/Table.js";
-import Favorite from "@material-ui/icons/Favorite";
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+
 import Cached from "@material-ui/icons/Cached";
 import Subject from "@material-ui/icons/Subject";
 import Check from "@material-ui/icons/Check";
 // core components
-import Accordion from "components/Accordion/Accordion.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
 import Button from "components/CustomButtons/Button.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
 import CardMusicPlayer from "components/Card/CardMusicPlayer"
-import suit1 from "assets/img/examples/suit-1.jpg";
-import suit2 from "assets/img/examples/suit-2.jpg";
-import suit3 from "assets/img/examples/suit-3.jpg";
-import suit4 from "assets/img/examples/suit-4.jpg";
-import suit5 from "assets/img/examples/suit-5.jpg";
-import suit6 from "assets/img/examples/suit-6.jpg";
 import color1 from "assets/img/examples/color1.jpg";
 import color3 from "assets/img/examples/color3.jpg";
 import color2 from "assets/img/examples/color2.jpg";
@@ -111,122 +96,7 @@ export default function SectionProducts({data}) {
                 </h4>
                 
               </CardBody>
-              <div
-        className={
-          classes.checkboxAndRadio + " " + classes.checkboxAndRadioHorizontal
-        }
-      >
-        <FormControlLabel
-          control={
-            <Radio
-              checked={selectedEnabled === "a"}
-              onChange={() => setSelectedEnabled("a")}
-              value="a"
-              name="radio button enabled"
-              aria-label="A"
-              icon={<FiberManualRecord className={classes.radioUnchecked} />}
-              checkedIcon={
-                <FiberManualRecord className={classes.radioChecked} />
-              }
-              classes={{
-                checked: classes.radio,
-                root: classes.radioRoot
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="First Radio"
-        />
-      </div>
-      <div
-        className={
-          classes.checkboxAndRadio + " " + classes.checkboxAndRadioHorizontal
-        }
-      >
-        <FormControlLabel
-          control={
-            <Radio
-              checked={selectedEnabled === "a"}
-              onChange={() => setSelectedEnabled("a")}
-              value="a"
-              name="radio button enabled"
-              aria-label="A"
-              icon={<FiberManualRecord className={classes.radioUnchecked} />}
-              checkedIcon={
-                <FiberManualRecord className={classes.radioChecked} />
-              }
-              classes={{
-                checked: classes.radio,
-                root: classes.radioRoot
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="First Radio"
-        />
-      </div>
-      <div
-        className={
-          classes.checkboxAndRadio + " " + classes.checkboxAndRadioHorizontal
-        }
-      >
-        <FormControlLabel
-          control={
-            <Radio
-              checked={selectedEnabled === "a"}
-              onChange={() => setSelectedEnabled("a")}
-              value="a"
-              name="radio button enabled"
-              aria-label="A"
-              icon={<FiberManualRecord className={classes.radioUnchecked} />}
-              checkedIcon={
-                <FiberManualRecord className={classes.radioChecked} />
-              }
-              classes={{
-                checked: classes.radio,
-                root: classes.radioRoot
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="First Radio"
-        />
-      </div>
-      <div
-        className={
-          classes.checkboxAndRadio + " " + classes.checkboxAndRadioHorizontal
-        }
-      >
-        <FormControlLabel
-          control={
-            <Radio
-              checked={selectedEnabled === "a"}
-              onChange={() => setSelectedEnabled("a")}
-              value="a"
-              name="radio button enabled"
-              aria-label="A"
-              icon={<FiberManualRecord className={classes.radioUnchecked} />}
-              checkedIcon={
-                <FiberManualRecord className={classes.radioChecked} />
-              }
-              classes={{
-                checked: classes.radio,
-                root: classes.radioRoot
-              }}
-            />
-          }
-          classes={{
-            label: classes.label
-          }}
-          label="First Radio"
-        />
-      </div>
+              
       <div
         className={
           classes.checkboxAndRadio + " " + classes.checkboxAndRadioHorizontal

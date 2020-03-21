@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -9,35 +9,25 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import CustomInput from "components/CustomInput/CustomInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
 import TitleIcon from '@material-ui/icons/Title';
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import CustomSelect from "components/CustomSelect/CustomSelect";
-import Box from '@material-ui/core/Box';
 import ImageUpload from 'components/CustomUpload/ImageUpload.js';
-import CustomFileInput from "components/CustomFileInput/CustomFileInput.js";
-import AttachFile from "@material-ui/icons/AttachFile";
 import { useDropzone } from 'react-dropzone'
 import { UPLOAD_WRITTEN_COMP } from "apollo/uploads";
 import {useMutation, useQuery, useApolloClient} from "@apollo/react-hooks";
-import CurrencyInput from 'react-currency-input';
 import Card from "components/Card/Card";
-import InputNumber from 'rc-input-number';
 import 'rc-input-number/assets/index.css';
 import CardBody from "components/Card/CardBody";
 import CreateIcon from '@material-ui/icons/Create';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import path from "path";
-import TextField from '@material-ui/core/TextField';
+
 import decode from "jwt-decode";
 import Cookies from "js-cookie";
 import {GET_ALL_CATEGORIES} from "apollo/categories";
-import { GET_ALL_COMPOSITIONS } from 'apollo/composition';
 import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
-import NumericInput from 'react-numeric-input';
-import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
 import CurrencyTextField from '@unicef/material-ui-currency-textfield'
 
 const useStyles = makeStyles(theme => ({
@@ -60,15 +50,13 @@ function getSteps() {
 }
 const FirstStep = ({setInput}) =>{
   const client = useApolloClient();
-  const [categories, setCategories] = useState(null)
   const {data: getCategories} = useQuery(GET_ALL_CATEGORIES, {
     onCompleted(){
 
     }
   })
   useEffect(()=>{
-    if(getCategories) console.log(getCategories.getCategories)
-  },[categories])
+  })
     return(
         
         <GridContainer>
@@ -248,10 +236,8 @@ const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone
 
 const ThirdStep = ({dataInput}) =>{
   const [currentImage, setCurrentImage] = useState(null);
-  console.log(dataInput)
   let reader = new FileReader();
     let file = dataInput.image;
-    console.log(file)
     // reader.onloadend = () => {
     //   setCurrentImage(reader.result)
     // };
@@ -300,8 +286,6 @@ export default function VerticalLinearStepper(props) {
       })
   
     useEffect(()=>{
-      console.log(compositionInput)
-      console.log(activeStep)
       //console.log(Object.keys(compositionInput).length)
     },[compositionInput])
   const handleNext = () => {
@@ -354,8 +338,8 @@ export default function VerticalLinearStepper(props) {
                     color="primary"
                     onClick={(e) => {
                       e.preventDefault()
-                      console.log(activeStep)
-                     return activeStep === 2 ? addWrittenComp({variables:{
+
+                      return activeStep === 2 ? addWrittenComp({variables:{
                       file: [compositionInput.compo_file, compositionInput.image],
                       writtenInput: {
                           userId: decoded ? decoded.user._id : null,
