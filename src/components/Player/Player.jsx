@@ -4,10 +4,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import {DATA_PLAYER} from "apollo/composition";
-import {useApolloClient} from "@apollo/react-hooks";
+import {useApolloClient, useQuery} from "@apollo/react-hooks";
 import Button from '@material-ui/core/Button';
 import "react-jinke-music-player/assets/index.css";
 import MusicContext from "_utils/CompositionContext";
+import {useGlobalState} from "_utils/CompositionContext";
+
 const useStyles = makeStyles(theme => ({
     player: {
         position: "fixed",
@@ -19,7 +21,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Player({method}) {
-    const value = useContext(MusicContext)
+    const [state, dispatch] = useGlobalState();
+    console.log(state)
     const [playData, setPlayData] = useState(null)
     const [played, setPlayed] = useState(false)
 
@@ -27,8 +30,9 @@ export default function Player({method}) {
     const { play } = client.readQuery({query:DATA_PLAYER})
 
     useEffect(() => {
+        if(state) setPlayed(state.bool)
        if(play) setPlayData(play)
-    }, [play]);
+    }, [play, state]);
     
     const classes = useStyles();
 
@@ -38,7 +42,7 @@ export default function Player({method}) {
 
     
 
-    return (played) ? (
+    return played  === true ? (
         <div className={classes.player}>
 
             <button onClick={e => {
@@ -54,13 +58,10 @@ export default function Player({method}) {
                 autoPlay={true}
                 onCanPlay={e => console.log(e)}
             />
-        </div>) : (
-        <div className={classes.player}>
-        <Button onClick={()=> openPlayer()}>Open</Button> </div>); 
+        </div>) : <div className={classes.player}>
+        </div>
+        // <div className={classes.player}>
+        // <Button onClick={()=> openPlayer()}>Open</Button> </div>); 
     
-    // : (
-    //     <div className={classes.player}>
-    //         <button onClick={()=> setIsPlayed(true)}>Open</button>
-    //     </div>
-    // )
+    
 }

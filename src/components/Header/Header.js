@@ -19,7 +19,7 @@ import Close from "@material-ui/icons/Close";
 import styles from "assets/jss/material-kit-pro-react/components/headerStyle.js";
 import Player from "../Player/Player";
 import {useApolloClient} from "@apollo/react-hooks";
-
+import {DATA_PLAYER} from "apollo/composition"
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
@@ -31,9 +31,9 @@ const [mobileOpen, setMobileOpen] = React.useState(false);
 const classes = useStyles();
 const client = useApolloClient();
 
-//const {play} = client.readQuery({query: DATA_PLAYER})
+const {play} = client.readQuery({query: DATA_PLAYER})
   React.useEffect(() => {
-   // console.log(play)
+   console.log(play)
   //if(play) setShowPlayer(play.show)
   console.log(showPlayer)
     if (props.changeColorOnScroll) {
@@ -76,11 +76,9 @@ const client = useApolloClient();
     [classes.fixed]: fixed
   });
   return (<>
-  {/* {
-    showPlayer ?
-   <Player play={ play }/>
-    :null
-  } */}
+
+  {/* <Player play={ play }/> */}
+
     <AppBar className={appBarClasses}>
 
       <Toolbar className={classes.container}>

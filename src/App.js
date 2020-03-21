@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router";
 import decode from 'jwt-decode';
@@ -27,8 +27,10 @@ import Player from "components/Player/Player"
 import Cookies from "js-cookie";
 import {useApolloClient} from "@apollo/react-hooks";
 import Stripe from "views/Stripe/Billing.js"
-
+import {useGlobalState} from "_utils/CompositionContext";
+import GlobalStateProvider from "_utils/CompositionContext";
 var hist = createBrowserHistory();
+
 
 
 
@@ -65,17 +67,23 @@ const PlayerRoutes = ({...rest}) =>{
   )
 }
 const App = (props) =>{
-  console.log(props)
+  const [state, dispatch] = useGlobalState();
   const [showPlayer, setShowPlayer] = useState(false);
+  const setBool = React.useCallback(bool => dispatch({bool}), []);
+
   const clients = useApolloClient();
-  const sendPlayerShow = (bool) =>{
-    setShowPlayer(bool)
-  }
+  useEffect(()=>{
+    console.log(state)
+
+  },[state])
+
   clients.writeData({
     data:{showThePlayer: {__typename:"Method"}}
   })
   return(
-  <Router history={hist}>
+<GlobalStateProvider>
+<Router history={hist}>
+<Player/>
     <Switch>
       <Route path="/about-us" component={AboutUsPage} />
       <Route path="/blog-post" component={BlogPostPage} />
@@ -100,7 +108,7 @@ const App = (props) =>{
       {/* <Route path="/" component={() => <PresentationPage method={playerShow}/>} /> */}
     </Switch>
   </Router>
-
+  </GlobalStateProvider>
   )
 }
 

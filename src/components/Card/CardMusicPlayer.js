@@ -17,7 +17,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {Link} from "react-router-dom";
 import Player from "components/Player/Player";
 import { useHistory } from "react-router-dom";
-
+import {useGlobalState} from "_utils/CompositionContext";
 const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChild,show} ) => {
   let history = useHistory()
   const useStyles = makeStyles(theme => ({
@@ -64,7 +64,7 @@ const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChi
       width: 68,
     },
   }));
-  
+  const [state, dispatch] = useGlobalState();
   const [showButton, setShowbutton] = useState(false);
   const [idPlayed, setIdPlayed] = useState(null)
   const [imageComposition, setImageComposition]= useState(null)
@@ -82,12 +82,14 @@ const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChi
   const classes = useStyles();
   const {play} = client.readQuery({query: DATA_PLAYER})
   useEffect(()=>{
+    console.log(state)
     setImageComposition(image)
-  },[imageComposition,showButton, play])
+  },[imageComposition,showButton, play, history,state])
 
   const addToShoppingCart = () =>{}
 
   const plays =  async() => {
+    dispatch({bool: true})
     playMusic({
     variables:{
            _id: id,
@@ -97,9 +99,9 @@ const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChi
         }});
         localStorage.setItem('musicUrl', file);       
     //  //await lastChild(true)
-    history.push("/")
+  
+  if(history.location.pathname) history.push("/")
 
-    return MusicContext({value:file})
   }
 const pause = (e) =>{
   e.preventDefault()
