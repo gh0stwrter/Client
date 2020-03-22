@@ -77,7 +77,6 @@ const {play} = client.readQuery({query: DATA_PLAYER})
   });
   return (<>
 
-  {/* <Player play={ play }/> */}
 
     <AppBar className={appBarClasses}>
 

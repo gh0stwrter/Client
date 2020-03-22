@@ -1,8 +1,15 @@
 import React from "react";
 
 const defaultGlobalState = {
-    items: 0,
-    bool: false
+    items: [],
+    bool: false,
+    play: false,
+    musicPlayed: {
+    _id: '',
+    music: '',
+    title: '',
+    image: ''
+    }
   };
   const GlobalStateContext = React.createContext(defaultGlobalState);
   const DispatchStateContext = React.createContext(undefined);

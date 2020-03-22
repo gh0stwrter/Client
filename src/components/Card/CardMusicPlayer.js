@@ -69,53 +69,56 @@ const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChi
   const [idPlayed, setIdPlayed] = useState(null)
   const [imageComposition, setImageComposition]= useState(null)
   const client = useApolloClient();
-  const [playMusic] = useMutation(STREAM_MUSIC,{
-    onCompleted(data){
-      console.log(data)
-    },
-  })
-  // const {refetch,data} = useQuery(DATA_PLAYER,{
-  //   onCompleted(){
-  //     console.log(data)
-  //   }
-  // })
+  
   const classes = useStyles();
-  const {play} = client.readQuery({query: DATA_PLAYER})
   useEffect(()=>{
-    console.log(state)
+    localStorage.setItem("items", state.items)
     setImageComposition(image)
-  },[imageComposition,showButton, play, history,state])
+  },[imageComposition,showButton, history,state])
 
-  const addToShoppingCart = () =>{}
+  const addToShoppingCart = () =>{
+    const itemsCardAdd = {
+      title,
+      image,
+      price,
+      id,
+
+    }
+
+   if( state.items.length > 0) {
+    const  matchIdCart = state.items.map(x => x.id).indexOf(id)
+    if(matchIdCart === -1){
+      dispatch({items: [...state.items, itemsCardAdd]})
+
+    }else{
+      return null;
+    }
+  }else{
+    dispatch({items: [...state.items, itemsCardAdd]})
+    localStorage.setItem("items", state.items)
+
+  }
+  }
 
   const plays =  async() => {
-    dispatch({bool: true})
-    playMusic({
-    variables:{
-           _id: id,
-           url: file,
-          show : true,
-          play: true,
-        }});
-        localStorage.setItem('musicUrl', file);       
+    dispatch({bool: true, play: true,musicPlayed:{
+      _id: id,
+      music: file,
+      title: title,
+      image: image
+    }})
+    
     //  //await lastChild(true)
   
-  if(history.location.pathname) history.push("/")
 
   }
 const pause = (e) =>{
   e.preventDefault()
-  playMusic({
-    variables:{
-           _id: id,
-           url: file,
-          show : true,
-          play: false,
-        }});
+  dispatch({play:false})
 }
 
   const buttonPlay = 
- play && play.playActually === true  && play._id === id ? (
+ state && state.musicPlayed._id === id && state.play === true ? (
       <IconButton onClick={pause} aria-label="play/pause" >
         <PauseCircleFilledOutlined 
         color="primary" 
@@ -136,17 +139,15 @@ const pause = (e) =>{
 
   return (
       <div>
-        {
-          play && idPlayed === play._id ?
-          <Player/>:null
-        }
     <Card  product  style={{ width: "230px" }} 
     onMouseOver={e => setShowbutton(true)} 
     onMouseLeave={e => setShowbutton(false)} 
     className={classes.root}>
       {
         show === "price" ?
-        <Button style={{width: "35%" ,textAlign: "center"}} round size="sm">{price} € <br/>
+        <Button onClick={(e) => {
+          e.preventDefault()
+          addToShoppingCart()}} style={{width: "35%" ,textAlign: "center"}} round size="sm">{price} € <br/>
         <AddShoppingCartIcon/></Button> : null
       }
       

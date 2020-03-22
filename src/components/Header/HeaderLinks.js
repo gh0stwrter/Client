@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
@@ -46,14 +46,14 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 import GlobalModal from "components/LoginModal/GlobalModal.js"
-
+import {useGlobalState} from "_utils/CompositionContext"
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const [redirect, setRedirect] = useState(null);
-
+  const [state, dispatch] = useGlobalState();
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t + b;
@@ -75,6 +75,7 @@ export default function HeaderLinks(props) {
       }
     }
   };
+  
   const scrollGo = (element, to, duration) => {
     var start = element.scrollTop,
       change = to - start,
@@ -292,7 +293,7 @@ export default function HeaderLinks(props) {
       className={classes.navLink}
       onClick={e => smoothScroll(e, "headers")}
     >
-      <ShoppingCart/>
+      <ShoppingCart/> {state.items.length}
     </Link>
   </ListItem>
           {loginButton}

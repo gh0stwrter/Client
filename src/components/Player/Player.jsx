@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button';
 import "react-jinke-music-player/assets/index.css";
 import MusicContext from "_utils/CompositionContext";
 import {useGlobalState} from "_utils/CompositionContext";
-
+import GridItem from "components/Grid/GridItem";
+import GridContainer from "components/Grid/GridContainer";
 const useStyles = makeStyles(theme => ({
     player: {
         position: "fixed",
@@ -22,17 +23,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function Player({method}) {
     const [state, dispatch] = useGlobalState();
-    console.log(state)
-    const [playData, setPlayData] = useState(null)
+    const [playData, setPlayData] = useState({})
     const [played, setPlayed] = useState(false)
 
-    const client = useApolloClient()
-    const { play } = client.readQuery({query:DATA_PLAYER})
+    const {musicPlayed} = state;
 
     useEffect(() => {
-        if(state) setPlayed(state.bool)
-       if(play) setPlayData(play)
-    }, [play, state]);
+        if(state.bool) setPlayed(state.bool)
+        console.log(state)
+       if(musicPlayed._id) setPlayData(musicPlayed)
+       console.log(playData)
+    }, [ state]);
     
     const classes = useStyles();
 
@@ -40,9 +41,8 @@ export default function Player({method}) {
         setPlayed(true);
     }
 
-    
 
-    return played  === true ? (
+    return played  === true  &&  musicPlayed._id ? (
         <div className={classes.player}>
 
             <button onClick={e => {
@@ -50,12 +50,35 @@ export default function Player({method}) {
                 }}>Fermer</button>
                 
             <AudioPlayer
-                src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ play ? play.url : null}`} 
-                onPlay={e => console.log(e.srcElement)}
+                src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ musicPlayed ? musicPlayed.music : null}`} 
+                onPlay={e => {
+                    dispatch({play:true})
+                }}
+
+                
                 onPlayError={err => console.log(err)}
                 preload="auto"
                 loop={true}
-                autoPlay={true}
+                onListen={(e) =>{
+                    console.log(e)
+                }}
+                header={
+                <GridContainer style={{textAlign:"center"}}>
+                    <GridItem sm={3}>
+                    <img style={{
+                        borderRadius: "50%"
+                    }} width="45px" height="45px" src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ musicPlayed ? musicPlayed.image : null}`}/>
+                    </GridItem>
+                    <GridItem sm={6}>
+                    <h5>{musicPlayed ? musicPlayed.title : null}</h5>
+                    </GridItem>
+                    
+                    </GridContainer>}
+                onPause={(e)=> {
+                    console.log(e)
+                     dispatch({play: false})
+                }}
+                autoPlay={state ? state.play : false}
                 onCanPlay={e => console.log(e)}
             />
         </div>) : <div className={classes.player}>

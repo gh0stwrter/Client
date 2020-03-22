@@ -58,14 +58,7 @@ const ProtectedRoute = ({ ...rest }) => {
     : <Redirect to={"/"} />;
 }
 
-const PlayerRoutes = ({...rest}) =>{
-  return (
-    <div>
-      <Route {...rest}/>
-      <Player/>
-      </div>
-  )
-}
+
 const App = (props) =>{
   const [state, dispatch] = useGlobalState();
   const [showPlayer, setShowPlayer] = useState(false);

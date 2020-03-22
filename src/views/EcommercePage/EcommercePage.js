@@ -94,7 +94,6 @@ const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
           </GridContainer>
         </div>
       </Parallax>
-       <Player/>
       <div className={classNames(classes.main, classes.mainRaised)}>
      
         <SectionLatestOffers  data={getCompositions}/> 
