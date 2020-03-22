@@ -54,13 +54,13 @@ const client = useApolloClient();
         }}
       />
       <Parallax
-        image={require("assets/img/bg4.jpg")}
+        image={require("assets/img/soundWave.jpg")}
         className={classes.parallax}
       >
       
         <div className={classes.container}>
           <GridContainer>
-            <GridItem>
+            <GridItem style={{textShadow: "2px 0px 3px black"}}>
               <div className={classes.brand}>
                 <h1>
                 Ghost-Composer 
