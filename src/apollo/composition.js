@@ -3,6 +3,7 @@ import {gql} from "apollo-boost";
 export const GET_ALL_COMPOSITIONS = gql`
 query {
   getCompositions{
+    username,
   _id,
   title,
   compo_type,

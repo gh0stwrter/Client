@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 import { useGlobalState } from "_utils/CompositionContext";
 
 const CardMusicPlayer = ({
-    data: { title, image, file, price, id },
+    data: { title, image, file, price, _id },
     show
 }) => {
     let history = useHistory();
@@ -75,22 +75,21 @@ const CardMusicPlayer = ({
             title,
             image,
             price,
-            id
+            _id
         };
         if (state.items.length > 0) {
-            const matchIdCart = state.items.map(x => x.id).indexOf(id);
+            const matchIdCart = state.items.map(x => x._id).indexOf(_id);
             if (matchIdCart === -1) {
-              const items =  { items: [...state.items, itemsCardAdd] }
-              localStorage.setItem("items",JSON.stringify(items))
+             
               dispatch({ items: [...state.items, itemsCardAdd] });
+              console.log(state.items)
 
                 
             } else {
                 return null;
             }
         } else {
-          const items =  { items: [...state.items, itemsCardAdd] }
-          localStorage.setItem( "items",JSON.stringify(items))
+          
             dispatch({ items: [...state.items, itemsCardAdd] });
             
         }
@@ -101,7 +100,7 @@ const CardMusicPlayer = ({
             bool: true,
             play: true,
             musicPlayed: {
-                _id: id,
+                _id: _id,
                 music: file,
                 title: title,
                 image: image
@@ -109,13 +108,12 @@ const CardMusicPlayer = ({
         });
     };
     const pause = e => {
-        // e.preventDefault();
-        console.log('pause')
+        e.preventDefault();
         dispatch({ play: false });
     };
 
     const buttonPlay =
-        state && state.musicPlayed._id === id && state.play === true ? (
+        state && state.musicPlayed._id === _id && state.play === true ? (
             <IconButton onClick={pause} aria-label='play/pause'>
                 <PauseCircleFilledOutlined
                     color='primary'
@@ -147,7 +145,6 @@ const CardMusicPlayer = ({
             className={classes.root}
         >
             {show === "price" ? (
-
                 <Button
                     onClick={e => {
                         e.preventDefault();
@@ -160,7 +157,6 @@ const CardMusicPlayer = ({
                     {price} € <br />
                     <AddShoppingCartIcon />
                 </Button>
-
             ) : null}
 
             <div className={classes.background}>
