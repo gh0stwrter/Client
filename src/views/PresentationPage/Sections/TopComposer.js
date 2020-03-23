@@ -12,14 +12,21 @@ import descriptionStyle from "assets/jss/material-kit-pro-react/views/presentati
 
 const useStyles = makeStyles(descriptionStyle);
 
-export default function SectionDescription({compositions: getCompositions, methodPlayer}) {
+export default function TopTenWeek({compositions: getCompositions, methodPlayer}) {
   const classes = useStyles();
   return (
     <div className={classes.section}>
       <div className={classes.container}>
        
         <div className={classes.features}>
-          <h2 style={{color:"white"}}>Top 10 of the week</h2>
+          <h2 style={{color:"white", textAlign:"left"}}>Top 10 de la semaine</h2>
+          <hr
+          style={{
+            // color: "white",
+            backgroundColor: "rgba(255,255,255, 0.4)",
+            height: "0.1px"
+          }}
+          />
           <GridContainer container sm={12}>
             {getCompositions ?
               getCompositions.getCompositions.map((item) =>

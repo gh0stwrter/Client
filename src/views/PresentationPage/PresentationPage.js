@@ -16,20 +16,17 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 // sections for this page
-import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded';
-import SectionDescription from "views/PresentationPage/Sections/SectionDescription.js";
-import SectionComponents from "views/PresentationPage/Sections/SectionComponents.js";
-import SectionPricing from "views/PresentationPage/Sections/SectionPricing.js";
+import TopTenWeek from "./Sections/TopTenWeek";
+import Latest from "./Sections/Latest";
+// import SectionComponents from "views/PresentationPage/Sections/SectionComponents.js";
+// import SectionPricing from "views/PresentationPage/Sections/SectionPricing.js";
 import presentationStyle from "assets/jss/material-kit-pro-react/views/presentationStyle.js";
-import SectionOverview from "./Sections/SectionOverview";
+// import SectionOverview from "./Sections/SectionOverview";
 import {GET_ALL_COMPOSITIONS} from "apollo/composition";
-// import Sticky from 'react-sticky-el';
-import Player from "components/Player/Player"
 const useStyles = makeStyles(presentationStyle);
 export default function PresentationPage(props) {
   console.log(props)
   const [showPlayer, setShowPlayer] = useState(false)
-const client = useApolloClient();
   const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
     onCompleted(){
       console.log(getCompositions)
@@ -75,10 +72,11 @@ const client = useApolloClient();
         </div>
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
-      <SectionDescription methodPlayer={setShowPlayer} compositions={getCompositions} />
-      <SectionComponents />
+      <TopTenWeek methodPlayer={setShowPlayer} compositions={getCompositions} />
+      <Latest methodPlayer={setShowPlayer} compositions={getCompositions}/>
+      {/* <SectionComponents />
       <SectionPricing />
-      <SectionOverview/>
+      <SectionOverview/> */}
       </div>
      
       <Footer

@@ -45,7 +45,6 @@ export default function Player({method}) {
             playerRef.audio.pause()
         else if (playerRef.audio)
             playerRef.audio.play()
-
     }, [state])
 
     return played  === true  &&  musicPlayed._id ? (
@@ -85,11 +84,9 @@ export default function Player({method}) {
                     
                     </GridContainer>}
                 onPause={(e)=> {
-                    // console.log(e)
                      dispatch({play: false})
                 }}
                 autoPlay={state ? state.play : false}
-                // onCanPlay={e => console.log(e)}
                 ref={c => {
                     setPlayerRef(c);
                 }}

@@ -104,7 +104,8 @@ const CardMusicPlayer = ({
         });
     };
     const pause = e => {
-        e.preventDefault();
+        // e.preventDefault();
+        console.log('pause')
         dispatch({ play: false });
     };
 
