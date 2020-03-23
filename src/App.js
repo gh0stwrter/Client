@@ -65,10 +65,6 @@ const App = (props) =>{
   const setBool = React.useCallback(bool => dispatch({bool}), []);
 
   const clients = useApolloClient();
-  useEffect(()=>{
-    console.log(state)
-
-  },[state])
 
   clients.writeData({
     data:{showThePlayer: {__typename:"Method"}}

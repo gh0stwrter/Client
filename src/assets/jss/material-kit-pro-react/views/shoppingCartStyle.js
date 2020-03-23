@@ -82,7 +82,8 @@ const styles = {
   tdName: {
     minWidth: "200px",
     fontWeight: "400",
-    fontSize: "1.5em"
+    fontSize: "1.5em",
+    textAlign: "right",
   },
   tdNameAnchor: {
     color: grayColor[1]
@@ -112,7 +113,8 @@ const styles = {
   },
   actionButton: {
     margin: "0px",
-    padding: "5px"
+    padding: "5px",
+    bottom: "0px"
   },
   textCenter: {
     textAlign: "center"

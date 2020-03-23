@@ -66,7 +66,7 @@ const CardMusicPlayer = ({
 
     const classes = useStyles();
     useEffect(() => {
-        localStorage.setItem("items", state.items);
+        localStorage.setItem("items", JSON.stringify(state.items));
         setImageComposition(image);
     }, [imageComposition, showButton, history, state]);
 
@@ -77,17 +77,22 @@ const CardMusicPlayer = ({
             price,
             id
         };
-
         if (state.items.length > 0) {
             const matchIdCart = state.items.map(x => x.id).indexOf(id);
             if (matchIdCart === -1) {
-                dispatch({ items: [...state.items, itemsCardAdd] });
+              const items =  { items: [...state.items, itemsCardAdd] }
+              localStorage.setItem("items",JSON.stringify(items))
+              dispatch({ items: [...state.items, itemsCardAdd] });
+
+                
             } else {
                 return null;
             }
         } else {
+          const items =  { items: [...state.items, itemsCardAdd] }
+          localStorage.setItem( "items",JSON.stringify(items))
             dispatch({ items: [...state.items, itemsCardAdd] });
-            localStorage.setItem("items", state.items);
+            
         }
     };
 
@@ -142,18 +147,20 @@ const CardMusicPlayer = ({
             className={classes.root}
         >
             {show === "price" ? (
+
                 <Button
                     onClick={e => {
                         e.preventDefault();
                         addToShoppingCart();
                     }}
-                    style={{ width: "35%", textAlign: "center" }}
+                    style={{  background: "black", width: "35%", textAlign: "center" }}
                     round
                     size='sm'
                 >
                     {price} € <br />
                     <AddShoppingCartIcon />
                 </Button>
+
             ) : null}
 
             <div className={classes.background}>
