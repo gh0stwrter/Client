@@ -40,12 +40,12 @@ export default function ShoppingCartPage(props) {
   useEffect(()=>{
     
   },[state])
-  // const removeItem =  (index) => {
-  //   let tmpItems = state.items;
-  //   tmpItems.splice(index, 1);
-  //   localStorage.setItem("items",JSON.stringify(tmpItems))
-  //    dispatch({item: tmpItems})
-  // }
+  const removeItem =  (index) => {
+    let tmpItems = state.items;
+    tmpItems.splice(index, 1);
+    localStorage.setItem("items",JSON.stringify(tmpItems))
+     dispatch({item: tmpItems})
+  }
 
   const listArticle = () => {
     let list = [];
