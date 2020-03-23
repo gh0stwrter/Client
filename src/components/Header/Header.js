@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -25,26 +25,9 @@ const useStyles = makeStyles(styles);
 export default function Header(props) {
 
 
-const [showPlayer, setShowPlayer] = useState(false)
-const [dataPlayer, setDataPlayer] = useState(null)
 const [mobileOpen, setMobileOpen] = React.useState(false);
 const classes = useStyles();
-const client = useApolloClient();
 
-const {play} = client.readQuery({query: DATA_PLAYER})
-  React.useEffect(() => {
-   console.log(play)
-  //if(play) setShowPlayer(play.show)
-  console.log(showPlayer)
-    if (props.changeColorOnScroll) {
-      window.addEventListener("scroll", headerColorChange);
-    }
-    return function cleanup() {
-      if (props.changeColorOnScroll) {
-        window.removeEventListener("scroll", headerColorChange);
-      }
-    };
-  },[showPlayer]);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };

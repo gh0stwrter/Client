@@ -37,13 +37,14 @@ export default function ShoppingCartPage(props) {
   const [priceTotal, setPriceTotal] = useState(0);
   let total = 0;
 
+  
   const removeItem = (index) => {
     let tmpItems = state.items;
     tmpItems.splice(index, 1);
     localStorage.setItem("items",JSON.stringify(tmpItems))
     dispatch({ items: [...state.items, tmpItems] });
   }
-
+  console.log(state.items)
   const listArticle = () => {
     let list = [];
     console.log(state.items)
