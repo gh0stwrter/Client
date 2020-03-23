@@ -3,11 +3,8 @@ import 'assets/css/PresentationPage/presentationPage.css';
 import React, { useEffect, useState, useContext } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-import {DATA_PLAYER} from "apollo/composition";
-import {useApolloClient, useQuery} from "@apollo/react-hooks";
 import Button from '@material-ui/core/Button';
 import "react-jinke-music-player/assets/index.css";
-import MusicContext from "_utils/CompositionContext";
 import {useGlobalState} from "_utils/CompositionContext";
 import GridItem from "components/Grid/GridItem";
 import GridContainer from "components/Grid/GridContainer";
@@ -18,6 +15,9 @@ const useStyles = makeStyles(theme => ({
         bottom: 0,
         width: "100%",
         zIndex: 10,
+    },
+    animate: {
+
     }
 }));
 
@@ -25,14 +25,13 @@ export default function Player({method}) {
     const [state, dispatch] = useGlobalState();
     const [playData, setPlayData] = useState({})
     const [played, setPlayed] = useState(false)
+    const [playerRef, setPlayerRef] =useState(false);
 
     const {musicPlayed} = state;
 
     useEffect(() => {
         if(state.bool) setPlayed(state.bool)
-        console.log(state)
        if(musicPlayed._id) setPlayData(musicPlayed)
-       console.log(playData)
     }, [ state]);
     
     const classes = useStyles();
@@ -41,27 +40,38 @@ export default function Player({method}) {
         setPlayed(true);
     }
 
+    useEffect(()=> {
+        if (playerRef.audio && !state.play)
+            playerRef.audio.pause()
+        else if (playerRef.audio)
+            playerRef.audio.play()
+
+    }, [state])
 
     return played  === true  &&  musicPlayed._id ? (
         <div className={classes.player}>
 
-            <button onClick={e => {
-                setPlayed(false);
-                }}>Fermer</button>
+            <Button 
+                onClick={e => {setPlayed(false)}}
+                style={{
+                    backgroundColor: "white",
+                    bottom: -40,
+                }}
+            >
+                    Fermer
+            </Button>
                 
             <AudioPlayer
                 src={`https://global-compositions.s3.eu-west-3.amazonaws.com/${ musicPlayed ? musicPlayed.music : null}`} 
                 onPlay={e => {
                     dispatch({play:true})
-                }}
-
-                
+                }}                
                 onPlayError={err => console.log(err)}
                 preload="auto"
-                loop={true}
-                onListen={(e) =>{
-                    console.log(e)
-                }}
+                // loop={true}
+                // onListen={(e) =>{
+                //     console.log(e)
+                // }}
                 header={
                 <GridContainer style={{textAlign:"center"}}>
                     <GridItem sm={3}>
@@ -75,11 +85,14 @@ export default function Player({method}) {
                     
                     </GridContainer>}
                 onPause={(e)=> {
-                    console.log(e)
+                    // console.log(e)
                      dispatch({play: false})
                 }}
                 autoPlay={state ? state.play : false}
-                onCanPlay={e => console.log(e)}
+                // onCanPlay={e => console.log(e)}
+                ref={c => {
+                    setPlayerRef(c);
+                }}
             />
         </div>) : <div className={classes.player}>
         </div>
