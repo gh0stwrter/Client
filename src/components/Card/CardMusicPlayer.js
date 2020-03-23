@@ -26,9 +26,6 @@ const CardMusicPlayer = ({data:{title, image, composer, file, price,id}, lastChi
       height: "200px",
         color: "white",
         display: 'flex',
-        "&:hover": {
-          opacity: 0.54
-        }
     },
     
     content: {
@@ -139,7 +136,7 @@ const pause = (e) =>{
 
   return (
       <div>
-    <Card  product  style={{ width: "230px" }} 
+    <Card  product  style={{ width: "230px", background: "#333436" }} 
     onMouseOver={e => setShowbutton(true)} 
     onMouseLeave={e => setShowbutton(false)} 
     className={classes.root}>
@@ -147,7 +144,7 @@ const pause = (e) =>{
         show === "price" ?
         <Button onClick={(e) => {
           e.preventDefault()
-          addToShoppingCart()}} style={{width: "35%" ,textAlign: "center"}} round size="sm">{price} € <br/>
+          addToShoppingCart()}} style={{width: "55%" ,textAlign: "center",background: "black"}} round size="sm"> {price} € <br/>
         <AddShoppingCartIcon/></Button> : null
       }
       
