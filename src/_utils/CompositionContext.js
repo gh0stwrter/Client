@@ -1,7 +1,7 @@
 import React from "react";
 
 const defaultGlobalState = {
-    items: [],
+    items: JSON.parse(localStorage.getItem("items")),
     bool: false,
     play: false,
     musicPlayed: {

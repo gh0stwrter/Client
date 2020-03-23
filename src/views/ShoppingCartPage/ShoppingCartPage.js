@@ -110,9 +110,20 @@ export default function ShoppingCartPage(props) {
      }
      
    }
+   const convertArrayToObject = (array, key) => {
+    const initialValue = {};
+    return array.reduce((obj, item) => {
+      return {
+        ...obj,
+        [item[key]]: item,
+      };
+    }, initialValue);
+  };
+  
    const trueArrays = loopOverComp();
   
-   
+   const resultat = convertArrayToObject(mapping, state.items)
+   console.log(resultat)
   return (
     <div>
       <Header
