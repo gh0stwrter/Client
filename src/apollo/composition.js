@@ -3,13 +3,14 @@ import {gql} from "apollo-boost";
 export const GET_ALL_COMPOSITIONS = gql`
 query {
   getCompositions{
-    id
-    isPublish
-    title
-    category
-    price 
-    file 
-    image
+  _id,
+  title,
+  compo_type,
+  category,
+  file, 
+  price,
+  isPublish,
+  image,
   }
 }
 `
