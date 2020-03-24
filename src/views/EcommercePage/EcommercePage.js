@@ -96,7 +96,7 @@ const {data: getCompositions } = useQuery(GET_ALL_COMPOSITIONS, {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
      
-        <SectionLatestOffers  data={getCompositions}/> 
+        {/* <SectionLatestOffers  data={getCompositions}/>  */}
         <SectionProducts data={getCompositions}/>
              
        </div>
