@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import 'assets/css/PresentationPage/presentationPage.css';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import Button from '@material-ui/core/Button';
@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Player({method}) {
     const [state, dispatch] = useGlobalState();
-    const [playData, setPlayData] = useState({})
     const [played, setPlayed] = useState(false)
     const [playerRef, setPlayerRef] =useState(false);
 
@@ -31,14 +30,9 @@ export default function Player({method}) {
 
     useEffect(() => {
         if(state.bool) setPlayed(state.bool)
-       if(musicPlayed._id) setPlayData(musicPlayed)
     }, [ state]);
     
     const classes = useStyles();
-
-    const openPlayer = () => {
-        setPlayed(true);
-    }
 
     useEffect(()=> {
         if (playerRef.audio && !state.play)
@@ -67,10 +61,6 @@ export default function Player({method}) {
                 }}                
                 onPlayError={err => console.log(err)}
                 preload="auto"
-                // loop={true}
-                // onListen={(e) =>{
-                //     console.log(e)
-                // }}
                 header={
                 <GridContainer style={{textAlign:"center"}}>
                     <GridItem sm={3}>
@@ -93,8 +83,4 @@ export default function Player({method}) {
             />
         </div>) : <div className={classes.player}>
         </div>
-        // <div className={classes.player}>
-        // <Button onClick={()=> openPlayer()}>Open</Button> </div>); 
-    
-    
 }

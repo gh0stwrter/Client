@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -14,9 +14,6 @@ const useStyles = makeStyles(descriptionStyle);
 
 export default function Latest({compositions: getCompositions, methodPlayer}) {
   const classes = useStyles();
-  useEffect(() => {
-    console.log(getCompositions)
-  }, []);
   return (
     <div className={classes.section}>
       <div className={classes.container}>

@@ -16,7 +16,7 @@ import CustomSelect from "components/CustomSelect/CustomSelect";
 import ImageUpload from 'components/CustomUpload/ImageUpload.js';
 import { useDropzone } from 'react-dropzone'
 import { UPLOAD_WRITTEN_COMP } from "apollo/uploads";
-import {useMutation, useQuery, useApolloClient} from "@apollo/react-hooks";
+import {useMutation, useQuery} from "@apollo/react-hooks";
 import Card from "components/Card/Card";
 import 'rc-input-number/assets/index.css';
 import CardBody from "components/Card/CardBody";
@@ -49,10 +49,8 @@ function getSteps() {
   return ['Entré les informations de loeuvre', 'Create an ad group', 'Create an ad'];
 }
 const FirstStep = ({setInput}) =>{
-  const client = useApolloClient();
   const {data: getCategories} = useQuery(GET_ALL_CATEGORIES, {
-    onCompleted(){
-
+      onCompleted(){
     }
   })
   useEffect(()=>{
@@ -130,9 +128,7 @@ NumberFormatCustom.propTypes = {
 
 
 const SecondStep = ({setInput, dataInput, setPrices,imageSet  }) =>{
-  const [erros, setError] = useState(false)
-  const client = useApolloClient()
-  const [price, setPrice] = useState("0.00");
+  const [price] = useState("0.00");
   
 useEffect(()=>{
 
@@ -145,7 +141,7 @@ const onDrop =(file) =>{
 }
  
   
-const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ onDrop })
   const files =  acceptedFiles.map(file => (
     <li key={file.path}>
       {file.path} - {file.size} bytes
@@ -235,19 +231,13 @@ const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone
 }
 
 const ThirdStep = ({dataInput}) =>{
-  const [currentImage, setCurrentImage] = useState(null);
-  let reader = new FileReader();
-    let file = dataInput.image;
-    // reader.onloadend = () => {
-    //   setCurrentImage(reader.result)
-    // };
-    // reader.readAsDataURL(file);
+  const [currentImage] = useState(null);
   return (
     <GridContainer>
       {
         currentImage ?
         <Card>
-          <img src={currentImage}></img>
+          <img alt="" src={currentImage}></img>
 
         </Card>
 
@@ -333,7 +323,7 @@ export default function VerticalLinearStepper(props) {
                     Back
                   </Button>
                   <Button
-                    disabled={Object.keys(compositionInput).length < 4 || activeStep === steps.length -2 && Object.keys(compositionInput).length < 5 }
+                    disabled={(Object.keys(compositionInput).length < 4 || activeStep === steps.length -2) && Object.keys(compositionInput).length < 5 }
                     variant="contained"
                     color="primary"
                     onClick={(e) => {

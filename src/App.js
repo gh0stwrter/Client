@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router";
 import decode from 'jwt-decode';
@@ -20,7 +20,7 @@ import PricingPage from "views/PricingPage/PricingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import ProductPage from "views/ProductPage/ProductPage.js";
 import SectionsPage from "views/SectionsPage/SectionsPage.js";
-import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.js";
+import Panier from "views/ShoppingCartPage/Panier.js";
 import SignupPage from "views/SignupPage/SignupPage.js";
 import ErrorPage from "views/ErrorPage/ErrorPage.js";
 import Player from "components/Player/Player"
@@ -60,8 +60,9 @@ const ProtectedRoute = ({ ...rest }) => {
 
 
 const App = (props) =>{
-  const [state, dispatch] = useGlobalState();
-  const [showPlayer, setShowPlayer] = useState(false);
+  console.log("localStorage: ",JSON.parse(localStorage.getItem("items")))
+  
+  const [state, dispatch] = useGlobalState(JSON.parse(localStorage.getItem("items")));
   const setBool = React.useCallback(bool => dispatch({bool}), []);
 
   const clients = useApolloClient();
@@ -83,11 +84,11 @@ const App = (props) =>{
       <Route path="/landing-page" component={LandingPage} />
       <Route path="/login-page" component={LoginPage} />
       <Route path="/pricing" component={PricingPage} />
-<Route path="/product-page" component={ProductPage} />
-<Route path="/sections" component={SectionsPage} />
-<Route path="/shopping-cart-page" component={ShoppingCartPage} />
-<Route path="/signup-page" component={SignupPage} />
-<Route path="/payment" component={Stripe} />
+      <Route path="/product-page" component={ProductPage} />
+      <Route path="/sections" component={SectionsPage} />
+      <Route path="/panier" component={Panier} />
+      <Route path="/signup-page" component={SignupPage} />
+      <Route path="/payment" component={Stripe} />
       <ProtectedRoute path="/profile" render={props =>
          <Route path="/profile/page" component={ProfilePage} /> 
          }/>

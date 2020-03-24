@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -24,27 +24,30 @@ import Table from "components/Table/Table.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-
+import Billing from "views/Stripe/Billing";
 import shoppingCartStyle from "assets/jss/material-kit-pro-react/views/shoppingCartStyle.js";
 import {useGlobalState} from "_utils/CompositionContext";
 
 const useStyles = makeStyles(shoppingCartStyle);
 
-export default function ShoppingCartPage(props) {
+export default function Panier(props) {
+  
   const [state, dispatch] = useGlobalState();
   console.log(state.items)
   const classes = useStyles();
   const [priceTotal, setPriceTotal] = useState(0);
   let total = 0;
-
-  
-  const removeItem = (index) => {
+  useEffect(()=>{
+    
+  },[state])
+  const removeItem =  (index) => {
     let tmpItems = state.items;
     tmpItems.splice(index, 1);
     localStorage.setItem("items",JSON.stringify(tmpItems))
-    dispatch({ items: [...state.items, tmpItems] });
+     dispatch({item: tmpItems})
   }
   console.log(state.items)
+
   const listArticle = () => {
     let list = [];
     console.log(state.items)
@@ -87,9 +90,7 @@ export default function ShoppingCartPage(props) {
       col: {
         colspan: 1,
         text: (
-          <Button color="info">
-            Complete Purchase <KeyboardArrowRight />
-          </Button>
+          <Billing/>
         )
       }
     });

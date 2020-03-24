@@ -1,15 +1,16 @@
 import React from "react";
 
 const defaultGlobalState = {
-    items: JSON.parse(localStorage.getItem("items")) || [],
+    items: [],
     bool: false,
     play: false,
     musicPlayed: {
     _id: '',
     music: '',
     title: '',
-    image: ''
-    }
+    image: '',
+    selectedItem : JSON.parse(localStorage.getItem("items")),  
+ }
   };
   const GlobalStateContext = React.createContext(defaultGlobalState);
   const DispatchStateContext = React.createContext(undefined);

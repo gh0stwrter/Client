@@ -138,7 +138,7 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
       <Link
-        to="/shopping-cart-page"
+        to="/panier"
         className={classes.navLink}
         onClick={e => smoothScroll(e, "headers")}
       >

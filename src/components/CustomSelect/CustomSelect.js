@@ -11,7 +11,6 @@ import styles from "assets/jss/material-kit-pro-react/customSelectStyle.js";
 import CreateIcon from '@material-ui/icons/Create';
 import PublicIcon from '@material-ui/icons/Public';
 import LockIcon from '@material-ui/icons/Lock';
-import {useApolloClient} from "@apollo/react-hooks";
 
 const useStyles = makeStyles(styles);
 
@@ -19,8 +18,7 @@ export default function Example({data, categoriesData,setSelect}){
   const droits = ["PUBLIC", "PRIVATE"]
   const compo_type = ["SONORE", "WRITTEN"]
   const [simpleSelect, setSimpleSelect] = React.useState("");
-  const [simpleCategories, setSimpleCategories] = React.useState([]);
-  const client = useApolloClient(); 
+  const [simpleCategories] = React.useState([]);
 
   const handleSimple = event => {
     setSimpleSelect(event.target.value);

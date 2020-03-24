@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slide from "@material-ui/core/Slide";
 import Dialog from "@material-ui/core/Dialog";
@@ -30,7 +30,6 @@ const useStyles = makeStyles(style);
 export default function UploadModal() {
     const [openModal, setOpen] = React.useState(false);
     const classes = useStyles();
-    const [filesList, setFilesList] = useState([]);
     
     React.useEffect(() => {
         document.body.scrollTop = 0;
@@ -74,25 +73,6 @@ export default function UploadModal() {
                     className={classes.modalBody}
                 >
                 <StepperComposition/>
-
-                    {/* UPLOAD */}
-
-                    {/* <section className="container">
-
-
-                        <div {...getRootProps({ className: 'dropzone' })}>
-                            <input multiple {...getInputProps()} />
-                            <Button color="transparent"><i className="material-icons">folder</i> importé</Button>
-                        </div>
-
-                        <aside>
-                            <h4>Files</h4>
-                            <ul>{files}</ul>
-                        </aside>
-
-                        
-
-                    </section> */}
                 </DialogContent>
                 <DialogActions className={classes.modalFooter}>
                     <Button onClick={() => setOpen(false)} color="secondary">
