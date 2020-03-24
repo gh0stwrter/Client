@@ -37,7 +37,7 @@ export default function ExampleOptionalSizes({file}) {
   const classes = useStyles();
   return (
     <div>
-         <IconButton onClick={() => setLargeModal(true)}> <VisibilityIcon/> </IconButton>
+         <IconButton onClick={() => setLargeModal(true)}> <VisibilityIcon style={{fontSize: 70,  border:"solid white 2px", borderRadius:"50%"}}/> </IconButton>
       
       <Dialog
         classes={{
@@ -52,6 +52,7 @@ export default function ExampleOptionalSizes({file}) {
         aria-describedby="large-modal-slide-description"
       >
         <DialogTitle
+        style={{textAlign:"center"}}
           id="large-modal-slide-title"
           disableTypography
           className={classes.modalHeader}
@@ -66,7 +67,7 @@ export default function ExampleOptionalSizes({file}) {
             {" "}
             <Close className={classes.modalClose} />
           </Button>
-          <h4 className={classes.modalTitle}>Large modal</h4>
+          <h4 className={classes.modalTitle}>Lecteur de composition Lyrics</h4>
         </DialogTitle>
         <DialogContent
           id="large-modal-slide-description"

@@ -35,10 +35,13 @@ const useStyles = makeStyles(styles);
 
 export default function SectionProducts({data}) {
   const [checked, setChecked] = React.useState([1, 9, 27]);
-  const [selectedEnabled, setSelectedEnabled] = React.useState("b");
-
-  
+  const [selectedEnabled, setSelectedEnabled] = React.useState(null);
+  const [compositions, setCompositions] = React.useState(data);
+const arrayFIlter = [ "SONORE","WRITTEN"]
   React.useEffect(() => {
+   
+    callData()
+    console.log(compositions)
     // if (
     //   !document
     //     .getElementById("sliderRegular")
@@ -54,8 +57,10 @@ export default function SectionProducts({data}) {
     //   });
     // }
     return function cleanup() {};
-  });
-
+  }, [compositions,selectedEnabled, callData]);
+    const filterData = (e) => {
+    return setSelectedEnabled(e.target.value)
+ }
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -66,6 +71,26 @@ export default function SectionProducts({data}) {
     }
     setChecked(newChecked);
   };
+
+  const callData = () =>{
+  if(data && data.getCompositions.length > 0 && selectedEnabled){
+     data.getCompositions.filter((item =>
+       item.compo_type.toLowerCase().includes(selectedEnabled.toLowerCase())
+      )).map((item)=>
+      item ? 
+      <GridItem md={4} sm={4}>
+        <CardMusicPlayer show="price" data={item}/>
+      </GridItem> : null)
+      }else if (data && !selectedEnabled){
+       return  data.getCompositions.map((item)=>
+        <GridItem md={4} sm={4}>
+          <CardMusicPlayer show="price" data={item}/>
+        </GridItem>)
+      }
+    
+}
+
+
   const classes = useStyles();
   return (
     <div className={classes.section}>
@@ -96,20 +121,22 @@ export default function SectionProducts({data}) {
                 </h4>
                 
               </CardBody>
-              
-      <div
+              {arrayFIlter.map((item) =>
+        <div
         className={
           classes.checkboxAndRadio + " " + classes.checkboxAndRadioHorizontal
         }
       >
+       
         <FormControlLabel
           control={
+            
             <Radio
-              checked={selectedEnabled === "a"}
-              onChange={() => setSelectedEnabled("a")}
-              value="a"
+              checked={selectedEnabled === item}
+              onChange={filterData}
+              value={item}
               name="radio button enabled"
-              aria-label="A"
+              aria-label={{item}}
               icon={<FiberManualRecord className={classes.radioUnchecked} />}
               checkedIcon={
                 <FiberManualRecord className={classes.radioChecked} />
@@ -123,22 +150,18 @@ export default function SectionProducts({data}) {
           classes={{
             label: classes.label
           }}
-          label="First Radio"
+          label={item}
         />
       </div>
+        
+        )}   
+      
             </Card>
           </GridItem>
           <GridItem md={9} sm={9}>
             
             <GridContainer>
-
-              { data ? data.getCompositions.map((item)=>
-          <GridItem md={4} sm={4}>
-            <CardMusicPlayer show="price" data={item}/>
-          </GridItem>
-
-          ) : null}
-
+{callData()}
               
             </GridContainer>
             <GridItem

@@ -171,8 +171,8 @@ const CardMusicPlayer = ({
 
             <div className={classes.background}>
                 <CardBody className={classes.content}>
-                    {showButton ? buttonPlay : null}
-                    {buttonRead}
+                    {showButton  && compo_type === "sonore"? buttonPlay :showButton && compo_type === "written" ? buttonRead: null}
+                    
                 </CardBody>
             </div>
 
