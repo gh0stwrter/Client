@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-// import { loadStripe } from '@stripe/stripe-js';
+import Button from "components/CustomButtons/Button.js";
+
+import { loadStripe } from '@stripe/stripe-js';
 import {
   CardElement,
   Elements,
@@ -44,6 +46,7 @@ const CheckoutForm = () => {
   // Handle form submission.
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
     const card = elements.getElement(CardElement);
     const result = await stripe.createToken(card)
     if (result.error) {
@@ -69,8 +72,8 @@ const CheckoutForm = () => {
         />
         <div className="card-errors" role="alert">{error}</div>
       </div>
-      <button type="submit">Submit Payment</button>
-    </form>
+      
+      <Button style={{margin: 12, background: "black"}} sm round color="primary">PAYER</Button>    </form>
   );
 }
 

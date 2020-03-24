@@ -90,7 +90,7 @@ export default function Panier(props) {
       col: {
         colspan: 1,
         text: (
-          <Billing/>
+          <Billing amount={total}/>
         )
       }
     });
