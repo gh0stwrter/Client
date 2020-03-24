@@ -68,7 +68,7 @@ const [addWrittenComp] = useMutation(UPLOAD_WRITTEN_COMP,{
   return (
     <div>
       <Header
-        brand="Material Kit PRO React"
+        brand="Ghost Composer"
         links={<HeaderLinks dropdownHoverColor="info" />}
         fixed
         color="transparent"

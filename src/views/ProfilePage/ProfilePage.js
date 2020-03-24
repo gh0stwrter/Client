@@ -115,7 +115,7 @@ export default function ProfilePage({ ...rest }) {
     <div style={{color:"white"}}>
       <Header
         color="transparent"
-        brand="Material Kit PRO React"
+        brand="Ghost Composer"
         links={<HeaderLinks dropdownHoverColor="info" />}
         fixed
         changeColorOnScroll={{
@@ -350,7 +350,7 @@ export default function ProfilePage({ ...rest }) {
           <Clearfix />
         </div>
       </div>
-      <Footer
+      {/* <Footer
         content={
           <div>
             <div className={classes.left}>
@@ -402,7 +402,7 @@ export default function ProfilePage({ ...rest }) {
             </div>
           </div>
         }
-      />
+      /> */}
     </div>
   );
 }

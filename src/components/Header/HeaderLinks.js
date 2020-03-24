@@ -133,7 +133,7 @@ export default function HeaderLinks(props) {
       {redirectComp()}
       <ListItem className={classes.listItem}>
         <Link to="/ecommerce-page" className={classes.navLink}>
-          <Store className={classes.dropdownIcons} /> Ecommerce Page
+          Shop
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>

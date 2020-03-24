@@ -79,7 +79,7 @@ export default function PresentationPage(props) {
       <SectionOverview/> */}
       </div>
      
-      <Footer
+      {/* <Footer
         theme="white"
         content={
           <div>
@@ -166,7 +166,7 @@ export default function PresentationPage(props) {
             </div>
           </div>
         }
-      />
+      /> */}
     
     </div>
   );

@@ -44,7 +44,7 @@ export default function Shop() {
   return (
     <div>
       <Header
-        brand="Material Kit PRO React"
+        brand="Ghost Composer"
         links={<HeaderLinks dropdownHoverColor="info" />}
         fixed
         color="dark"
@@ -264,7 +264,7 @@ export default function Shop() {
           </Card>
         </div>
       </div>
-      <Footer
+      {/* <Footer
         content={
           <div>
             <div className={classes.left}>
@@ -283,7 +283,7 @@ export default function Shop() {
             </div>
           </div>
         }
-      />
+      /> */}
     </div>
   );
 }

@@ -71,7 +71,7 @@ export default function ProductPage() {
   return (
     <div className={classes.productPage}>
       <Header
-        brand="Material Kit PRO React"
+        brand="Ghost Composer"
         links={<HeaderLinks dropdownHoverColor="rose" />}
         fixed
         color="transparent"
@@ -460,7 +460,7 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
-      <Footer
+      {/* <Footer
         // theme="dark"
         content={
           <div>
@@ -514,7 +514,7 @@ export default function ProductPage() {
             </div>
           </div>
         }
-      />
+      /> */}
     </div>
   );
 }

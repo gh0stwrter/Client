@@ -102,7 +102,7 @@ export default function Components() {
   return (
     <div>
       <Header
-        brand="Material Kit PRO React"
+        brand="Ghost Composer"
         links={<HeaderLinks dropdownHoverColor="info" />}
         fixed
         color="transparent"
@@ -285,7 +285,7 @@ export default function Components() {
           </li>
         </ul>
       </nav>
-      <Footer
+      {/* <Footer
         content={
           <div>
             <div className={classes.left}>
@@ -337,7 +337,7 @@ export default function Components() {
             </div>
           </div>
         }
-      />
+      /> */}
     </div>
   );
 }

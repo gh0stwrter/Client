@@ -32,7 +32,7 @@ export default function PricingPage() {
   return (
     <div>
       <Header
-        brand="Material Kit PRO React"
+        brand="Ghost Composer"
         links={<HeaderLinks dropdownHoverColor="info" />}
         fixed
         color="transparent"

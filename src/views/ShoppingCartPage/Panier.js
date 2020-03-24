@@ -100,7 +100,7 @@ export default function Panier(props) {
   return (
     <div>
       <Header
-        brand="Material Kit PRO React"
+        brand="Ghost Composer"
         links={<HeaderLinks dropdownHoverColor="info" />}
         fixed
         color="transparent"
@@ -111,7 +111,7 @@ export default function Panier(props) {
       />
 
       <Parallax
-        image={require("assets/img/examples/bg2.jpg")}
+        image={require("assets/img/storeBanner.jpg")}
         filter="dark"
         small
       >
@@ -126,7 +126,7 @@ export default function Panier(props) {
                 classes.textCenter
               )}
             >
-              <h2 className={classes.title}>Shopping Page</h2>
+              <h2 className={classes.title}>Panier</h2>
             </GridItem>
           </GridContainer>
         </div>
@@ -135,20 +135,20 @@ export default function Panier(props) {
         <div className={classes.container}>
           <Card plain >
             <CardBody plain >
-              <h3 className={classes.cardTitle} style={{color: "white"}}>Panier</h3>
+              {/* <h3 className={classes.cardTitle} style={{color: "white"}}>Panier</h3> */}
               { state.items.length > 0 ?      
              <Table
              style={{color: "white", display: "flex"}}
              tableData={listArticle()}
               />
               
-              : <h3 style={{color:"white"}}>Pas de produit dans le panier</h3>}
+              : <h3 style={{color:"white"}}>Votre panier est vide</h3>}
               
             </CardBody>
           </Card>
         </div>
       </div>
-      <Footer
+      {/* <Footer
         content={
           <div>
             <div className={classes.left}>
@@ -204,7 +204,7 @@ export default function Panier(props) {
             </div>
           </div>
         }
-      />
+      /> */}
     </div>
   );
 }
