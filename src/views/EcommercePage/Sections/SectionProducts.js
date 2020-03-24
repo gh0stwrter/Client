@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import PauseCircleFilledOutlined from "@material-ui/icons/Pause";
 
 import Cached from "@material-ui/icons/Cached";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -19,12 +20,12 @@ import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import CardHeader from "components/Card/CardHeader.js";
 import classNames from "classnames";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 
-import dg6 from "assets/img/dg6.jpg";
-import dg10 from "assets/img/dg10.jpg";
-import dg9 from "assets/img/dg9.jpg";
+import IconButton from "@material-ui/core/IconButton";
 import CardFooter from "components/Card/CardFooter";
 import {useGlobalState} from "_utils/CompositionContext";
+import PDFReaderModal from "components/PdfReader/PDFReaderModal";
 
 const useStyles = makeStyles(styles);
 
@@ -53,6 +54,62 @@ export default function SectionProducts({data}) {
         dispatch({ items: [...state.items, itemsCardAdd] });
     }
   };
+  const buttonRead = (file, type) => {
+    return (
+      type === "written"?
+    <PDFReaderModal file={file}/> : null
+    )
+  }
+  const buttonPlay = (compo_type, _id, image, title, file) => {
+    const plays = async () => {
+      dispatch({
+          bool: true,
+          play: true,
+          musicPlayed: {
+              _id: _id,
+              music: file,
+              title: title,
+              image: image
+          }
+      });
+  };
+  const pause = e => {
+      e.preventDefault();
+      dispatch({ play: false });
+  };
+
+    return (
+        state && state.musicPlayed._id === _id && state.play === true  && compo_type === "sonore"? (
+            <IconButton onClick={pause} aria-label='play/pause'>
+                <PauseCircleFilledOutlined
+                    color='primary'
+                    className={classes.playIcon}
+                />
+            </IconButton>
+        ) : compo_type === "sonore"? (
+            <IconButton
+                onClick={e => {
+                    e.preventDefault();
+                    plays();
+                }}
+                aria-label='play/pause'
+            >
+                <PlayArrowIcon
+                    style={{
+                    background: "rgba(0, 0, 0, 0.5)",
+                    color: "white",
+                    margin: "auto",
+                    "&:hover": {
+                        transform: "scale(1.1)"
+                    },
+                    border: "solid white 1.5px",
+                    borderRadius: "50%",
+                    height: 25,
+                    width: 25 }}
+                />
+            </IconButton>
+        ): null
+    )}
 
   return (
     <div className={classes.section}>
@@ -128,7 +185,7 @@ export default function SectionProducts({data}) {
           
            <GridItem md={4} sm={4}>    
             <Card blog>
-              <CardHeader image>
+            <CardHeader image>
                 <a href="#pablo">
                   <img src={bucket + item.image} style={{height: 200}}alt="..." />
                 </a>
@@ -146,6 +203,7 @@ export default function SectionProducts({data}) {
                 <h5 className={classes.cardTitle}>
                   <a href="#pablo">
                     {item.title}
+                    {console.log(item)}
                   </a>
                 </h5>
                 <h6 className={classes.cardTitle}>
@@ -165,6 +223,8 @@ export default function SectionProducts({data}) {
                 >
                     <AddShoppingCartIcon />
                 </Button>
+                {buttonPlay(item.compo_type, item._id, item.image, item.title, item.file)}
+                {buttonRead(item.file, item.compo_type)}
               </CardFooter>
             </Card>
           </GridItem>

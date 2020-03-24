@@ -174,17 +174,20 @@ const CardMusicPlayer = ({
 
             
         </Card>
-        <GridContainer>
+        {show !== 'shop' ? (<GridContainer>
                 <GridItem
                     style={{ color: "white", textAlign: "center" , marginTop: 5, marginBottom: 25}}
                     sm={12}
                     md={12}
                 >
+
+                    
                     <Typography color='secondary' variant='h6'>
                         <Link to="" style={{ color: "white", textShadow: "1px 0px 1px black" }}>{title}</Link>
                     </Typography>
+                    
                 </GridItem>
-            </GridContainer>
+            </GridContainer>) : ""}
         </>
     );
 };
