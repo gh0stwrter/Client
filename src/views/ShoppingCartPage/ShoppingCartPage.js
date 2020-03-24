@@ -89,7 +89,7 @@ export default function ShoppingCartPage(props) {
       col: {
         colspan: 1,
         text: (
-          <Billing/>
+          <Billing amount={total}/>
         )
       }
     });

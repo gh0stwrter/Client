@@ -73,6 +73,7 @@ const App = (props) =>{
 <GlobalStateProvider>
 <Router history={hist}>
 <Player/>
+
     <Switch>
       <Route path="/about-us" component={AboutUsPage} />
       <Route path="/blog-post" component={BlogPostPage} />

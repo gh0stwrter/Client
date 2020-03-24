@@ -14,11 +14,13 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useGlobalState } from "_utils/CompositionContext";
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import { Document, Page } from 'react-pdf';
+import env from 'envGetter'
+import PDFReaderModal from "components/PdfReader/PDFReaderModal";
 
 const CardMusicPlayer = ({
-    data: { title, image, file, price, _id },
-    show
-}) => {
+    data: { title, image, file, price, _id, compo_type }, show }) => {
     let history = useHistory();
     const useStyles = makeStyles(theme => ({
         styles,
@@ -63,6 +65,11 @@ const CardMusicPlayer = ({
     const [state, dispatch] = useGlobalState();
     const [showButton, setShowbutton] = useState(false);
     const [imageComposition, setImageComposition] = useState(null);
+  
+  const readPdf  = (e) =>{
+    e.preventDefault();
+          
+  }
 
     const classes = useStyles();
     useEffect(() => {
@@ -111,16 +118,19 @@ const CardMusicPlayer = ({
         e.preventDefault();
         dispatch({ play: false });
     };
+    const buttonRead = compo_type === "written"?
+    <PDFReaderModal file={file}/> : null
+
 
     const buttonPlay =
-        state && state.musicPlayed._id === _id && state.play === true ? (
+        state && state.musicPlayed._id === _id && state.play === true  && compo_type === "sonore"? (
             <IconButton onClick={pause} aria-label='play/pause'>
                 <PauseCircleFilledOutlined
                     color='primary'
                     className={classes.playIcon}
                 />
             </IconButton>
-        ) : (
+        ) : compo_type === "sonore"? (
             <IconButton
                 onClick={e => {
                     e.preventDefault();
@@ -133,7 +143,7 @@ const CardMusicPlayer = ({
                     className={classes.playIcon}
                 />
             </IconButton>
-        );
+        ): null
 
     return (
       <>
@@ -162,6 +172,7 @@ const CardMusicPlayer = ({
             <div className={classes.background}>
                 <CardBody className={classes.content}>
                     {showButton ? buttonPlay : null}
+                    {buttonRead}
                 </CardBody>
             </div>
 

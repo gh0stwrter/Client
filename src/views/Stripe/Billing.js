@@ -61,13 +61,13 @@ export default function Billing() {
             {" "}
             <Close className={classes.modalClose} />
           </Button>
-          <h4 className={classes.modalTitle}>Modal title</h4>
+          <h4 className={classes.modalTitle}>Payment</h4>
         </DialogTitle>
         <DialogContent
           id="classic-modal-slide-description"
           className={classes.modalBody}
         >
-            <Elements stripe={stripePromise}>
+        <Elements stripe={stripePromise}>
         <CheckoutForm />
         </Elements>
           <p>Woohoo, you're reading this text in a modal!</p>
@@ -76,7 +76,7 @@ export default function Billing() {
           <Button onClick={() => setLiveDemo(false)} color="secondary">
             Close
           </Button>
-          <Button color="primary">Save changes</Button>
+         
         </DialogActions>
       </Dialog>
     </div>
